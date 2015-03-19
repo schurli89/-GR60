@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
+<head>
+
+	<title>Jeopardy - Registrierungsformular</title>
+</head>
+<body>
+<div id="site">
+<form action="#" method="post">
+<p> Persönliche Daten</p>
+
+<p><label for="firstname">Vorname:</label>
+<input type="text" id="firstname" name="firstname"/></p>
+<p><label for="lastname">Nachname:</label>
+<input type="text" id="lastname" name="lastname"/></p>
+<p><label for ="birthday">Geburtstag:</label>
+<input type="text" id="birthday" name="birthday"/></p>
+<p><label>Geschlecht:</label>
+<input type="radio" id="mgender" name="gender" value="m"/>Männlich
+<input type="radio" id="wgender" name="gender" value="f"/>Weiblich
+</p>
+
+<p>Spielerdaten</p>
+
+<p><label for="avatar">Avatar:</label>
+<select name="avatar" size="1" id="avatar">
+<option value="1">BlackWidow</option>
+<option value="2">Deadpool</option>
+</select></p>
+<p><label for="userName">Benutzername*:</label>
+<input type="text" id="userName" name="userName" required="required" pattern =".{4,8}" /></p>
+<p><label for ="password">Passwort*:</label>
+<input type="password" id="password" name="password" required="required" pattern =".{4,8}" /></p>
+<input type="submit" value="Registrieren" />
+</form>
+<footer>@ 2015 BIG Jeopardy</footer>
+</div>
+</body>
+</html>
