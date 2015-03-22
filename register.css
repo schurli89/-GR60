@@ -4,6 +4,7 @@
 	html, body {
 		height: 100%;
 		background: -moz-linear-gradient(white, #D0D0E4);
+		background: linear-gradient(white,#D0D0E4);
 	}
 	
 	h2 {
@@ -80,6 +81,7 @@
 html, body {
  height: 100%;
  background: -moz-linear-gradient(white, #D0D0E4);
+ background: linear-gradient(white,#D0D0E4);
 }
 
 h2 {
