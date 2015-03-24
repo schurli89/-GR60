@@ -1,0 +1,44 @@
+
+div.table {
+	
+}
+
+div.column {
+	text-align:right;
+	width:200px;
+	float:left;
+	margin-right:5px;
+	font-size:15px;
+	font:SansSerif;
+	font-family:"Arial", Times, serif;
+}
+
+div.header {
+	
+	border-width: 1px;
+	border-color: black;
+	border-style: solid;
+	width: 200px;
+	height:40px;
+	background-color:orange;
+	color:blue;
+	text-align:center;
+	line-height:40px;
+	margin-bottom:5px;
+	
+}
+
+
+div.cell {
+	
+	border-width: 1px;
+	border-color: black;
+	border-style: solid;
+	width:200px;
+	height:40px;
+	background-color:blue;
+	color:white;
+	text-align:center;
+	line-height:50px;
+	margin-bottom:5px;
+}
