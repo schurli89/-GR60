@@ -1,44 +1,139 @@
 
-div.table {
-	
+header{
+	border-width: 1px;
+	border-color: #312B57;
+	border-style: solid;
+	background:#314C88;
+	color:white;
+	margin-right:5px;
 }
 
-div.column {
-	text-align:right;
-	width:200px;
-	float:left;
-	margin-right:5px;
+button{
+	height: 3em;
+	width: 7em;
+	border-width: 1px;
+	border-color: #784600;
+	border-style: solid;
+	background-color:#FA7700;
+	color: white;
+	text-align: center;
+}
+
+button.choose{
+	height: 2em;
+	width: 7em;
+	border-color: #116D01;
+	border-style: solid;
+	-moz-border-radius:2px;
+	border-radius:2px;
+	background-color:#2CC53A;
+	color: white;
+	text-align: center;
+}
+
+
+html, body {
+	height: 100%;
+	background: -moz-linear-gradient(white, #D0D0E4);
+	background: linear-gradient(white,#D0D0E4);
 	font-size:15px;
 	font:SansSerif;
 	font-family:"Arial", Times, serif;
 }
 
-div.header {
-	
+img{
+	max-width: 5em;
 	border-width: 1px;
-	border-color: black;
+	border-color: #784600;
 	border-style: solid;
-	width: 200px;
-	height:40px;
-	background-color:orange;
-	color:blue;
-	text-align:center;
-	line-height:40px;
-	margin-bottom:5px;
-	
 }
 
+.grid {
+	overflow: hidden;
+	clear: both;
+}
+	.grid .column {
+		text-align:right;
+		width:10em;
+		float:left;
+		margin-right: 0.5em;
+		font-size:15px;
+		font:SansSerif;
+		font-family:"Arial", Times, serif;
+	}
 
-div.cell {
+	.grid .header {		
+		border-width: 1px;
+		border-color: #784600;
+		border-style: solid;
+		width: 10em;
+		height:40px;
+		background-color:#FA7700;
+		color:#172B57;
+		text-align:center;
+		font-weight:bold;
+		line-height:40px;
+		margin-bottom:5px;	
+	}
+
+	.grid .cell {		
+		border-width: 1px;
+		border-color: #312B57;
+		border-style: solid;
+		width: 10em;
+		height:40px;
+		background-color:#314C88;
+		color:white;
+		text-align:center;
+		line-height:40px;
+		margin-bottom:5px;
+	}
 	
-	border-width: 1px;
+	.grid .celldisabled{
+		border-width: 1px;
+		border-color: #5C5F63;
+		border-style: solid;
+		width: 10em;
+		height:40px;
+		background-color:#D3D8E3;
+		color:#5C5F63;
+		text-align:center;
+		line-height:40px;
+		margin-bottom:5px;
+	}
+
+.greenbox{
+	width: 80%;
+	height: 2em;
+	border-width: 0.1em;
+	border-color: green;
+	border-style: solid;
+	color: green;
+	text-align: center;
+	line-height: 2em;
+	margin-bottom: 0.2em;
+}
+
+.redbox{
+	width: 80%;
+	height: 2em;
+	border-width: 0.1em;
+	border-color: red;
+	border-style: solid;
+	color: red;
+	text-align: center;
+	line-height: 2em;
+	margin-bottom: 0.2em;
+}
+
+.blackbox{
+	width: 80%;
+	height: 2em;
+	border-width: 0.1em;
 	border-color: black;
 	border-style: solid;
-	width:200px;
-	height:40px;
-	background-color:blue;
-	color:white;
-	text-align:center;
-	line-height:50px;
-	margin-bottom:5px;
+	color: black;
+	text-align: center;
+	line-height: 2em;
+	margin-bottom: 0.2em;
 }

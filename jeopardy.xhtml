@@ -1,39 +1,139 @@
 <?xml version="1.0" encoding="UTF-8"?> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
-<link rel="stylesheet" type="text/css" href="jeopardy.css"/>
+<link rel="stylesheet" href="jeopardy.css"/>
 <body>
-<header>
-	<img src="img/big-logo-small.png" alt=""/>
-	<label>Jeopardy!</label>
-</header>
+	<header>
+			<img src="img/big-logo-small.png" alt=""/>
+			<label>Jeopardy!</label>
+			<button class="button" type="button">Anmelden</button> 
+	</header>
 
-<div class="table">
-	<div class="column">
-		<div class="header">
-			Semistr. Daten
-		</div>
-		<div class="cell">
-				150€
-		</div>
+	<label>Fragen 2/10</label>
+	<div class="greenbox">
+		<label> Du hast richtig geantwortet: +1000 €</label>
 	</div>
-	<div class="column"> 
-		<div class="header">
-			SEPM
-		</div>
-		<div class="cell">
-			100 €
-		</div>
-		<div class="cell">
-			200 €
-		</div>
+	<div class="redbox">
+		<label> Du hast falsch geantwortet: -500 €</label>
 	</div>
-</div>
-
-<img src="img/avatar/deadpool_head.png" alt=""/>
-<img src="img/avatar/black-widow_head.png" alt=""/>
-<p> Du hast richtig geantwortet:</p> 
-<p> Du hast falsch geantwortet:</p> 
-<footer>@ 2015 BIG Jeopardy</footer>
+	<div class="blackbox">
+		<label>Deadpool hat TUWIEN für €1000 gewählt.</label>
+	</div>
+	<div>
+		<img src="img/avatar/black-widow_head.png" alt=""/>
+		<a>Black Widow (Du)</a>
+		<p>2000 €</p>
+	</div>
+	<div>
+		<img src="img/avatar/deadpool_head.png" alt=""/>
+		<a>Deadpool</a>
+		<p>400 €</p>
+	</div>
+	<section id="questionmatrix">
+	<div class="grid">
+		<div class="column">
+			<div class="header">
+				<label>TV</label>
+			</div>
+			<div class="celldisabled">
+				<label>€ 100</label>
+			</div>
+			<div class="cell">
+				<label>€ 200</label>
+			</div>		
+			<div class="cell">
+				<label>€ 500</label>
+			</div>
+			<div class="cell">
+				<label>€ 750</label>
+			</div>
+		</div>
+		<div class="column">
+			<div class="header">
+				<label>SSD</label>
+			</div>
+			<div class="cell">
+				<label>€ 100</label>
+			</div>
+			<div class="cell">
+				<label>€ 200</label>
+			</div>		
+			<div class="cell">
+				<label>€ 500</label>
+			</div>
+			<div class="cell">
+				<label>€ 750</label>
+			</div>
+			<div class="cell">
+				<label>€ 1000</label>
+			</div>
+		</div>
+		<div class="column">
+			<div class="header">
+				<label>Web</label>
+			</div>
+			<div class="cell">
+				<label>€ 100</label>
+			</div>
+			<div class="cell">
+				<label>€ 200</label>
+			</div>		
+			<div class="celldisabled">
+				<label>€ 500</label>
+			</div>
+			<div class="cell">
+				<label>€ 750</label>
+			</div>
+			<div class="cell">
+				<label>€ 1000</label>
+			</div>
+		</div>
+		<div class="column">
+			<div class="header">
+				<label>Sport</label>
+			</div>
+			<div class="cell">
+				<label>€ 100</label>
+			</div>
+			<div class="celldisabled">
+				<label>€ 200</label>
+			</div>		
+			<div class="cell">
+				<label>€ 500</label>
+			</div>
+			<div class="cell">
+				<label>€ 750</label> 
+			</div>	
+		</div>
+		<div class="column">
+			<div class="header">
+				<label>TUWIEN</label>
+			</div>
+			<div class="cell">
+				<label>€ 100</label>
+			</div>
+			<div class="cell">
+				<label>€ 200</label>
+			</div>		
+			<div class="cell">
+				<label>€ 500</label>
+			</div>
+			<div class="cell">
+				<label>€ 750</label>
+			</div>
+			<div class="celldisabled">
+				<label>€ 1000</label>
+			</div>
+		</div>
+		</div>
+	</section>
+	<p></p>
+	<div id="grid">
+	<div>
+		<p>Letztes Spiel: <time>22.2.2015 11:07:00</time></p>
+		<a><button class="choose" type="button"> wählen</button></a>
+	</div>
+	</div>
+	<footer>@ 2015 BIG Jeopardy</footer>
 </body>
 </html>
