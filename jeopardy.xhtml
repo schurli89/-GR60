@@ -4,31 +4,49 @@
 <link rel="stylesheet" href="jeopardy.css"/>
 <body>
 	<header>
+			<div id="header">
 			<img src="img/big-logo-small.png" alt=""/>
-			<label>Jeopardy!</label>
-			<button class="button" type="button">Anmelden</button> 
+			<label id="headerlabel">Jeopardy!</label>
+			<button class="button" type="button" id="logon">Anmelden</button> 
+			</div>
 	</header>
 
-	<label>Fragen 2/10</label>
-	<div class="greenbox">
-		<label> Du hast richtig geantwortet: +1000 €</label>
-	</div>
-	<div class="redbox">
-		<label> Du hast falsch geantwortet: -500 €</label>
-	</div>
-	<div class="blackbox">
-		<label>Deadpool hat TUWIEN für €1000 gewählt.</label>
-	</div>
-	<div>
+	<div id="jeopardy">
+	<div id="avatars">
+		<div id="avatargroup1">
+		<div id="imgbox">
 		<img src="img/avatar/black-widow_head.png" alt=""/>
+		</div>
 		<a>Black Widow (Du)</a>
 		<p>2000 €</p>
-	</div>
-	<div>
+		</div>
+		<div id="avatargroup2">
+		<div id="imgbox2">
 		<img src="img/avatar/deadpool_head.png" alt=""/>
+		</div>
 		<a>Deadpool</a>
 		<p>400 €</p>
+		</div>
+		<div id="qstcount">
+		<label>
+		Fragen 2/10
+		</label>
+		</div>
 	</div>
+
+	<div id="grid_and_boxes">
+	<div id="boxes">
+	<div class="box" id="green">
+		<label> Du hast richtig geantwortet: +1000 €</label>
+	</div>
+	<div class="box" id="red">
+		<label> Du hast falsch geantwortet: -500 €</label>
+	</div>
+	<div class="box" id="black">
+		<label>Deadpool hat TUWIEN für €1000 gewählt.</label>
+	</div>
+	</div>
+	
 	<section id="questionmatrix">
 	<div class="grid">
 		<div class="column">
@@ -127,13 +145,14 @@
 		</div>
 		</div>
 	</section>
-	<p></p>
 	<div id="grid">
-	<div>
-		<p>Letztes Spiel: <time>22.2.2015 11:07:00</time></p>
 		<a><button class="choose" type="button"> wählen</button></a>
+		<p>Letztes Spiel: <time>22.2.2015 11:07:00</time></p>
 	</div>
 	</div>
+	</div>
+	<p></p>
+	
 	<footer>@ 2015 BIG Jeopardy</footer>
 </body>
 </html>

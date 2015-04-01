@@ -17,11 +17,16 @@
 <input type="text" id="lastname" name="lastname"/></p>
 <p><label for ="birthday">Geburtstag:</label>
 <input type="text" id="birthday" name="birthday"/></p>
-<p><label>Geschlecht:</label></p>
-<p>
-<input type="radio" id="mgender" name="gender" value="m"/>Männlich
-<input type="radio" id="wgender" name="gender" value="f"/>Weiblich
+<p><label for="radiogroup">Geschlecht:</label>
+
+<div id="radiogroup">
+<input type="radio" id="mgender" name="gender" value="m"/>
+<label for="mgender">Männlich</label>
+<input type="radio" id="wgender" name="gender" value="f"/>
+<label for="wgender">Weiblich</label>
+</div>
 </p>
+
 <p><h2>Spielerdaten</h2></p>
 
 <p><label for="avatar">Avatar:</label>

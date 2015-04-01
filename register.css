@@ -88,21 +88,27 @@ h2 {
 	color:#3366BB;
 	font:SansSerif;
 	font-size:16px;
+	padding-bottom:1em;
+	padding-top:2em;
 }
-div {
+
+#site {
     width: 368px;
     padding: 25px;
 	text-align: justify;
 	margin-left: auto;
 	margin-right: auto;
-}
-p {
-	font-size:12px;
-	font-family:"Arial", Times, serif;
-	margin-top:25px;	
+	
+	
 }
 
-input {
+#site p {
+	font-size:12px;
+	font-family:"Arial", Times, serif;
+	margin-top:25px;
+}
+
+input:not([type="radio"]) {
 	float:right;
 	clear:both;
 	width:180px;
@@ -116,6 +122,26 @@ input {
 	border-radius: 5px;
 	padding-left:10px;
 }
+
+#radiogroup {
+	clear:both;
+	float:right;
+	border-width:1px;
+	overflow:display;
+	padding-left:0;
+	width:190px;
+	margin-left:0;
+	margin-right:0;
+	padding-left:10px;
+}
+
+#mgender,#wgender {
+	width:1em;
+	clear:both;
+	text-align: justify;
+	
+}
+/*
 #mgender, #wgender {
 	float: right;
 	clear: both;
@@ -126,6 +152,7 @@ input {
 	
 	
 }
+*/
 input[value="Registrieren"]{
 	background-color:lightGray;
 	color:white;
@@ -147,6 +174,7 @@ input[value="Registrieren"]{
 	border-radius: 5px;
 	padding-left:10px;
 }
+
 
 footer {
 		text-align:center;
