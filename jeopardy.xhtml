@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
-<link rel="stylesheet" href="jeopardy.css"/>
+<head>
+	<title>Jeopardy</title>
+	<link rel="stylesheet" href="jeopardy.css"/>
+</head>
 <body>
 	<header>
 			<div id="header">
@@ -10,20 +13,15 @@
 			<button class="button" type="button" id="logon">Anmelden</button> 
 			</div>
 	</header>
-
 	<div id="jeopardy">
 	<div id="avatars">
 		<div id="avatargroup1">
-		<div id="imgbox">
-		<img src="img/avatar/black-widow_head.png" alt=""/>
-		</div>
+		<img class="imgbox" src="img/avatar/black-widow_head.png" alt=""/>
 		<a>Black Widow (Du)</a>
 		<p>2000 €</p>
 		</div>
 		<div id="avatargroup2">
-		<div id="imgbox2">
-		<img src="img/avatar/deadpool_head.png" alt=""/>
-		</div>
+		<img class="imgbox2" src="img/avatar/deadpool_head.png" alt=""/>
 		<a>Deadpool</a>
 		<p>400 €</p>
 		</div>
@@ -146,7 +144,7 @@
 		</div>
 	</section>
 	<div id="grid">
-		<a><button class="choose" type="button"> wählen</button></a>
+		<button class="choose" type="button"> wählen</button>
 		<p>Letztes Spiel: <time>22.2.2015 11:07:00</time></p>
 	</div>
 	</div>
