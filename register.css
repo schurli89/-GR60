@@ -1,3 +1,46 @@
+header{
+		border-width: 1px;
+		border-color: #312B57;
+		border-style: solid;
+		background:#314C88;
+		color:white;
+		margin-bottom: 1em;
+		margin-bottom: 15px;
+		height:3.5em;
+}
+
+
+#headerimg{
+	float:left;
+}
+
+#headertext {
+	margin-left:0.5em;
+	float:left;
+	font-weight: bold;
+	font-size: 1.4em;
+	line-height:2.5em;
+	width:auto;
+
+}
+
+#logon {
+		margin:0.5em;
+	    clear:left;
+		float:right;
+		font-weight: bold;
+		width:auto;
+}
+button{
+	height: 2.5em;
+	width: 9em;
+	border-width: 1px;
+	border-color: #784600;
+	border-style: solid;
+	background-color:#FA7700;
+	color: white;
+	text-align: center;
+}
 @media screen and (max-width:481px) {
 
 	html, body {
