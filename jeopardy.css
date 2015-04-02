@@ -13,26 +13,27 @@ header{
 		color:white;
 		margin-bottom: 1em;
 		margin-bottom: 15px;
-		height:auto;
+		height:3.5em;
 }
 
-#headerlabel {
-		clear:both;
-		font-weight: bold;
-		font-size: 1.4em;
-		margin-top:auto;
-		background-color: gray;
-				height: 2.5em;
-						margin-top:auto;
-		margin-bottom:auto;
-		margin:0.5em;
-		margin-bottom:auto;
+
+#headerimg{
+	float:left;
+}
+
+#headertext {
+	margin-left:0.5em;
+	float:left;
+	font-weight: bold;
+	font-size: 1.4em;
+	line-height:2.5em;
+	width:auto;
+
 }
 
 #logon {
-		margin-top:auto;
-		margin-bottom:auto;
 		margin:0.5em;
+	    clear:left;
 		float:right;
 		font-weight: bold;
 		width:auto;
@@ -161,7 +162,6 @@ html, body {
 
 	footer {
 			clear: both;
-			float: justify;
 			text-align:center;
 			margin-top: 150px;
 	}
@@ -378,7 +378,6 @@ html, body {
 
 	footer {
 			clear: both;
-			float: justify;
 			text-align:center;
 			margin-top: 150px;
 	}
@@ -623,7 +622,6 @@ html, body {
 
 	footer {
 			clear: both;
-			float: justify;
 			text-align:center;
 			margin-top: 150px;
 	}
@@ -640,6 +638,7 @@ html, body {
 		margin-bottom: 1em;
 		clear:both;
 		float:left;
+		text-align:left;
 	}
 
 	#avatargroup1 {

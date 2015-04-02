@@ -133,7 +133,6 @@ input:not([type="radio"]) {
 	clear:both;
 	float:right;
 	border-width:1px;
-	overflow:display;
 	padding-left:0;
 	width:190px;
 	margin-left:0;
