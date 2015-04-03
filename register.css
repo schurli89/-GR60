@@ -160,12 +160,16 @@ input:not([type="radio"]) {
 	
 }
 */
-input[value="Registrieren"]{
+input[value="Registrieren"]:disabled{
 	background-color:lightGray;
 	color:white;
 	width:120px;
 	padding-left:0px;
 	margin-top:25px;
+}
+input[value="Registrieren"]{
+	background-color:#2CC53A;
+
 }
 #avatar {
 	float:right;
