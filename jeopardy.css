@@ -100,6 +100,10 @@ html, body {
 			line-height:40px;
 			margin-bottom:5px;
 		}
+		
+		.grid .cell:hover {		
+		background-color:#FA7700;
+		}
 	
 		.grid .celldisabled{
 			border-width: 1px;
@@ -309,11 +313,8 @@ html, body {
 			margin-bottom:5px;
 		}
 		
-				
-			.grid .cell:hover {		
-	
+		.grid .cell:hover {		
 			background-color:#FA7700;
-	
 		}
 		
 		.grid .celldisabled{
