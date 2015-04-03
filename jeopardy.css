@@ -100,7 +100,7 @@ html, body {
 			line-height:40px;
 			margin-bottom:5px;
 		}
-		
+	
 		.grid .celldisabled{
 			border-width: 1px;
 			border-color: #5C5F63;
@@ -307,6 +307,13 @@ html, body {
 			text-align:center;
 			line-height:40px;
 			margin-bottom:5px;
+		}
+		
+				
+			.grid .cell:hover {		
+	
+			background-color:#FA7700;
+	
 		}
 		
 		.grid .celldisabled{
