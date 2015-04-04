@@ -6,7 +6,7 @@ header{
 		color:white;
 		margin-bottom: 1em;
 		margin-bottom: 15px;
-		height:3.5em;
+		height:3.1em;
 }
 
 
@@ -40,6 +40,15 @@ button{
 	color: white;
 	text-align: center;
 }
+
+ fieldset {
+    border: none;
+    padding: 0;
+	padding-top:1em;
+	font:SansSerif;
+	font-size:12px;
+	font-family:"Arial", Times, serif;
+  }
 @media screen and (max-width:481px) {
 
 	html, body {
