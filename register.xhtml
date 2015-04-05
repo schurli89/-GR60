@@ -21,9 +21,12 @@
 				{
 					dateValid=validateDate(getNormalizedDateString('#birthday'));
 					var text='';
-					setDateErrorMessage(dateValid);
-					alert('Datum im Format dd.mm.yyyy eingeben');
-					return;
+					
+					if(!dateValid) {
+						setDateErrorMessage(dateValid);
+						alert('Datum im Format dd.mm.yyyy eingeben');
+						return;
+					}
 				} 
 				else
 				{
@@ -47,9 +50,12 @@
 			{
 				if($('#birthday').val().length > 0){
 					dateValid=validateDate(getNormalizedDateString('#birthday'));
-					setDateErrorMessage(dateValid);
-					alert('Datum im Format dd.mm.yyyy eingeben');
-					return;
+					
+					if(!dateValid) {
+						setDateErrorMessage(dateValid);
+						alert('Datum im Format dd.mm.yyyy eingeben');
+						return;
+					}
 				} 
 				else
 				{
