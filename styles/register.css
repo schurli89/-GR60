@@ -20,8 +20,6 @@ html, body {
 h2 {
 	color:#3366BB;
 	font-size:16px;
-	padding-bottom:1em;
-	padding-top:2em;
 }
 
 #avatar {
@@ -78,12 +76,14 @@ button{
 	font-size:13px;
   }
   
-
-  
   #radiogroup {
 	margin-top: -2.5em;
 	width: 22em;
 	height: 2em;
+  }
+  
+  #radiogroup input {
+	border-width: 0em;
   }
  
  #submitButton{
@@ -115,14 +115,14 @@ input {
 		-moz-border-radius: 5px;
 		-webkit-border-radius: 5px;
 		border-radius: 5px;
-		padding-left:10px;
-		
+		padding-left:10px;	
 }
 
 @media screen and (max-width:521px) {
 
 	#radiogroup {
 		width:10em;
+		margin-top:-0.3em;
 	}
   
 	#radiogroup input {
@@ -136,12 +136,14 @@ input {
   
 	fieldset legend {
 		width: 100%;
+		margin-top:1em;
 	}
   
 	#site div {
 		width: 100%;
 		margin-left:0px;
 		float: left;
+
 	}
 	
 	input {
