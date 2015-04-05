@@ -1,9 +1,4 @@
 
-* {
-  -webkit-box-sizing: border-box;
-     -moz-box-sizing: border-box;
-          box-sizing: border-box;
-}
 
 header{
 		border-width: 1px;
@@ -36,9 +31,10 @@ header{
 		float:right;
 		font-weight: bold;
 		width:auto;
+		padding-left:2em;
+		padding-right:2em;
 }
-	
-@media screen and (max-width:480px) {
+
 html, body {
 		height: 100%;
 		background: -moz-linear-gradient(white, #D0D0E4);
@@ -46,23 +42,14 @@ html, body {
 		font-size:15px;
 		font:SansSerif;
 		font-family:"Arial", Times, serif;
-	}
-	
-	button{
-		height: 2.5em;
-		width: 9em;
-		border-width: 1px;
-		border-color: #784600;
-		border-style: solid;
-		background-color:#FA7700;
-		color: white;
-		text-align: center;
-	}
-	
-	.grid {
+}
+
+.grid {
 		overflow: hidden;
 		clear: both;
 		margin-top:1.5em;
+		width:100%;
+		
 	}
 		.grid .column {
 			text-align:right;
@@ -115,8 +102,8 @@ html, body {
 			line-height:40px;
 			margin-bottom:5px;
 		}
-
-	.box{
+		
+		.box{
 		width: 80%;
 		height: 2em;
 		border-width: 0.1em;
@@ -129,7 +116,7 @@ html, body {
 		margin-left:auto;
 		margin-right:auto;
 	}
-
+		
 	#green {
 		color: green;
 		border-color: green;
@@ -140,118 +127,6 @@ html, body {
 		border-color: red;
 	}
 	
-	#avatars {
-		clear:both;
-		width:100%;
-		height:auto;
-		text-align:left;
-	}
-
-	#boxes {
-		width:100%;
-		clear:both;
-		float:right;
-		text-align: center;
-		margin-left: auto;
-		margin-right: auto;
-		margin-bottom: 1em;
-	}
-
-	footer {
-			clear: both;
-			text-align:center;
-			margin-top: 150px;
-	}
-
-	#grid {
-		margin-top:2em;
-		clear: both;
-		text-align:left;
-		width:100%;
-	}
-
-	#avatargroup2 {
-		margin-bottom: 1em;
-		float:right;
-		text-align:right;
-	}
-
-	#avatargroup1 {
-		margin-bottom: 1em;
-		clear:both;
-		font-weight: bold;
-		float:left;
-
-	}
-
-	#qstcount {
-		clear:right;
-		margin-left:auto;
-		margin-right:auto;
-		font-weight: bold;
-		text-align: center;
-		padding-bottom:1em;
-	}
-
-	.imgbox {
-		clear:both;
-		float:left;
-		max-width:5em;
-		border-width: 0.15em;
-		border-color: orange;
-		border-style: solid;
-		margin-right: 1em;
-
-	}
-
-	.imgbox2 {
-		clear:both;
-		max-width:5em;
-		float:right;
-		border-width: 0.1em;
-		border-color:black;
-		border-style:solid;
-	}
-	
-	.choose{
-		height: 2em;
-		width: 9em;
-		border-color: #116D01;
-		border-style: solid;
-		-moz-border-radius:2px;
-		border-radius:2px;
-		background-color:#2CC53A;
-		color: white;
-		text-align: center;
-		clear:both;
-		float:right;
-		margin-bottom:2em;
-	}
-
-}
-
-@media screen and (min-width:481px) {
-	html, body {
-		height: 100%;
-		background: -moz-linear-gradient(white, #D0D0E4);
-		background: linear-gradient(white,#D0D0E4);
-		font-size:15px;
-		font:SansSerif;
-		font-family:"Arial", Times, serif;
-	}
-	
-	#headerlabel {
-		font-weight: bold;
-		font-size: 1.4em;
-	}
-	
-	#logon {
-		
-		margin:0.75em;
-		float:right;
-		font-weight: bold;
-		
-	}
 	
 	button{
 		height: 2.5em;
@@ -263,110 +138,7 @@ html, body {
 		color: white;
 		text-align: center;
 	}
-	/*img{
-		max-width: 4em;
-		border-width: 1px;
-		border-color: #784600;
-		border-style: solid;
-	}*/
 	
-	.grid {
-		overflow: hidden;
-		clear: both;
-		margin-top:1.5em;
-	}
-		.grid .column {
-			text-align:right;
-			width:8em;
-			float:left;
-			margin-right: 0.3em;
-			font-size:15px;
-			font:SansSerif;
-			font-family:"Arial", Times, serif;
-		}
-
-		.grid .header {		
-			border-width: 1px;
-			border-color: #784600;
-			border-style: solid;
-			width: 8em;
-			height:40px;
-			background-color:#FA7700;
-			color:#172B57;
-			text-align:center;
-			font-weight:bold;
-			line-height:40px;
-			margin-bottom:5px;	
-		}
-
-		.grid .cell {		
-			border-width: 1px;
-			border-color: #312B57;
-			border-style: solid;
-			width: 8em;
-			height:40px;
-			background-color:#314C88;
-			color:white;
-			text-align:center;
-			line-height:40px;
-			margin-bottom:5px;
-		}
-		
-		.grid .cell:hover {		
-			background-color:#FA7700;
-		}
-		
-		.grid .celldisabled{
-			border-width: 1px;
-			border-color: #5C5F63;
-			border-style: solid;
-			width: 8em;
-			height:40px;
-			background-color:#D3D8E3;
-			color:#5C5F63;
-			text-align:center;
-			line-height:40px;
-			margin-bottom:5px;
-		}
-
-	.box{
-		width: 80%;
-		height: 2em;
-		border-width: 0.1em;
-		border-color: black;
-		border-style: solid;
-		color: black;
-		text-align: center;
-		line-height: 2em;
-		margin-bottom: 0.2em;
-		margin-left:auto;
-		margin-right:auto;
-	}
-
-	#green {
-		color: green;
-		border-color: green;
-	}
-
-	#red {
-		color: red;
-		border-color: red;
-	}
-	
-	
-	#grid_and_boxes {
-		float:right;
-		margin-left: auto;
-		margin-right: 7%;
-	}
-	
-	#avatars {
-		clear:both;
-		width:100%;
-		height:auto;
-		text-align:left;
-	}
-
 	#boxes {
 		width:100%;
 		clear:both;
@@ -376,34 +148,30 @@ html, body {
 		margin-right: auto;
 		margin-bottom: 1em;
 	}
-
-	footer {
-			clear: both;
-			text-align:center;
-			margin-top: 150px;
-	}
-
-	#grid {
-		margin-top:2em;
-		clear: both;
-		text-align:left;
-		width:100%;
-	}
-
-	#avatargroup2 {
-		margin-bottom: 1em;
-		float:right;
-		text-align:right;
-	}
-
-	#avatargroup1 {
-		margin-bottom: 1em;
+	
+	#imgbox {
 		clear:both;
-		font-weight: bold;
 		float:left;
-
+		max-width: 5em;
+		border-width: 0.15em;
+		border-color: orange;
+		border-style: solid;
+		margin-right: 1em;
 	}
 
+	#imgbox2 {
+		clear:both;
+		float:right;
+		margin-left:1em;
+		text-align:left;
+		max-width: 5em;
+		border-color:black;
+		border-width: 0.1em;
+		border-style:solid;		
+	}
+	
+	
+	
 	#qstcount {
 		clear:both;
 		margin-left:auto;
@@ -412,29 +180,35 @@ html, body {
 		text-align:center;
 		padding-bottom:1em;
 	}
-
-	.imgbox {
-		clear:both;
-		float:left;
-		max-width:5em;
-		border-width: 0.15em;
-		border-color: orange;
-		border-style: solid;
-		margin-right: 1em;
-	}
-
-	.imgbox2 {
-		clear:both;
-		max-width:5em;
-		margin-right: 1em;
-		margin-left: 1em;
+	
+	#avatargroup2 {
+		margin-bottom: 1em;
 		float:right;
-		border-color:black;
-		border-width: 0.1em;
-		border-style:solid;
+		text-align:right;
+		
 	}
 
-	.choose{
+	#avatargroup1 {
+		margin-bottom: 1em;
+		clear:both;
+		font-weight: bold;
+		float:left;
+
+	}
+	
+	footer {
+			clear: both;
+			text-align:center;
+			margin-top: 150px;
+	}
+	
+	#grid {
+		margin-top:2em;
+		text-align:left;
+		width:100%;
+	}
+	
+	#choose {
 		height: 2em;
 		width: 9em;
 		border-color: #116D01;
@@ -449,158 +223,67 @@ html, body {
 		margin-bottom:2em;
 	}
 
+	
+@media screen and (max-width:520px) {
+
+	html,body {
+		background: white;
+	}
+	#logon {
+		padding-left:0.2em;
+		padding-right:0.2em;
+	}
+	#avatars {
+		clear:both;
+		width:100%;
+		height:auto;
+		text-align:left;
+	}
+	
+	#imgbox,#imgbox2 {
+		width:3em;
+	}
+	
+}
+
+@media screen and (min-width:520px) {
+	
+	.grid .column {
+			width:8em;
+	}
+	
+	
+	#grid_and_boxes {
+		margin-left: auto;
+		margin-right: 7%;
+		float:right;
+	}
+	
+	#avatars {
+		clear:both;
+		width:100%;
+		height:auto;
+		text-align:left;
+	}
 
 }
 
-@media screen and (min-width:801px) {
-
-	#header {
-		height:auto;
-		padding:0;
+@media screen and (min-width:960px) {
+	.grid .column {
+		max-width:10em;
+		min-width:8em;
 	}
 	
-	#headerlabel {
-		font-weight: bold;
+	#imgbox2 {
+		float:left;
+		margin-left:0em;
+		margin-right:1em;
 	}
-
-	#logon {
-		margin:0.75em;
-		float:right;
-		font-weight: bold;
-	}
-	
-	#jeopardy{
-		margin-left:auto;
-		margin-right:auto;
-		width:100%;
-	}
-	button{
-		height: 2.5em;
-		width: 9em;
-		border-width: 1px;
-		border-color: #784600;
-		border-style: solid;
-		background-color:#FA7700;
-		color: white;
-		text-align: center;
-	}
-
-	.choose{
-		height: 2em;
-		width: 7em;
-		border-color: #116D01;
-		border-style: solid;
-		-moz-border-radius:2px;
-		border-radius:2px;
-		background-color:#2CC53A;
-		color: white;
-		text-align: center;
-		clear:both;
-		float:right;
-		margin-bottom:2em;
-	}
-
-
-	html, body {
-		height: 100%;
-		background: -moz-linear-gradient(white, #D0D0E4);
-		background: linear-gradient(white,#D0D0E4);
-		font-size:15px;
-		font:SansSerif;
-		font-family:"Arial", Times, serif;
-	}
-
-/*	img{
-		max-width: 5em;
-		border-width: 1px;
-		border-color: #784600;
-		border-style: solid;
-	}*/
-
-	.grid {
-		overflow: hidden;
-		clear: both;
-		margin-top:1.5em;
-	}
-		.grid .column {
-			text-align:right;
-			width:10em;
-			float:left;
-			margin-right: 0.5em;
-			font-size:15px;
-			font:SansSerif;
-			font-family:"Arial", Times, serif;
-		}
-
-		.grid .header {		
-			border-width: 1px;
-			border-color: #784600;
-			border-style: solid;
-			width: 10em;
-			height:40px;
-			background-color:#FA7700;
-			color:#172B57;
-			text-align:center;
-			font-weight:bold;
-			line-height:40px;
-			margin-bottom:5px;	
-		}
-
-		.grid .cell {		
-			border-width: 1px;
-			border-color: #312B57;
-			border-style: solid;
-			width: 10em;
-			height:40px;
-			background-color:#314C88;
-			color:white;
-			text-align:center;
-			line-height:40px;
-			margin-bottom:5px;
-		}
-		
-		.grid .celldisabled{
-			border-width: 1px;
-			border-color: #5C5F63;
-			border-style: solid;
-			width: 10em;
-			height:40px;
-			background-color:#D3D8E3;
-			color:#5C5F63;
-			text-align:center;
-			line-height:40px;
-			margin-bottom:5px;
-		}
-
-	.box{
-		width: 80%;
-		height: 2em;
-		border-width: 0.1em;
-		border-color: black;
-		border-style: solid;
-		color: black;
-		text-align: center;
-		line-height: 2em;
-		margin-bottom: 0.2em;
-		margin-left:auto;
-		margin-right:auto;
-	}
-
-	#green {
-		color: green;
-		border-color: green;
-	}
-
-	#red {
-		color: red;
-		border-color: red;
-	}
-
 	
 	#grid_and_boxes {
 		float:right;
 		margin-left: auto;
-		margin-right: auto;
+		margin-right: 1em;
 	}
 	
 	#avatars {
@@ -622,20 +305,6 @@ html, body {
 		margin-bottom: 1em;
 	}
 
-	footer {
-			clear: both;
-			text-align:center;
-			margin-top: 150px;
-	}
-
-	#grid {
-		margin-top:2em;
-		clear: both;
-		text-align:left;
-		width:100%;
-	}
-
-
 	#avatargroup2 {
 		margin-bottom: 1em;
 		clear:both;
@@ -646,7 +315,6 @@ html, body {
 	#avatargroup1 {
 		margin-bottom: 1em;
 		clear:both;
-		font-weight: bold;
 		float:left;
 
 	}
@@ -657,24 +325,5 @@ html, body {
 		font-weight: bold;
 	}
 
-	.imgbox {
-		clear:both;
-		float:left;
-		max-width: 5em;
-		border-width: 0.15em;
-		border-color: orange;
-		border-style: solid;
-		margin-right: 1em;
-	}
 
-	.imgbox2 {
-		clear:both;
-		float:left;
-		margin-left:0em;
-		text-align:left;
-		max-width: 5em;
-		border-color:black;
-		border-width: 0.1em;
-		border-style:solid;		
-	}
 }
