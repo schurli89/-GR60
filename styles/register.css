@@ -104,7 +104,35 @@ p {
 		font:SansSerif;
 		font-family:"Arial", Times, serif;
 }
-	
+
+#birthday:invalid {
+	border-color:red;
+	border-width:2px;
+}
+input:focus:required:valid {
+	background-color:#CCFFCC;
+}
+
+input:focus:invalid {
+	background-color:#FF8C69;
+}
+
+input:required:valid {
+	border-color:green;
+	border-width:2px;
+}
+
+input:focus:required:invalid {
+	border-color:red;
+	border-width:2px;
+}
+
+input:empty:required:invalid:{
+	border-color:black;
+	border-width:1px;
+	background-color:white;
+}
+
 
 input {
 		width: 15em;
