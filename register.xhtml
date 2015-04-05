@@ -22,6 +22,8 @@
 					dateValid=validateDate(getNormalizedDateString('#birthday'));
 					var text='';
 					setDateErrorMessage(dateValid);
+					alert('Datum im Format dd.mm.yyyy eingeben');
+					return;
 				} 
 				else
 				{
@@ -29,13 +31,25 @@
 
 				}
 				userValid=checkValidierung($('#userName')[0],'Der Benutzername');
+				if((!userValid))
+				{
+				alert('Benutzername muss zwischen 4 und 8 Zeichen lang sein.');
+				return;
+				}
 				pwdValid=checkValidierung($('#password')[0],'Das Passwort');
+				if(!pwdValid)
+				{
+				alert('Passwort muss zwischen 4 und 8 Zeichen lang sein.');
+				return;
+				}
 			}
 			else 
 			{
 				if($('#birthday').val().length > 0){
 					dateValid=validateDate(getNormalizedDateString('#birthday'));
 					setDateErrorMessage(dateValid);
+					alert('Datum im Format dd.mm.yyyy eingeben');
+					return;
 				} 
 				else
 				{
@@ -43,7 +57,17 @@
 
 				}
 				userValid=validateLogin($('#userName')[0],'Der Benutzername');
+				if(!userValid)
+				{
+				alert('Benutzername muss zwischen 4 und 8 Zeichen lang sein.');
+				return;
+				}
 				pwdValid=validateLogin($('#password')[0],'Das Passwort');	
+				if(!pwdValid)
+				{
+				alert('Passwort muss zwischen 4 und 8 Zeichen lang sein.');
+				return;
+				}
 			}
 			if(userValid && pwdValid && dateValid)
 			{
@@ -76,7 +100,7 @@
 		input.setCustomValidity('');
 		if(!input.checkValidity())
 		{
-			input.setCustomValidity(text+' muss zwischen 4 und 8 Zeichen sein');
+			input.setCustomValidity(text+' muss zwischen 4 und 8 Zeichen sein');			
 			return false;
 		}
 		else
@@ -91,7 +115,7 @@
    	input.setCustomValidity('');
     	if(input.value.length < 4 || input.value.length > 8)
     	{
-			input.setCustomValidity(text+' muss zwischen 4 und 8 Zeichen sein');
+			input.setCustomValidity(text+' muss zwischen 4 und 8 Zeichen sein');			
          return false;
        }
        else 
@@ -214,7 +238,7 @@
 		</form>	
 	</section>
 	</main>
-	<footer>@ 2015 BIG Jeopardy</footer>
+	<footer>&copy; 2015 BIG Jeopardy</footer>
 	</div>
 </body>
 </html>
