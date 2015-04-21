@@ -56,7 +56,13 @@ public class BigJeopardyServlet extends HttpServlet {
 		if(quiz == null){
 			System.out.println("quiz object is null");
 		}
-		
+		/*
+		 * quiz.isAnswer()
+		 * 	handle answer
+		 * 	handle enemy answer
+		 * else
+		 * 	handle question selection
+		 */
 			//retrieve selected question via attribute "question_selection"
 			//input element with same id returns selected item
 			int q_id = Integer.parseInt(request.getParameter("question_selection"));
@@ -84,13 +90,13 @@ public class BigJeopardyServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// handle login.jsp 
-		//set QuizFactory for jeopard.jsp
-		QuizFactory quiz = (QuizFactory)request.getSession().getAttribute("quiz");
-		if(quiz == null){
+		//set (new) QuizFactory for jeopard.jsp 
+		QuizFactory quiz;// = (QuizFactory)request.getSession().getAttribute("quiz");
+		//if(quiz == null){
 			quiz = new QuizFactory();
 			quiz.setCategories(factory.createQuestionDataProvider().getCategoryData());
 			quiz.init();
-		}
+		//}
 		
 		request.setAttribute("quiz", quiz);
 		request.getSession().setAttribute("quiz", quiz);
