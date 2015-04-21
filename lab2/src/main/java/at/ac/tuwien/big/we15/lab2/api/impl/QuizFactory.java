@@ -56,6 +56,9 @@ public class QuizFactory{
 		return numberOfQuestions;
 	}
 
+	public void increaseNumberOfQuestions(){
+		++this.numberOfQuestions;
+	}
 	/**
 	 * 
 	 * @param id question id 

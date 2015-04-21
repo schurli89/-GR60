@@ -1,6 +1,7 @@
 package at.ac.tuwien.big.we15.lab2.servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -24,8 +25,9 @@ import at.ac.tuwien.big.we15.lab2.api.impl.ServletJeopardyFactory;
 @WebServlet("/BigJeopardyServlet")
 public class BigJeopardyServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    private QuizFactory quiz;
-    /**
+    private ServletJeopardyFactory factory;
+    
+    /** 
      * @see HttpServlet#HttpServlet()
      */
     public BigJeopardyServlet() {
@@ -41,14 +43,7 @@ public class BigJeopardyServlet extends HttpServlet {
 		System.out.println("init");
 		// ServletContext coming from javax.servlet.GenericServlet or subclass
 		ServletContext servletContext = getServletContext();
-		/*QuizFactory*/ServletJeopardyFactory factory = new ServletJeopardyFactory(servletContext);
-		QuestionDataProvider provider = factory.createQuestionDataProvider();
-		List<Category> categories = provider.getCategoryData();
-		quiz = new QuizFactory();
-		quiz.setCategories(categories);
-		quiz.init();
-		// category has name and holds questions
-		// questions have attributes and answers
+		/*QuizFactory*/ factory = new ServletJeopardyFactory(servletContext);
 	}
 
 	/**
@@ -57,7 +52,11 @@ public class BigJeopardyServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// handle jeopardy question selection
 		System.out.println("doGet");
-	 
+		QuizFactory quiz = (QuizFactory) request.getSession().getAttribute("quiz");
+		if(quiz == null){
+			System.out.println("quiz object is null");
+		}
+		
 			//retrieve selected question via attribute "question_selection"
 			//input element with same id returns selected item
 			int q_id = Integer.parseInt(request.getParameter("question_selection"));
@@ -69,7 +68,8 @@ public class BigJeopardyServlet extends HttpServlet {
 			q.setDisabled(true);
 
 			quiz.setSelected_question(q);
-		
+			quiz.increaseNumberOfQuestions();
+			
 		//set QuizFactory with selected question and pass it to 
 		//question.jsp
 		request.getSession().setAttribute("quiz", quiz);
@@ -85,7 +85,15 @@ public class BigJeopardyServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// handle login.jsp 
 		//set QuizFactory for jeopard.jsp
+		QuizFactory quiz = (QuizFactory)request.getSession().getAttribute("quiz");
+		if(quiz == null){
+			quiz = new QuizFactory();
+			quiz.setCategories(factory.createQuestionDataProvider().getCategoryData());
+			quiz.init();
+		}
+		
 		request.setAttribute("quiz", quiz);
+		request.getSession().setAttribute("quiz", quiz);
 		//move to jeopard.jsp
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/jeopardy.jsp");
 		dispatcher.forward(request, response);

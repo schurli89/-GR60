@@ -44,7 +44,7 @@
                      <th class="accessibility">Spielerpunkte</th>
                      <td class="playerpoints">${quiz.user.points } €</td>
                   </tr>
-               </table>
+               </table>            
             </section>
             <section id="secondplayer" class="playerinfo" aria-labelledby="secondplayerheading">
                <h3 id="secondplayerheading" class="accessibility">Zweiter Spieler</h3>
@@ -56,7 +56,7 @@
                   </tr>
                   <tr>
                      <th class="accessibility">Spielerpunkte</th>
-                     <td class="playerpoints">${quiz.enemy.points }€</td>
+                     <td class="playerpoints">${quiz.enemy.points } €</td>
                   </tr>
                </table>
             </section>
