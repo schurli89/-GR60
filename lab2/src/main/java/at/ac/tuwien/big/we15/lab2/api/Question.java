@@ -103,6 +103,12 @@ public interface Question {
 	
 	/**
 	 * 
+	 * @param disabled
+	 * 			true if already chosen; otherwise false
+	 */
+	public void setDisabled(boolean disabled);
+	/**
+	 * 
 	 * @return "disabled" if question is not selectable
 	 */
 	public String getDisabled();

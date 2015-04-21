@@ -33,6 +33,7 @@ public class SimpleQuestion implements Question {
 	private Category category;
 
 	private boolean disabled=false;
+	private String click;
 	
 	public SimpleQuestion() {
 		this.text = "";
@@ -203,6 +204,10 @@ public class SimpleQuestion implements Question {
 				+ rightAnswers + ", category=" + ((category != null)? category.getName() : "null") + "]";
 	}
 
+	public void setDisabled(boolean disabled){
+		this.disabled = disabled;
+	}
+	
 	public String getDisabled(){
 		return disabled ? "disabled":"";
 	}

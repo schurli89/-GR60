@@ -8,18 +8,17 @@ import at.ac.tuwien.big.we15.lab2.api.Avatar;
 import at.ac.tuwien.big.we15.lab2.api.Category;
 import at.ac.tuwien.big.we15.lab2.api.JeopardyFactory;
 import at.ac.tuwien.big.we15.lab2.api.Player;
+import at.ac.tuwien.big.we15.lab2.api.Question;
 
 public class QuizFactory{
 
 	private List<Category> categories;
 	private Player enemy;
 	private Player user;
-	private int numberOfQuestions = 0;
+	private int numberOfQuestions = 0; 
+	private Question selected_question;
 	
 	public QuizFactory( ) { 
-		System.out.println("Quizfactory constructor");
-	//	init();
-		//System.out.println("categories.size: " + categories.size());
 	}
 	
 	public void init(){
@@ -27,7 +26,6 @@ public class QuizFactory{
 		user.setAvatar(Avatar.getRandomAvatar());
 		enemy = new Player();
 		enemy.setAvatar(Avatar.getOpponent(user.getAvatar()));
-		System.out.println("enemy name: " + enemy.getAvatar().getName());
 	}
 	
 	public void setCategories(List<Category> categories){
@@ -58,8 +56,27 @@ public class QuizFactory{
 		return numberOfQuestions;
 	}
 
-	public void setNumberOfQuestions(int numberOfQuestions) {
-		this.numberOfQuestions = numberOfQuestions;
+	/**
+	 * 
+	 * @param id question id 
+	 * @return question identified by id; null if not found
+	 */
+	public Question getQuestion(int id) {
+		for(Category cat : categories){
+			for(Question q : cat.getQuestions()){
+				if(q.getId() == id){
+					return q;
+				}
+			}		
+		}	
+		return null;
 	}
-	
+
+	public Question getSelected_question() {
+		return selected_question;
+	}
+
+	public void setSelected_question(Question selected_question) {
+		this.selected_question = selected_question;
+	}
 }

@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import at.ac.tuwien.big.we15.lab2.api.Category;
+import at.ac.tuwien.big.we15.lab2.api.Question;
 import at.ac.tuwien.big.we15.lab2.api.QuestionDataProvider;
 import at.ac.tuwien.big.we15.lab2.api.impl.QuizFactory;
 import at.ac.tuwien.big.we15.lab2.api.impl.ServletJeopardyFactory;
@@ -54,29 +55,38 @@ public class BigJeopardyServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		System.out.println(getServletConfig());
+		// handle jeopardy question selection
+		System.out.println("doGet");
+	 
+			//retrieve selected question via attribute "question_selection"
+			//input element with same id returns selected item
+			int q_id = Integer.parseInt(request.getParameter("question_selection"));
+			System.out.println("selected id:" + q_id);
+			Question q = quiz.getQuestion(q_id);
+			System.out.println("Question: "+ q.getText());
+			
+			//set question non-selectable
+			q.setDisabled(true);
 
-		request.setAttribute("quiz", quiz);
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/jeopardy.jsp");
+			quiz.setSelected_question(q);
+		
+		//set QuizFactory with selected question and pass it to 
+		//question.jsp
+		request.getSession().setAttribute("quiz", quiz);
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/question.jsp");
 		dispatcher.forward(request, response);
+
+
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		System.out.println(getServletConfig());
-		//ServletContext servletContext = getServletContext();
-		//*QuizFactory*/ServletJeopardyFactory factory = new ServletJeopardyFactory(servletContext);
-		//QuestionDataProvider provider = factory.createQuestionDataProvider();
-		//List<Category> categories = provider.getCategoryData();
-		//quiz = new QuizFactory();
-		//quiz.setCategories(categories);
-		//quiz.init();
-		//request.setAttribute("quiz", quiz);
-		request.getSession().setAttribute("quiz", quiz);
+		// handle login.jsp 
+		//set QuizFactory for jeopard.jsp
+		request.setAttribute("quiz", quiz);
+		//move to jeopard.jsp
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/jeopardy.jsp");
 		dispatcher.forward(request, response);
 	}
