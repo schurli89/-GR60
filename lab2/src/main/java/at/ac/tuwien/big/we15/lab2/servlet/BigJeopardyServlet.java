@@ -17,6 +17,7 @@ import at.ac.tuwien.big.we15.lab2.api.Category;
 import at.ac.tuwien.big.we15.lab2.api.Question;
 import at.ac.tuwien.big.we15.lab2.api.QuestionDataProvider;
 import at.ac.tuwien.big.we15.lab2.api.impl.QuizFactory;
+import at.ac.tuwien.big.we15.lab2.api.impl.QuizState;
 import at.ac.tuwien.big.we15.lab2.api.impl.ServletJeopardyFactory;
 
 /**
@@ -26,6 +27,7 @@ import at.ac.tuwien.big.we15.lab2.api.impl.ServletJeopardyFactory;
 public class BigJeopardyServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     private ServletJeopardyFactory factory;
+    private Question q;
     
     /** 
      * @see HttpServlet#HttpServlet()
@@ -44,6 +46,7 @@ public class BigJeopardyServlet extends HttpServlet {
 		// ServletContext coming from javax.servlet.GenericServlet or subclass
 		ServletContext servletContext = getServletContext();
 		/*QuizFactory*/ factory = new ServletJeopardyFactory(servletContext);
+		
 	}
 
 	/**
@@ -52,35 +55,66 @@ public class BigJeopardyServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// handle jeopardy question selection
 		System.out.println("doGet");
+		RequestDispatcher dispatcher;
+	
+	
 		QuizFactory quiz = (QuizFactory) request.getSession().getAttribute("quiz");
 		if(quiz == null){
 			System.out.println("quiz object is null");
+		initQuiz(request,response);
 		}
-		/*
-		 * quiz.isAnswer()
-		 * 	handle answer
-		 * 	handle enemy answer
-		 * else
-		 * 	handle question selection
-		 */
+		if(quiz.getState() == QuizState.QUIZ_ANSWER ){
+			dispatcher = getServletContext().getRequestDispatcher("/jeopardy.jsp");
+			quiz.nextState(QuizState.QUIZ_JEOPARDY);
+			boolean result = true;
+			String[] answerIds = request.getParameterValues("answer_selection");
+			
+			if(answerIds != null){
+				for(String id : answerIds){
+					result = result && q.checkAnswer(Integer.parseInt(id));
+				}
+			}
+			else {
+				result = false;
+			}
+			
+			if(result){
+				quiz.getUser().setPoints(quiz.getUser().getPoints() + q.getValue());
+			}
+			
+			
+			/*
+			 * handle enemy answer
+			 */
+			
+			
+			if(quiz.getNumberOfQuestions() == 10){
+				quiz.nextState(QuizState.QUIZ_FINISHED);
+				dispatcher = getServletContext().getRequestDispatcher("/winner.jsp");
+			}
+			dispatcher.forward(request, response);
+		}
+		else if(quiz.getState() == QuizState.QUIZ_JEOPARDY || quiz.getState() == QuizState.QUIZ_INIT) {
+
 			//retrieve selected question via attribute "question_selection"
 			//input element with same id returns selected item
 			int q_id = Integer.parseInt(request.getParameter("question_selection"));
 			System.out.println("selected id:" + q_id);
-			Question q = quiz.getQuestion(q_id);
+			q = quiz.getQuestion(q_id);
 			System.out.println("Question: "+ q.getText());
 			
 			//set question non-selectable
 			q.setDisabled(true);
-
+	
 			quiz.setSelected_question(q);
 			quiz.increaseNumberOfQuestions();
-			
-		//set QuizFactory with selected question and pass it to 
-		//question.jsp
-		request.getSession().setAttribute("quiz", quiz);
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/question.jsp");
-		dispatcher.forward(request, response);
+			quiz.nextState(QuizState.QUIZ_ANSWER);
+			//set QuizFactory with selected question and pass it to 
+			//question.jsp
+			request.getSession().setAttribute("quiz", quiz);
+			dispatcher = getServletContext().getRequestDispatcher("/question.jsp");
+			dispatcher.forward(request, response);
+		}
 
 
 	}
@@ -89,6 +123,10 @@ public class BigJeopardyServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		initQuiz(request,response);
+	}
+	
+	private void initQuiz(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// handle login.jsp 
 		//set (new) QuizFactory for jeopard.jsp 
 		QuizFactory quiz;// = (QuizFactory)request.getSession().getAttribute("quiz");
@@ -96,6 +134,7 @@ public class BigJeopardyServlet extends HttpServlet {
 			quiz = new QuizFactory();
 			quiz.setCategories(factory.createQuestionDataProvider().getCategoryData());
 			quiz.init();
+			quiz.nextState(QuizState.QUIZ_INIT);
 		//}
 		
 		request.setAttribute("quiz", quiz);
@@ -103,6 +142,7 @@ public class BigJeopardyServlet extends HttpServlet {
 		//move to jeopard.jsp
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/jeopardy.jsp");
 		dispatcher.forward(request, response);
+	
 	}
 
 }

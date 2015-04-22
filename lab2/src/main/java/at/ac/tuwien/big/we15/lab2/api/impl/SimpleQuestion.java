@@ -95,6 +95,12 @@ public class SimpleQuestion implements Question {
 	}
 
 	@Override
+	public void setAllAnswers(List<Answer> answerList){
+			// to  be implemented?
+			// dummy
+	}
+
+	@Override
 	public List<Answer> getAllAnswers() {
 		List<Answer> allChoices = new ArrayList<>();
 
@@ -210,5 +216,17 @@ public class SimpleQuestion implements Question {
 	
 	public String getDisabled(){
 		return disabled ? "disabled":"";
+	}
+	
+	@Override 
+	public boolean checkAnswer(Integer id){
+		
+		for(Answer a : rightAnswers) {
+			if(a.getId() == id){
+				return true;
+			}
+		}
+		
+		return false;
 	}
 }

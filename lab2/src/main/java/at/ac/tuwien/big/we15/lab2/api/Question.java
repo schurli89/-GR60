@@ -63,6 +63,12 @@ public interface Question {
 	 * @return temporary shuffled list of all choices
 	 */
 	public List<Answer> getAllAnswers();
+	
+	/**
+	 * @param answerList
+	 * 				all available answers to this Question
+	 */
+	public void setAllAnswers(List<Answer> answerList);
 
 	/**
 	 * 
@@ -112,4 +118,16 @@ public interface Question {
 	 * @return "disabled" if question is not selectable
 	 */
 	public String getDisabled();
+	
+	/**
+	 * 
+	 * @param id
+	 * 			ID of answer to be checked
+	 * @return
+	 * 		 true 
+	 * 			if answer is correct
+	 * 		 false
+	 * 			else
+	 */
+	public boolean checkAnswer(Integer id);
 }

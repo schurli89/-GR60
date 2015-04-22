@@ -17,10 +17,18 @@ public class QuizFactory{
 	private Player user;
 	private int numberOfQuestions = 0; 
 	private Question selected_question;
+	private QuizState state = QuizState.QUIZ_INIT;
 	
-	public QuizFactory( ) { 
+	public QuizFactory() { 
 	}
 	
+	public QuizState getState(){
+		return state;
+	}
+	
+	public void nextState(QuizState newState){
+		state = newState;
+	}
 	public void init(){
 		user = new Player();
 		user.setAvatar(Avatar.getRandomAvatar());
@@ -52,6 +60,29 @@ public class QuizFactory{
 		this.user = user;
 	}
 
+	public Player getFirstPlayer() {
+		if(user.getPoints() >= enemy.getPoints()){
+			return user;
+		}
+		
+		return enemy;
+	}
+	
+	public void setFirstPlayer(Player first) {
+		
+	}
+	
+	public Player getSecondPlayer() {
+		if(user.getPoints() >= enemy.getPoints()){
+			return enemy;
+		}
+		
+		return user;
+	}
+	
+	public void setSecondPlayer(Player second) {
+		
+	}
 	public int getNumberOfQuestions() {
 		return numberOfQuestions;
 	}
