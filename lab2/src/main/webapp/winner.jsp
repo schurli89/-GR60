@@ -35,7 +35,7 @@
             <p class="user-info negative-change">Deadpool hat falsch geantwortet: -500 €</p>
             <section class="playerinfo leader" aria-labelledby="winnerannouncement">
                <h3 id="winnerannouncement">Gewinner: ${quiz.firstPlayer.avatar.name}</h3>
-               <img class="avatar" src="${quiz.firstPlayer.avatar.imageFull}" alt="Spieler-Avatar ${quiz.firstPlayer.avatar.name}" />
+               <img class="avatar" src="img/avatar/${quiz.firstPlayer.avatar.imageFull}" alt="Spieler-Avatar ${quiz.firstPlayer.avatar.name}" />
                <table>
                   <tr>
                      <th class="accessibility">Spielername</th>
@@ -49,7 +49,7 @@
             </section>
             <section class="playerinfo" aria-labelledby="loserheading">
                <h3 id="loserheading" class="accessibility">Verlierer: ${quiz.secondPlayer.avatar.name}</h3>
-               <img class="avatar" src="${quiz.secondPlayer.avatar.imageHead}" alt="Spieler-Avatar ${quiz.secondPlayer.avatar.name}" />
+               <img class="avatar" src="img/avatar/${quiz.secondPlayer.avatar.imageHead}" alt="Spieler-Avatar ${quiz.secondPlayer.avatar.name}" />
                <table>
                   <tr>
                      <th class="accessibility">Spielername</th>

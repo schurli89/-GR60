@@ -55,14 +55,19 @@ public class BigJeopardyServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// handle jeopardy question selection
 		System.out.println("doGet");
+		
 		RequestDispatcher dispatcher;
 	
 	
 		QuizFactory quiz = (QuizFactory) request.getSession().getAttribute("quiz");
 		if(quiz == null){
 			System.out.println("quiz object is null");
-		initQuiz(request,response);
+			initQuiz(request,response);
 		}
+		System.out.println("quiz_state = "+quiz.getState());
+	
+		
+		
 		if(quiz.getState() == QuizState.QUIZ_ANSWER ){
 			dispatcher = getServletContext().getRequestDispatcher("/jeopardy.jsp");
 			quiz.nextState(QuizState.QUIZ_JEOPARDY);
@@ -91,6 +96,7 @@ public class BigJeopardyServlet extends HttpServlet {
 
 			//retrieve selected question via attribute "question_selection"
 			//input element with same id returns selected item
+			
 			int q_id = Integer.parseInt(request.getParameter("question_selection"));
 			System.out.println("selected id:" + q_id);
 			q = quiz.getQuestion(q_id);
