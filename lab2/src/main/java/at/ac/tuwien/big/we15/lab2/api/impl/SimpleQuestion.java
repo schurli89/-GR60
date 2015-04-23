@@ -219,14 +219,40 @@ public class SimpleQuestion implements Question {
 	}
 	
 	@Override 
-	public boolean checkAnswer(Integer id){
+	public boolean checkAnswers(String[] ids){
 		
-		for(Answer a : rightAnswers) {
-			if(a.getId() == id){
-				return true;
+		boolean ret = false;
+		
+		List<Integer> castedIds = new ArrayList<Integer>();
+		List<Integer> correctIds = new ArrayList<Integer>();
+		List<Integer> falseIds = new ArrayList<Integer>();
+		
+		for(String id : ids){
+			castedIds.add(Integer.parseInt(id));
+		}
+		
+		for(Integer id : castedIds){
+			for(Answer a : rightAnswers){
+				if(a.getId() == id){
+					correctIds.add(id);
+				}
 			}
 		}
 		
-		return false;
+		
+		for(Integer id : castedIds) {
+			for(Answer a : wrongAnswers){
+				if(a.getId()== id){
+					falseIds.add(id);
+				}
+			}
+		}
+		
+		if(falseIds.size() > 0 || correctIds.size() < rightAnswers.size() ){
+			return false;
+		}
+		else {
+			return true;
+		}
 	}
 }

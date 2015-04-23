@@ -122,12 +122,13 @@ public interface Question {
 	/**
 	 * 
 	 * @param id
-	 * 			ID of answer to be checked
+	 * 			ID of answers to be checked
 	 * @return
 	 * 		 true 
-	 * 			if answer is correct
+	 * 			if answers is correct
 	 * 		 false
-	 * 			else
+	 * 			if at least one answer is false or
+	 * 			the correct answers are incomplete
 	 */
-	public boolean checkAnswer(Integer id);
+	public boolean checkAnswers(String[] ids);
 }

@@ -69,14 +69,7 @@ public class BigJeopardyServlet extends HttpServlet {
 			boolean result = true;
 			String[] answerIds = request.getParameterValues("answer_selection");
 			
-			if(answerIds != null){
-				for(String id : answerIds){
-					result = result && q.checkAnswer(Integer.parseInt(id));
-				}
-			}
-			else {
-				result = false;
-			}
+			result = q.checkAnswers(answerIds);
 			
 			if(result){
 				quiz.getUser().setPoints(quiz.getUser().getPoints() + q.getValue());

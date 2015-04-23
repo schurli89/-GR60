@@ -68,10 +68,6 @@ public class QuizFactory{
 		return enemy;
 	}
 	
-	public void setFirstPlayer(Player first) {
-		
-	}
-	
 	public Player getSecondPlayer() {
 		if(user.getPoints() >= enemy.getPoints()){
 			return enemy;
@@ -80,9 +76,6 @@ public class QuizFactory{
 		return user;
 	}
 	
-	public void setSecondPlayer(Player second) {
-		
-	}
 	public int getNumberOfQuestions() {
 		return numberOfQuestions;
 	}
