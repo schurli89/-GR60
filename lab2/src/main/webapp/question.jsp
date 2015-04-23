@@ -38,7 +38,7 @@
                <table>
                   <tr>
                      <th class="accessibility">Spielername</th>
-                     <td class="playername">${quiz.firstPlayer.avatar.name}</td>
+                     <td class="playername">${quiz.firstPlayer.avatar.name} (Du)</td>
                   </tr>
                   <tr>
                      <th class="accessibility">Spielerpunkte</th>

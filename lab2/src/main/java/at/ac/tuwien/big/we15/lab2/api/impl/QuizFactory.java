@@ -15,9 +15,9 @@ public class QuizFactory{
 	private List<Category> categories;
 	private Player enemy;
 	private Player user;
-	private int numberOfQuestions = 0; 
+	private int numberOfQuestions; 
 	private Question selected_question;
-	private QuizState state = QuizState.QUIZ_INIT;
+	private QuizState state;
 	
 	public QuizFactory() { 
 	}
@@ -29,11 +29,21 @@ public class QuizFactory{
 	public void nextState(QuizState newState){
 		state = newState;
 	}
+	
 	public void init(){
+		enemy = new Player();
+				
+		numberOfQuestions = 0;
+		state = QuizState.QUIZ_INIT;
+		enemy.setAvatar(Avatar.getOpponent(user.getAvatar()));		
+	}
+	
+	/**
+	 * must be called before init()
+	 */
+	public void initUser(){
 		user = new Player();
 		user.setAvatar(Avatar.getRandomAvatar());
-		enemy = new Player();
-		enemy.setAvatar(Avatar.getOpponent(user.getAvatar()));
 	}
 	
 	public void setCategories(List<Category> categories){
