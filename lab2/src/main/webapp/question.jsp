@@ -23,7 +23,7 @@
 		<nav role="navigation" aria-labelledby="navheading">
 			<h2 id="navheading" class="accessibility">Navigation</h2>
 			<ul>
-				<li><a class="orangelink navigationlink" id="logoutlink" title="Klicke hier um dich abzumelden" href="login.xhtml" accesskey="l">Abmelden</a></li>
+				<li><a class="orangelink navigationlink" id="logoutlink" title="Klicke hier um dich abzumelden" href="login.jsp" accesskey="l">Abmelden</a></li>
 			</ul>
 		</nav>
       
@@ -38,11 +38,11 @@
                <table>
                   <tr>
                      <th class="accessibility">Spielername</th>
-                     <td class="playername">${quiz.firstPlayer.avatar.name} (Du)</td>
+                     <td class="playername">${quiz.user.avatar.name} (Du)</td>
                   </tr>
                   <tr>
                      <th class="accessibility">Spielerpunkte</th>
-                     <td class="playerpoints">${quiz.firstPlayer.points} €</td>
+                     <td class="playerpoints">${quiz.user.points} €</td>
                   </tr>
                </table>
             </section>
@@ -52,11 +52,11 @@
                <table>
                   <tr>
                      <th class="accessibility">Spielername</th>
-                     <td class="playername">${quiz.secondPlayer.avatar.name}</td>
+                     <td class="playername">${quiz.enemy.avatar.name}</td>
                   </tr>
                   <tr>
                      <th class="accessibility">Spielerpunkte</th>
-                     <td class="playerpoints">${quiz.secondPlayer.points} €</td>
+                     <td class="playerpoints">${quiz.enemy.points} €</td>
                   </tr>
                </table>
             </section>

@@ -23,7 +23,7 @@
 		<nav role="navigation" aria-labelledby="navheading">
 			<h2 id="navheading" class="accessibility">Navigation</h2>
 			<ul>
-				<li><a class="orangelink navigationlink" id="logoutlink" title="Klicke hier um dich abzumelden" href="login.xhtml" accesskey="l">Abmelden</a></li>
+				<li><a class="orangelink navigationlink" id="logoutlink" title="Klicke hier um dich abzumelden" href="login.jsp" accesskey="l">Abmelden</a></li>
 			</ul>
 		</nav>
       
@@ -31,8 +31,8 @@
       <div role="main">
          <section id="gameinfo" aria-labelledby="winnerinfoheading">
             <h2 id="winnerinfoheading" class="accessibility">Gewinnerinformationen</h2>
-            <p class="user-info positive-change">Du hast richtig geantwortet: +1000 €</p>
-            <p class="user-info negative-change">Deadpool hat falsch geantwortet: -500 €</p>
+             <p class="${quiz.classinfoUser}">  ${quiz.messageUser} </p>
+            <p class="${quiz.classinfoEnemy}"> ${quiz.messageEnemy} </p>
             <section class="playerinfo leader" aria-labelledby="winnerannouncement">
                <h3 id="winnerannouncement">Gewinner: ${quiz.firstPlayer.avatar.name}</h3>
                <img class="avatar" src="img/avatar/${quiz.firstPlayer.avatar.imageFull}" alt="Spieler-Avatar ${quiz.firstPlayer.avatar.name}" />

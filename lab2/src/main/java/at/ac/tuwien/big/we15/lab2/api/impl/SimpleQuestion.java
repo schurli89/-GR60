@@ -33,7 +33,6 @@ public class SimpleQuestion implements Question {
 	private Category category;
 
 	private boolean disabled=false;
-	private String click;
 	
 	public SimpleQuestion() {
 		this.text = "";

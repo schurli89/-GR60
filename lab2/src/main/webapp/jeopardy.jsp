@@ -23,7 +23,7 @@
 		<nav role="navigation" aria-labelledby="navheading">
 			<h2 id="navheading" class="accessibility">Navigation</h2>
 			<ul>
-				<li><a class="orangelink navigationlink" id="logoutlink" title="Klicke hier um dich abzumelden" href="#" accesskey="l">Abmelden</a></li>
+				<li><a class="orangelink navigationlink" id="logoutlink" title="Klicke hier um dich abzumelden" href="login.jsp" accesskey="l">Abmelden</a></li>
 			</ul>
 		</nav>
       
@@ -66,9 +66,9 @@
          <!-- Question -->
              <section id="question-selection" aria-labelledby="questionheading">
             <h2 id="questionheading" class="black accessibility">Jeopardy</h2>
-            <p class="user-info positive-change">Du hast richtig geantwortet: +1000 €</p>
-            <p class="user-info negative-change">Deadpool hat falsch geantwortet: -500 €</p>
-            <p class="user-info">Deadpool hat TUWIEN für € 1000 gewählt.</p>
+             <p class="${quiz.classinfoUser}" ${quiz.hidden}>  ${quiz.messageUser} </p>
+            <p class="${quiz.classinfoEnemy}" ${quiz.hidden} > ${quiz.messageEnemy} </p>
+            <p class="${quiz.classinfo}" ${quiz.hidden} > ${quiz.messageQuestionEnemy}</p>
             <form id="questionform" action="BigJeopardy" method="get">
                <fieldset>
                <legend class="accessibility">Fragenauswahl</legend>
