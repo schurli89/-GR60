@@ -34,7 +34,7 @@
             <h2 id="gameinfoinfoheading" class="accessibility">Spielinformationen</h2>
             <section id="firstplayer" class="playerinfo leader" aria-labelledby="firstplayerheading">
                <h3 id="firstplayerheading" class="accessibility">Führender Spieler</h3>
-               <img class="avatar" src="img/avatar/${quiz.firstPlayer.avatar.imageHead}" alt="Spieler-Avatar ${quiz.firstPlayer.avatar.name}" />
+               <img class="avatar" src="img/avatar/${quiz.user.avatar.imageHead}" alt="Spieler-Avatar ${quiz.user.avatar.name}" />
                <table>
                   <tr>
                      <th class="accessibility">Spielername</th>
@@ -48,7 +48,7 @@
             </section>
             <section id="secondplayer" class="playerinfo" aria-labelledby="secondplayerheading">
                <h3 id="secondplayerheading" class="accessibility">Zweiter Spieler</h3>
-               <img class="avatar" src="img/avatar/${quiz.secondPlayer.avatar.imageHead}" alt="Spieler-Avatar ${quiz.secondPlayer.avatar.name}" />
+               <img class="avatar" src="img/avatar/${quiz.enemy.avatar.imageHead}" alt="Spieler-Avatar ${quiz.enemy.avatar.name}" />
                <table>
                   <tr>
                      <th class="accessibility">Spielername</th>
