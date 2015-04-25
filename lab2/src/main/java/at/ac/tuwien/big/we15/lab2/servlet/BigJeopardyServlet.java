@@ -37,7 +37,6 @@ public class BigJeopardyServlet extends HttpServlet {
      */
     public BigJeopardyServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -66,58 +65,14 @@ public class BigJeopardyServlet extends HttpServlet {
 		if(quiz.getState() == QuizState.QUIZ_ANSWER ){			
 			quiz.nextState(QuizState.QUIZ_JEOPARDY);
 			
-			//retrieve checked answers
-			boolean result = false;
-			String[] answerIds = request.getParameterValues("answer_selection");
-
-			if(answerIds !=null){//compare answers
-				result = q.checkAnswers(answerIds);
-			}
-			
-			if(result){ //add points if answer was correct
-				quiz.getUser().setPoints(quiz.getUser().getPoints() + q.getValue());
-				quiz.setClassinfoUser("user-info positive-change");
-				quiz.setMessageUser("Du hast richtig geantwortet +"+q.getValue()+"â‚¬");
-	
-			} 
-			else 
-			{
-				quiz.getUser().setPoints(quiz.getUser().getPoints() - q.getValue());
-				quiz.setClassinfoUser("user-info negative-change");
-				quiz.setMessageUser("Du hast falsch geantwortet -"+q.getValue()+"â‚¬");
-			}
+			handleUserAnswer(quiz, request);
+		
 			/*
 			 * handle enemy answer
 			 */
+			handleEnemyAnswer(quiz);
 			
-			int nextQuestion=randomGenerator.nextInt((questions.size()-1));
-			System.out.println("questions size "+questions.size());
-			System.out.println("next Category for enemy "+nextQuestion);
 			
-			Question enemyQuestion=questions.get(nextQuestion);
-			quiz.setEnemy_question(enemyQuestion);
-			
-			quiz.setMessageQuestionEnemy(quiz.getEnemy().getAvatar().getName()+" hat "
-			+ enemyQuestion.getCategory().getName()+" fÃ¼r â‚¬"+enemyQuestion.getValue() + " gewÃ¤hlt.");
-			quiz.setClassinfo("user-info");
-			System.out.println("enemy answer "+enemyQuestion.getCategory()+" "+enemyQuestion.getValue()+ " " +enemyQuestion.getText());
-			if(randomGenerator.nextBoolean())
-			{
-				System.out.println("enemy answer is right");
-				quiz.getEnemy().setPoints(quiz.getEnemy().getPoints()+enemyQuestion.getValue());
-				quiz.setClassinfoEnemy("user-info positive-change");
-				quiz.setMessageEnemy(quiz.getEnemy().getAvatar().getName() +" hat richtig geantwortet +"+enemyQuestion.getValue()+"â‚¬");
-			} else
-			{
-				quiz.setClassinfoEnemy("user-info negative-change");
-				quiz.setMessageEnemy(quiz.getEnemy().getAvatar().getName() +" hat falsch geantwortet -"+enemyQuestion.getValue()+"â‚¬");
-				quiz.getEnemy().setPoints(quiz.getEnemy().getPoints()-enemyQuestion.getValue());
-
-
-			}
-			questions.remove(nextQuestion);
-			enemyQuestion.setDisabled(true);
-			quiz.setHidden("");
 			if(quiz.getNumberOfQuestions() == 10){
 				quiz.nextState(QuizState.QUIZ_FINISHED);	
 				dispatcher = getServletContext().getRequestDispatcher("/winner.jsp");
@@ -169,8 +124,8 @@ public class BigJeopardyServlet extends HttpServlet {
 		// handle login.jsp 
 		//set (new) QuizFactory for jeopard.jsp 
 		QuizFactory quiz = (QuizFactory)request.getSession().getAttribute("quiz");
+		
 		if(quiz == null){
-			System.out.println("init quiz null");
 			quiz = new QuizFactory();	
 			//initialize user to prevent NullPointerException
 			quiz.initUser();
@@ -204,5 +159,70 @@ public class BigJeopardyServlet extends HttpServlet {
 	
 	}
 
+	/**
+	 * Handles user answer process
+	 * 
+	 * @param quiz current instance
+	 * @param request current instance
+	 */
+	private void handleUserAnswer(QuizFactory quiz, HttpServletRequest request){
+		//retrieve checked answers
+		boolean result = false;
+		String[] answerIds = request.getParameterValues("answer_selection");
+
+		if(answerIds !=null){//compare answers
+			result = q.checkAnswers(answerIds);
+		}
+		
+		if(result){ //add points if answer was correct
+			quiz.getUser().setPoints(quiz.getUser().getPoints() + q.getValue());
+			quiz.setClassinfoUser("user-info positive-change");
+			quiz.setMessageUser("Du hast richtig geantwortet +"+q.getValue()+" €");
+
+		} 
+		else 
+		{
+			quiz.getUser().setPoints(quiz.getUser().getPoints() - q.getValue());
+			quiz.setClassinfoUser("user-info negative-change");
+			quiz.setMessageUser("Du hast falsch geantwortet -"+q.getValue()+" €");
+		}
+	}
+	
+	/**
+	 * Handles the question selection and answer process of the enemy
+	 * 
+	 * @param quiz current instance
+	 */
+	private void handleEnemyAnswer(QuizFactory quiz){		
+		int nextQuestion=randomGenerator.nextInt((questions.size()-1));
+		System.out.println("questions size "+questions.size());
+		System.out.println("next Category for enemy "+nextQuestion);
+		
+		Question enemyQuestion=questions.get(nextQuestion);
+		quiz.setEnemy_question(enemyQuestion);
+		
+		quiz.setMessageQuestionEnemy(quiz.getEnemy().getAvatar().getName()+" hat "
+		+ enemyQuestion.getCategory().getName()+" für € "+enemyQuestion.getValue() + " gewählt.");
+		
+		quiz.setClassinfo("user-info");
+		System.out.println("enemy answer "+enemyQuestion.getCategory()+" "+enemyQuestion.getValue()+ " " +enemyQuestion.getText());
+		if(randomGenerator.nextBoolean())
+		{
+			System.out.println("enemy answer is right");
+			quiz.getEnemy().setPoints(quiz.getEnemy().getPoints()+enemyQuestion.getValue());
+			quiz.setClassinfoEnemy("user-info positive-change");
+			quiz.setMessageEnemy(quiz.getEnemy().getAvatar().getName() +" hat richtig geantwortet +"+enemyQuestion.getValue()+" €");
+		} else
+		{
+			quiz.setClassinfoEnemy("user-info negative-change");
+			quiz.setMessageEnemy(quiz.getEnemy().getAvatar().getName() +" hat falsch geantwortet -"+enemyQuestion.getValue()+" €");
+			quiz.getEnemy().setPoints(quiz.getEnemy().getPoints()-enemyQuestion.getValue());
+
+
+		}
+		questions.remove(nextQuestion);
+		enemyQuestion.setDisabled(true);
+		quiz.setHidden("");
+	}
 
 }

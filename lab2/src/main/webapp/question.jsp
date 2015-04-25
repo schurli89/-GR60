@@ -67,7 +67,7 @@
       <section id="question" aria-labelledby="questionheading">
             <form id="questionform" action="BigJeopardy" method="get">
                <h2 id="questionheading" class="accessibility">Frage</h2>
-               <p id="questiontype">${quiz.selected_question.category.name })</p>
+               <p id="questiontype">${quiz.selected_question.category.name} für € ${quiz.selected_question.value}</p>
                <p id="questiontext">${quiz.selected_question.text}</p>
                <ul id="answers">
              	<c:forEach var="answer" items="${quiz.selected_question.allAnswers}">

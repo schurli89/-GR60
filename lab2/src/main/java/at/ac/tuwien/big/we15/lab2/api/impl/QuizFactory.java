@@ -84,7 +84,7 @@ public class QuizFactory{
 	}
 
 	public Player getFirstPlayer() {
-		if(user.getPoints() >= enemy.getPoints()){
+		if(user.getPoints() > enemy.getPoints()){
 			return user;
 		}
 		
@@ -92,7 +92,7 @@ public class QuizFactory{
 	}
 	
 	public Player getSecondPlayer() {
-		if(user.getPoints() >= enemy.getPoints()){
+		if(user.getPoints() > enemy.getPoints()){
 			return enemy;
 		}
 		
