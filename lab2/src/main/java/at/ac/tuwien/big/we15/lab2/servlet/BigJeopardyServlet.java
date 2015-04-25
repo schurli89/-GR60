@@ -30,6 +30,8 @@ public class BigJeopardyServlet extends HttpServlet {
     private Question q;
     private Random randomGenerator = new Random();
     private List<Question> questions;
+    private int userCnt = 0;
+    private int enemyCnt = 0;
  
     
     /** 
@@ -66,12 +68,22 @@ public class BigJeopardyServlet extends HttpServlet {
 			quiz.nextState(QuizState.QUIZ_JEOPARDY);
 			
 			handleUserAnswer(quiz, request);
-		
+			++userCnt;
+			
 			/*
 			 * handle enemy answer
 			 */
-			handleEnemyAnswer(quiz);
 			
+			
+			if(enemyCnt <= userCnt) {
+				System.out.println("enemyCount: "+enemyCnt+" ,userCount: "+userCnt);
+				handleEnemyAnswer(quiz);
+				++enemyCnt;
+				if(quiz.getUser().getPoints() > quiz.getEnemy().getPoints()){
+					handleEnemyAnswer(quiz);
+					++enemyCnt;
+				}
+			}
 			
 			if(quiz.getNumberOfQuestions() == 10){
 				quiz.nextState(QuizState.QUIZ_FINISHED);	
@@ -80,7 +92,7 @@ public class BigJeopardyServlet extends HttpServlet {
 		}
 		else if(quiz.getState() == QuizState.QUIZ_JEOPARDY) {
 			
-			
+				
 				//retrieve selected question via attribute "question_selection"
 				//input element with same id returns selected item
 				String sel_question = request.getParameter("question_selection");
@@ -142,6 +154,8 @@ public class BigJeopardyServlet extends HttpServlet {
 				quiz.setMessageUser("");
 				quiz.setMessageQuestionEnemy("");
 				quiz.init();
+				userCnt = 0;
+				enemyCnt = 0;
 
 			}
 		}
@@ -167,6 +181,7 @@ public class BigJeopardyServlet extends HttpServlet {
 	 */
 	private void handleUserAnswer(QuizFactory quiz, HttpServletRequest request){
 		//retrieve checked answers
+		System.out.println("USER POINTS: "+quiz.getUser().getPoints());
 		boolean result = false;
 		String[] answerIds = request.getParameterValues("answer_selection");
 
@@ -186,6 +201,8 @@ public class BigJeopardyServlet extends HttpServlet {
 			quiz.setClassinfoUser("user-info negative-change");
 			quiz.setMessageUser("Du hast falsch geantwortet -"+q.getValue()+" €");
 		}
+		System.out.println("USER POINTS: "+quiz.getUser().getPoints());
+	
 	}
 	
 	/**
@@ -194,6 +211,7 @@ public class BigJeopardyServlet extends HttpServlet {
 	 * @param quiz current instance
 	 */
 	private void handleEnemyAnswer(QuizFactory quiz){		
+		System.out.println("ENEMY POINTS: "+quiz.getEnemy().getPoints());
 		int nextQuestion=randomGenerator.nextInt((questions.size()-1));
 		System.out.println("questions size "+questions.size());
 		System.out.println("next Category for enemy "+nextQuestion);
@@ -223,6 +241,7 @@ public class BigJeopardyServlet extends HttpServlet {
 		questions.remove(nextQuestion);
 		enemyQuestion.setDisabled(true);
 		quiz.setHidden("");
+		System.out.println("ENEMY POINTS: "+quiz.getEnemy().getPoints());
 	}
 
 }
