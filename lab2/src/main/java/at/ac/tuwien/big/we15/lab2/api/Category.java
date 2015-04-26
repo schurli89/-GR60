@@ -56,4 +56,7 @@ public interface Category {
 	 */
 	public void removeQuestion(Question question);
 
+	public void setId(String id);
+	
+	public String getId();
 }

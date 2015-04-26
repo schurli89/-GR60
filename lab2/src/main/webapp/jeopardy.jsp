@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
     <head>
         <meta charset="utf-8"/>
@@ -33,7 +34,7 @@
          <section id="gameinfo" aria-labelledby="gameinfoinfoheading">
             <h2 id="gameinfoinfoheading" class="accessibility">Spielinformationen</h2>
             <section id="firstplayer" class="playerinfo leader" aria-labelledby="firstplayerheading">
-               <h3 id="firstplayerheading" class="accessibility">Führender Spieler</h3>
+               <h3 id="firstplayerheading" class="accessibility">FÃ¼hrender Spieler</h3>
                <img class="avatar" src="img/avatar/${quiz.user.avatar.imageHead}" alt="Spieler-Avatar Black Widow" />
                <table>
                   <tr>
@@ -73,8 +74,8 @@
                <fieldset>
                <legend class="accessibility">Fragenauswahl</legend>
                <c:forEach var="category" items="${quiz.categories}">
-               <section class="questioncategory" aria-labelledby="tvheading">
-                  <h3 id="heading" class="tile category-title"><span class="accessibility">Kategorie: </span>${category.name}</h3>
+               <section class="questioncategory" aria-labelledby="${category.id}heading">
+                  <h3 id="${category.id}heading" class="tile category-title"><span class="accessibility">Kategorie: </span>${category.name}</h3>
                   <ol class="category_questions">
                   <c:forEach var="question" items="${category.questions}">
                      <li><input name="question_selection" id="question_${question.id}" value="${question.id }" type="radio"  ${question.disabled}/><label class="tile clickable" for="question_${question.id}">€ ${question.value}</label></li>

@@ -21,6 +21,7 @@ import at.ac.tuwien.big.we15.lab2.api.Question;
  */
 public class SimpleCategory implements Category {
 
+	private String id;
 	private String name;
 	private List<Question> questions;
 
@@ -43,6 +44,7 @@ public class SimpleCategory implements Category {
 	@Override
 	public void setName(String name) {
 		this.name = name;
+		setId(name);
 	}
 
 	@Override
@@ -115,6 +117,16 @@ public class SimpleCategory implements Category {
 	public String toString() {
 		return "SimpleCategory [name=" + name + ", questions=" + questions
 				+ "]";
+	}
+
+	@Override
+	public void setId(String id) {
+		this.id = id.replace(" ", "").toLowerCase();
+	}
+
+	@Override
+	public String getId() {
+		return id;
 	}
 
 }
