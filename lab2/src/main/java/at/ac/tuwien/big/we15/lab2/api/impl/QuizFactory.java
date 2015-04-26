@@ -10,6 +10,7 @@ import at.ac.tuwien.big.we15.lab2.api.Question;
 
 public class QuizFactory{
 
+	private List<Question> questions;
 	private List<Category> categories;
 	private Player enemy;
 	private Player user;
@@ -122,15 +123,18 @@ public class QuizFactory{
 		return null;
 	}
 	
-	public List<Question> getQuestions() {
+	public void createQuestions() {
 		
-		ArrayList<Question> questions= new ArrayList<Question>(); 
+		questions= new ArrayList<Question>(); 
 		
 		for(Category cat: categories)
 		{
 			questions.addAll(cat.getQuestions());
 		}
-		return questions;
+	}
+	
+	public List<Question> getQuestions(){
+		return this.questions;
 	}
 
 	public Question getSelected_question() {
@@ -204,6 +208,5 @@ public class QuizFactory{
 	public void setMessageQuestionEnemy(String messageQuestionEnemy) {
 		this.messageQuestionEnemy = messageQuestionEnemy;
 	}
-
 	
 }

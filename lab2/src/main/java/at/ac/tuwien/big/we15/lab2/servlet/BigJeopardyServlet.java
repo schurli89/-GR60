@@ -28,11 +28,8 @@ import at.ac.tuwien.big.we15.lab2.api.impl.ServletJeopardyFactory;
 public class BigJeopardyServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     private ServletJeopardyFactory factory;
-    private Question q;
     private Random randomGenerator = new Random();
-    private List<Question> questions;
-   /* private int userCnt = 0;
-    private int enemyCnt = 0;*/
+
  
     
     /** 
@@ -56,6 +53,8 @@ public class BigJeopardyServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		Question q;
 		// handle jeopardy question selection		
 		HttpSession session = request.getSession();
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/jeopardy.jsp");;		
@@ -99,13 +98,14 @@ public class BigJeopardyServlet extends HttpServlet {
 					int q_id = Integer.parseInt(sel_question);
 					
 					q = quiz.getQuestion(q_id);
+					session.setAttribute("current_question", q);
 					
 					//set question non-selectable
 					q.setDisabled(true);
 			
 					quiz.setSelected_question(q);
 					quiz.increaseNumberOfQuestions();
-					questions.remove(questions.indexOf(q));
+					quiz.getQuestions().remove(quiz.getQuestions().indexOf(q));
 					quiz.nextState(QuizState.QUIZ_ANSWER);
 				
 				//set QuizFactory with selected question and pass it to 
@@ -152,7 +152,7 @@ public class BigJeopardyServlet extends HttpServlet {
 		}
 		
 		quiz.setCategories(factory.createQuestionDataProvider().getCategoryData());
-		questions=quiz.getQuestions();
+		quiz.createQuestions();
 		quiz.nextState(QuizState.QUIZ_JEOPARDY);
 		
 		request.setAttribute("quiz", quiz);
@@ -177,6 +177,8 @@ public class BigJeopardyServlet extends HttpServlet {
 		boolean result = false;
 		String[] answerIds = request.getParameterValues("answer_selection");
 
+		Question q = (Question) request.getSession().getAttribute("current_question");
+		
 		if(answerIds !=null){//compare answers
 			result = q.checkAnswers(answerIds);
 		}
@@ -202,9 +204,9 @@ public class BigJeopardyServlet extends HttpServlet {
 	 */
 	private void handleEnemyAnswer(QuizFactory quiz){		
 		System.out.println("ENEMY POINTS: "+quiz.getEnemy().getPoints());
-		int nextQuestion=randomGenerator.nextInt((questions.size()-1));
+		int nextQuestion=randomGenerator.nextInt((quiz.getQuestions().size()-1));
 		
-		Question enemyQuestion=questions.get(nextQuestion);
+		Question enemyQuestion=quiz.getQuestions().get(nextQuestion);
 		quiz.setEnemy_question(enemyQuestion);
 		
 		quiz.setMessageQuestionEnemy(quiz.getEnemy().getAvatar().getName()+" hat "
@@ -223,7 +225,7 @@ public class BigJeopardyServlet extends HttpServlet {
 
 
 		}
-		questions.remove(nextQuestion);
+		quiz.getQuestions().remove(nextQuestion);
 		enemyQuestion.setDisabled(true);
 		quiz.setHidden("");
 	}
