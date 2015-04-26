@@ -14,6 +14,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import at.ac.tuwien.big.we15.lab2.api.Question;
 import at.ac.tuwien.big.we15.lab2.api.impl.QuizFactory;
@@ -30,8 +31,8 @@ public class BigJeopardyServlet extends HttpServlet {
     private Question q;
     private Random randomGenerator = new Random();
     private List<Question> questions;
-    private int userCnt = 0;
-    private int enemyCnt = 0;
+   /* private int userCnt = 0;
+    private int enemyCnt = 0;*/
  
     
     /** 
@@ -56,43 +57,40 @@ public class BigJeopardyServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// handle jeopardy question selection		
+		HttpSession session = request.getSession();
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/jeopardy.jsp");;		
-		QuizFactory quiz = (QuizFactory) request.getSession().getAttribute("quiz");
+		QuizFactory quiz = (QuizFactory) session.getAttribute("quiz");
 		
 		if(quiz == null){ 
 			initQuiz(request,response);
 		}
-		System.out.println("quiz_state = "+quiz.getState());
-		
+	
 		if(quiz.getState() == QuizState.QUIZ_ANSWER ){			
 			quiz.nextState(QuizState.QUIZ_JEOPARDY);
 			
 			handleUserAnswer(quiz, request);
-			++userCnt;
 			
-			/*
-			 * handle enemy answer
-			 */
-			
-			
-			if(enemyCnt <= userCnt) {
-				System.out.println("enemyCount: "+enemyCnt+" ,userCount: "+userCnt);
+			if(session.getAttribute("enemy_missing")!= null){//enemy did not choose question yet
 				handleEnemyAnswer(quiz);
-				++enemyCnt;
-				if(quiz.getUser().getPoints() > quiz.getEnemy().getPoints()){
-					handleEnemyAnswer(quiz);
-					++enemyCnt;
-				}
 			}
 			
 			if(quiz.getNumberOfQuestions() == 10){
 				quiz.nextState(QuizState.QUIZ_FINISHED);	
 				dispatcher = getServletContext().getRequestDispatcher("/winner.jsp");
-			}
+			}else{
+			
+			//case switch
+			if(quiz.getUser().getPoints() <= quiz.getEnemy().getPoints()){ //first user, enemy is missing				
+				session.setAttribute("enemy_missing", true);
+				
+			}else{ //first enemy, user is missing
+				handleEnemyAnswer(quiz);
+				session.setAttribute("enemy_missing", null);
+			}			
+		}
 		}
 		else if(quiz.getState() == QuizState.QUIZ_JEOPARDY) {
-			
-				
+						
 				//retrieve selected question via attribute "question_selection"
 				//input element with same id returns selected item
 				String sel_question = request.getParameter("question_selection");
@@ -100,10 +98,7 @@ public class BigJeopardyServlet extends HttpServlet {
 				if(sel_question != null){ //question is selected
 					int q_id = Integer.parseInt(sel_question);
 					
-					System.out.println("selected id:" + q_id);
 					q = quiz.getQuestion(q_id);
-					System.out.println("Question: "+ q.getText());
-					System.out.println("Category: "+q.getCategory().getName());
 					
 					//set question non-selectable
 					q.setDisabled(true);
@@ -121,7 +116,6 @@ public class BigJeopardyServlet extends HttpServlet {
 			} 
 			request.getSession().setAttribute("quiz", quiz);
 			dispatcher.forward(request, response);
-
 	} 
 
 
@@ -154,9 +148,6 @@ public class BigJeopardyServlet extends HttpServlet {
 				quiz.setMessageUser("");
 				quiz.setMessageQuestionEnemy("");
 				quiz.init();
-				userCnt = 0;
-				enemyCnt = 0;
-
 			}
 		}
 		
@@ -166,6 +157,7 @@ public class BigJeopardyServlet extends HttpServlet {
 		
 		request.setAttribute("quiz", quiz);
 		request.getSession().setAttribute("quiz", quiz);
+		request.getSession().setAttribute("enemy_missing", true);
 		
 		//move to jeopard.jsp
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/jeopardy.jsp");
@@ -200,9 +192,7 @@ public class BigJeopardyServlet extends HttpServlet {
 			quiz.getUser().setPoints(quiz.getUser().getPoints() - q.getValue());
 			quiz.setClassinfoUser("user-info negative-change");
 			quiz.setMessageUser("Du hast falsch geantwortet -"+q.getValue()+" €");
-		}
-		System.out.println("USER POINTS: "+quiz.getUser().getPoints());
-	
+		}	
 	}
 	
 	/**
@@ -213,8 +203,6 @@ public class BigJeopardyServlet extends HttpServlet {
 	private void handleEnemyAnswer(QuizFactory quiz){		
 		System.out.println("ENEMY POINTS: "+quiz.getEnemy().getPoints());
 		int nextQuestion=randomGenerator.nextInt((questions.size()-1));
-		System.out.println("questions size "+questions.size());
-		System.out.println("next Category for enemy "+nextQuestion);
 		
 		Question enemyQuestion=questions.get(nextQuestion);
 		quiz.setEnemy_question(enemyQuestion);
@@ -223,15 +211,12 @@ public class BigJeopardyServlet extends HttpServlet {
 		+ enemyQuestion.getCategory().getName()+" für € "+enemyQuestion.getValue() + " gewählt.");
 		
 		quiz.setClassinfo("user-info");
-		System.out.println("enemy answer "+enemyQuestion.getCategory()+" "+enemyQuestion.getValue()+ " " +enemyQuestion.getText());
-		if(randomGenerator.nextBoolean())
-		{
-			System.out.println("enemy answer is right");
+		
+		if(randomGenerator.nextBoolean()){
 			quiz.getEnemy().setPoints(quiz.getEnemy().getPoints()+enemyQuestion.getValue());
 			quiz.setClassinfoEnemy("user-info positive-change");
 			quiz.setMessageEnemy(quiz.getEnemy().getAvatar().getName() +" hat richtig geantwortet +"+enemyQuestion.getValue()+" €");
-		} else
-		{
+		} else{
 			quiz.setClassinfoEnemy("user-info negative-change");
 			quiz.setMessageEnemy(quiz.getEnemy().getAvatar().getName() +" hat falsch geantwortet -"+enemyQuestion.getValue()+" €");
 			quiz.getEnemy().setPoints(quiz.getEnemy().getPoints()-enemyQuestion.getValue());
@@ -241,7 +226,5 @@ public class BigJeopardyServlet extends HttpServlet {
 		questions.remove(nextQuestion);
 		enemyQuestion.setDisabled(true);
 		quiz.setHidden("");
-		System.out.println("ENEMY POINTS: "+quiz.getEnemy().getPoints());
 	}
-
 }
