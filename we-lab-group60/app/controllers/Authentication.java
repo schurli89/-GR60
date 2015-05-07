@@ -2,7 +2,7 @@ package controllers;
 
 import javax.persistence.TypedQuery;
 
-import models.User;
+import models.ComplexUser;
 import play.cache.Cache;
 import play.data.Form;
 import play.db.jpa.Transactional;
@@ -13,12 +13,12 @@ import views.html.index;
 
 public class Authentication extends Controller {
 
-	final static Form<User> user = Form.form(User.class);
+	final static Form<ComplexUser> user = Form.form(ComplexUser.class);
 
 	@Transactional
 	public static Result login() {
 
-		Form<User> form = user.bindFromRequest();
+		Form<ComplexUser> form = user.bindFromRequest();
 
 		String username = form.field("name").value().trim();
 		String password = form.field("password").value().trim();
@@ -37,10 +37,10 @@ public class Authentication extends Controller {
 
 		String queryString = "SELECT u FROM User u where u.name = '"
 				+ username + "' and u.password = '" + password + "'";
-		TypedQuery<User> query = play.db.jpa.JPA.em().createQuery(queryString,
-				User.class);
+		TypedQuery<ComplexUser> query = play.db.jpa.JPA.em().createQuery(queryString,
+				ComplexUser.class);
 
-		User local = null;
+		ComplexUser local = null;
 
 		if (!query.getResultList().isEmpty()) {
 			local = query.getResultList().get(0);
@@ -67,7 +67,7 @@ public class Authentication extends Controller {
 		return Application.index();
 	}
 
-	private static void initCache(User user) {
+	private static void initCache(ComplexUser user) {
 
 		String uuid = session("uuid");
 		if (uuid == null) {
@@ -75,7 +75,7 @@ public class Authentication extends Controller {
 			session("uuid", uuid);
 		}
 
-		User cacheUser = (User) Cache.get(uuid + "user");
+		ComplexUser cacheUser = (ComplexUser) Cache.get(uuid + "user");
 		if (cacheUser == null) {
 			Cache.set("uuid", uuid);
 			Cache.set(uuid + "user", user);

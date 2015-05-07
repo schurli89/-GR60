@@ -4,11 +4,10 @@ import java.util.Date;
 
 import javax.persistence.*;
 
-import at.ac.tuwien.big.we15.lab2.api.Avatar;
 import play.data.validation.*;
 
 @Entity
-public class User implements at.ac.tuwien.big.we15.lab2.api.User {
+public class ComplexUser extends at.ac.tuwien.big.we15.lab2.api.impl.SimpleUser {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,8 +16,6 @@ public class User implements at.ac.tuwien.big.we15.lab2.api.User {
 	private String firstname;
 	
 	private String lastname;
-	
-	private Avatar avatar;
 
 	@Temporal(TemporalType.DATE)
 	private Date birthdate;
@@ -36,10 +33,10 @@ public class User implements at.ac.tuwien.big.we15.lab2.api.User {
 	private String password;
 
 	// needs a default constructor for the views
-	public User() {
+	public ComplexUser() {
 	};
 
-	public User(String firstname, String lastname, Date birthdate,
+	public ComplexUser(String firstname, String lastname, Date birthdate,
 			String gender, String username, String password) {
 		this.firstname = firstname;
 		this.lastname = lastname;
@@ -47,6 +44,7 @@ public class User implements at.ac.tuwien.big.we15.lab2.api.User {
 		this.gender = gender;
 		this.name = username;
 		this.password = password;
+		
 	}
 
 	public Long getId() {
@@ -112,14 +110,4 @@ public class User implements at.ac.tuwien.big.we15.lab2.api.User {
 		
 	}
 
-	public Avatar getAvatar() {
-		return this.avatar;
-	}
-
-	public void setAvatar(Avatar avatar) {
-		this.avatar=avatar;
-	}
-
-
-	
 }

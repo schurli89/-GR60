@@ -1,4 +1,4 @@
-@(form: Form[models.User])
+@(form: Form[models.ComplexUser])
 
 @main("Business Informatics Group Jeopardy") {
    <body id="register-page">
@@ -37,7 +37,64 @@
 					@for(error <- form("birthdateError").error) {
 					<div id="error_msg_birthdate" class="error" role="alert">"Verwenden Sie bitte folgendes Datumsformat: dd.mm.yyyy (z.B. 24.12.2012)."</div>
 					}
-                   					
+                   		
+                       <label>Geschlecht:</label>
+                    <fieldset class="inputset">
+                        <input type="radio" name="gender" id="male" value="m" checked="checked" />
+                        <label for="male">Männlich</label>
+                        <input type="radio" name="gender" id="female" value="f" />
+                        <label for="female">Weiblich</label>
+                    </fieldset>
+                    
+                    
+                </fieldset>
+                <fieldset>
+                    <legend>Spielerdaten</legend>
+                    <label for="avatar">Avatar:</label>
+                    <select id="avatar" name="avatar">
+                        <option value="aldrich-killian">Aldrich Killian</option>
+                        <option value="beetle">Beetle</option>
+						<option value="black-widow">Black Widow</option>
+						<option value="captain-america">Captain America</option>
+						<option value="cyclops">Cyclops</option>
+						<option value="deadpool">Deadpool</option>
+						<option value="doctor-doom">Doctor Doom</option>
+						<option value="doctor-octopus">Doctor Octopus</option>
+						<option value="drax">Drax</option>
+						<option value="electro">Electro</option>
+						<option value="extremis-soldier">Extremis Soldier</option>
+						<option value="falcon">Falcon</option>
+						<option value="gamora">Gamora</option>
+						<option value="green-goblin">Green Goblin</option>
+						<option value="groot">Groot</option>
+						<option value="hawkeye">Hawkeye</option>
+						<option value="hulk">Hulk</option>
+						<option value="hydra-henchman">Hydra Henchman</option>
+						<option value="iron-fist">Iron Fist</option>
+						<option value="iron-man">Iron Man</option>
+						<option value="j-jonah-jameson">J. Jonah Jameson</option>
+						<option value="loki">Loki</option>
+						<option value="magneto">Magneto</option>
+						<option value="mary-jane-watson">Mary Jane Watson</option>
+						<option value="modok">MODOK</option>
+						<option value="nebula">Nebula</option>
+						<option value="nick-fury">Nick Fury</option>
+						<option value="nova">Nova</option>
+						<option value="pepper-potts">Pepper Potts</option>
+						<option value="power-man">Power Man</option>
+						<option value="red-skull">Red Skull</option>
+						<option value="rocket">Rocket Raccoon</option>
+						<option value="ronan">Ronan</option>
+						<option value="spiderman">Spiderman</option>
+						<option value="starlord">Starlord</option>
+						<option value="taskmaster">Taskmaster</option>
+						<option value="the-mandarin">The Mandarin</option>
+						<option value="thor">Thor</option>
+						<option value="tony-stark">Tony Stark</option>
+						<option value="venom">Venom</option>
+						<option value="war-machine">War Machine</option>
+						<option value="wolverine">Wolverine</option>
+                    </select>			
 					<legend>Spielerdaten</legend>
 
                     @helper.inputText(form("name"), 'id -> "name", 'type -> "text", '_label -> "Benutzername*:", 'required -> "required", '_showConstraints -> false, '_showErrors -> false)

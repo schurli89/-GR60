@@ -2,7 +2,7 @@ package controllers;
 
 import javax.persistence.TypedQuery;
 
-import models.User;
+import models.ComplexUser;
 import play.api.i18n.Lang;
 import play.data.Form;
 import play.db.jpa.JPA;
@@ -15,7 +15,7 @@ import views.html.registration;
 
 public class Registration extends Controller {
 
-	final static Form<User> signupForm = Form.form(User.class);
+	final static Form<ComplexUser> signupForm = Form.form(ComplexUser.class);
 	final static String datePattern = "^(0?[1-9]|[12][0-9]|3[01]).(0?[1-9]|1[012]).((19|20)\\d\\d)$";
 	
 	public static Result registration() {
@@ -24,7 +24,7 @@ public class Registration extends Controller {
 	
 	@Transactional
 	public static Result register() {
-		Form<User> form = signupForm.bindFromRequest();
+		Form<ComplexUser> form = signupForm.bindFromRequest();
 		
 		if(!form.field("birthdate").valueOr("").isEmpty()){
 			if (!form.field("birthdate").value().matches(datePattern)){
@@ -45,10 +45,10 @@ public class Registration extends Controller {
             return badRequest(registration.render(form));
         } else{
         	
-        	User user = form.get();
+        	ComplexUser user = form.get();
         	
         	String queryString = "SELECT u FROM User u where u.name = '" + user.getName() + "'";
-    		TypedQuery<User> query = play.db.jpa.JPA.em().createQuery(queryString, User.class);
+    		TypedQuery<ComplexUser> query = play.db.jpa.JPA.em().createQuery(queryString, ComplexUser.class);
         	
     		if(!query.getResultList().isEmpty()){
     			form.reject("userExist", "User existiert bereits.");
