@@ -1,14 +1,15 @@
 package controllers;
 
-import play.*;
+import play.data.Form;
 import play.mvc.*;
-
 import views.html.*;
+import models.User;
 
 public class Application extends Controller {
 
-    public static Result index() {
-        return ok(index.render("Your new application is ready."));
-    }
-
+	final static Form<User> signinForm = Form.form(User.class);
+	
+	public static Result index() {
+		return ok(authentication.render(signinForm));
+	}
 }

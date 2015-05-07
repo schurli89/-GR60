@@ -1,0 +1,67 @@
+@(form: Form[models.User])
+
+@main("Business Informatics Group Jeopardy") {
+   <body id="register-page">
+        <a class="accessibility" href="#register">Zur Registrierung springen</a>
+         
+      <!-- Header -->
+        <header role="banner" aria-labelledby="bannerheading">
+         <h1 id="bannerheading">
+            <span class="accessibility">Business Informatics Group </span><span class="gametitle">Jeopardy!</span>
+         </h1>
+      </header>
+      
+      <!-- Navigation -->
+		<nav role="navigation" aria-labelledby="navheading">
+			<h2 id="navheading" class="accessibility">Navigation</h2>
+			<ul>
+				<li><a class="orangelink navigationlink" id="loginlink" title="Klicke hier um dich anzumelden" href="/" accesskey="l">Anmelden</a></li>
+			</ul>
+		</nav>
+		
+		
+		<!-- Content -->
+      <div id="register" role="main"> 
+            <!-- Register section -->
+            <h2 id="registerheading" class="accessibility">Registrierung</h2>
+             @helper.form(action = routes.Registration.register()) {
+                <fieldset>
+                    <legend>Persönliche Daten</legend>
+					
+					@helper.inputText(form("firstname"), 'id -> "firstname", 'type -> "text", '_label -> "Vorname:")
+                    
+                    @helper.inputText(form("lastname"), 'id -> "lastname", 'type -> "text", '_label -> "Nachname:")
+                    
+                    @helper.inputDate(form("birthdate"), 'id -> "birthdate", 'type -> "date", '_label -> "Geburtstag:", '_showErrors -> true)
+                    
+					@for(error <- form("birthdateError").error) {
+					<div id="error_msg_birthdate" class="error" role="alert">"Verwenden Sie bitte folgendes Datumsformat: dd.mm.yyyy (z.B. 24.12.2012)."</div>
+					}
+                   					
+					<legend>Spielerdaten</legend>
+
+                    @helper.inputText(form("name"), 'id -> "name", 'type -> "text", '_label -> "Benutzername*:", 'required -> "required", '_showConstraints -> false, '_showErrors -> false)
+                    @for(error <- form("usernameError").error) {
+                    <div id="error_msg_username" class="error" role="alert">Der Benutzername muss mindestens 4 Zeichen und darf maximal 8 Zeichen enthalten.</div>
+                    }
+                    
+                    
+                    @helper.inputText(form("password"), 'id -> "password", 'type -> "password", '_label -> "Passwort*:", 'required -> "required", '_showConstraints -> false, '_showErrors -> false)
+                    @for(error <- form("passwordError").error) {
+                    <div id="error_msg_password" class="error" role="alert">Das Passwort muss mindestens 4 Zeichen und darf maximal 8 Zeichen enthalten.</div>
+                    }
+                    
+                    @for(error <- form("userExist").error) {
+                    <div id="error_msg_password" class="error" role="alert">User existiert bereits.</div>
+                    }
+                    
+                    <input id="registersubmit" type="submit" value="Registrieren" accesskey="s"/>
+                    <p id="requiredhint">Mit "*" gekennzeichnete Felder sind Pflichtfelder</p>
+				</fieldset>
+            }
+        </div>
+  
+        <!-- footer -->
+        <footer role="contentinfo">© 2015 BIG Jeopardy</footer>
+    </body>
+	}
