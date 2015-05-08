@@ -1,0 +1,124 @@
+@(form: Form[models.ComplexUser])
+
+@main("Business Informatics Group Jeopardy") {
+   <body >
+        <a class="accessibility" href="#register">Zur Registrierung springen</a>
+         
+      <!-- Header -->
+        <header role="banner" aria-labelledby="bannerheading">
+         <h1 id="bannerheading">
+            <span class="accessibility">Business Informatics Group </span><span class="gametitle">Jeopardy!</span>
+         </h1>
+      </header>
+      
+      <!-- Navigation -->
+		<nav role="navigation" aria-labelledby="navheading">
+			<h2 id="navheading" class="accessibility">Navigation</h2>
+			<ul>
+				<li><a class="orangelink navigationlink" id="loginlink" title="Klicke hier um dich anzumelden" href="/" accesskey="l">Anmelden</a></li>
+			</ul>
+		</nav>
+		
+		
+		<!-- Content -->
+      <div id="register" role="main"> 
+            <!-- Register section -->
+            <h2 id="registerheading" class="accessibility">@Messages("register.button")</h2>
+             @helper.form(action = routes.Registration.register()) {
+                <fieldset>
+                    <legend>@Messages("register.personal")</legend>
+					
+					@helper.inputText(form("firstname"), 'id -> "firstname", 'type -> "text", '_label -> Messages("register.firstname"))
+                    
+                    @helper.inputText(form("lastname"), 'id -> "lastname", 'type -> "text", '_label -> Messages("register.lastname"))
+                    
+                    @helper.inputDate(form("birthdate"), 'id -> "birthdate", '_label -> Messages("register.birthdate"), '_showErrors -> false)
+                    
+					@for(error <- form("birthdateError").error) {
+					<div id="error_msg_birthdate" class="error" role="alert">@Messages("register.birthdate_error")</div>
+					}
+                   		
+                       <label>@Messages("register.gender")</label>
+                    <fieldset class="inputset">
+                        <input type="radio" name="gender" id="male" value="m" checked="checked" />
+                        <label for="male">@Messages("register.male")</label>
+                        <input type="radio" name="gender" id="female" value="f" />
+                        <label for="female">@Messages("register.female")</label>
+                    </fieldset>
+                    
+                    
+                </fieldset>
+                <fieldset>
+                    <legend>@Messages("register.userinfo")</legend>
+                    <label for="avatar">@Messages("register.avatar")</label>
+                    <select id="avatar" name="avatar">
+                        <option value="aldrich-killian">Aldrich Killian</option>
+                        <option value="beetle">Beetle</option>
+						<option value="black-widow">Black Widow</option>
+						<option value="captain-america">Captain America</option>
+						<option value="cyclops">Cyclops</option>
+						<option value="deadpool">Deadpool</option>
+						<option value="doctor-doom">Doctor Doom</option>
+						<option value="doctor-octopus">Doctor Octopus</option>
+						<option value="drax">Drax</option>
+						<option value="electro">Electro</option>
+						<option value="extremis-soldier">Extremis Soldier</option>
+						<option value="falcon">Falcon</option>
+						<option value="gamora">Gamora</option>
+						<option value="green-goblin">Green Goblin</option>
+						<option value="groot">Groot</option>
+						<option value="hawkeye">Hawkeye</option>
+						<option value="hulk">Hulk</option>
+						<option value="hydra-henchman">Hydra Henchman</option>
+						<option value="iron-fist">Iron Fist</option>
+						<option value="iron-man">Iron Man</option>
+						<option value="j-jonah-jameson">J. Jonah Jameson</option>
+						<option value="loki">Loki</option>
+						<option value="magneto">Magneto</option>
+						<option value="mary-jane-watson">Mary Jane Watson</option>
+						<option value="modok">MODOK</option>
+						<option value="nebula">Nebula</option>
+						<option value="nick-fury">Nick Fury</option>
+						<option value="nova">Nova</option>
+						<option value="pepper-potts">Pepper Potts</option>
+						<option value="power-man">Power Man</option>
+						<option value="red-skull">Red Skull</option>
+						<option value="rocket">Rocket Raccoon</option>
+						<option value="ronan">Ronan</option>
+						<option value="spiderman">Spiderman</option>
+						<option value="starlord">Starlord</option>
+						<option value="taskmaster">Taskmaster</option>
+						<option value="the-mandarin">The Mandarin</option>
+						<option value="thor">Thor</option>
+						<option value="tony-stark">Tony Stark</option>
+						<option value="venom">Venom</option>
+						<option value="war-machine">War Machine</option>
+						<option value="wolverine">Wolverine</option>
+                    </select>			
+			
+                    @helper.inputText(form("name"), 'id -> "name", 'type -> "text", '_label -> Messages("register.username"), 'required -> "required", '_showConstraints -> false, '_showErrors -> false)
+                   	
+                    @for(error <- form("usernameError").error) {
+                    <div id="error_msg_username" class="error" role="alert">@Messages("register.username_error")</div>
+                    }
+                    
+                    
+                    @helper.inputText(form("password"), 'id -> "password", 'type -> "password", '_label -> Messages("register.password"), 'required -> "required", '_showConstraints -> false, '_showErrors -> false)
+                    @for(error <- form("passwordError").error) {
+                    <div id="error_msg_password" class="error" role="alert">@Messages("register.password_error")</div>
+                    }
+                    
+                    @for(error <- form("userExist").error) {
+                    <div id="error_msg_password" class="error" role="alert">@Messages("register.user_exists_error")</div>
+                    }
+                    
+                    <input class="greenlink formlink" id="registersubmit" type="submit" value=@Messages("register.button") accesskey="s"/>
+                    <p id="requiredhint">@Messages("register.required")</p>
+				</fieldset>
+            }
+        </div>
+  
+        <!-- footer -->
+        <footer role="contentinfo">(C) 2015 BIG Jeopardy</footer>
+    </body>
+	}

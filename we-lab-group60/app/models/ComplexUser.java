@@ -1,5 +1,6 @@
 package models;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.persistence.*;
@@ -18,10 +19,10 @@ public class ComplexUser extends at.ac.tuwien.big.we15.lab2.api.impl.SimpleUser 
 	private String lastname;
 
 	@Temporal(TemporalType.DATE)
-	private Date birthdate;
+	private java.util.Date birthdate;
 
 	private String gender;
-
+	
 	@Constraints.Required
 	@Constraints.MinLength(4)
 	@Constraints.MaxLength(8)
@@ -31,7 +32,7 @@ public class ComplexUser extends at.ac.tuwien.big.we15.lab2.api.impl.SimpleUser 
 	@Constraints.MinLength(4)
 	@Constraints.MaxLength(8)
 	private String password;
-
+	
 	// needs a default constructor for the views
 	public ComplexUser() {
 	};
@@ -71,11 +72,11 @@ public class ComplexUser extends at.ac.tuwien.big.we15.lab2.api.impl.SimpleUser 
 		this.lastname = surname;
 	}
 
-	public Date getBirthdate() {
+	public java.util.Date getBirthdate() {
 		return birthdate;
 	}
 
-	public void setBirthdate(Date birthdate) {
+	public void setBirthdate(java.util.Date birthdate) {
 		this.birthdate = birthdate;
 	}
 
@@ -97,7 +98,7 @@ public class ComplexUser extends at.ac.tuwien.big.we15.lab2.api.impl.SimpleUser 
 	
 	public String toString(){
 		
-		return "Username: "+ name + "\nPasswort: " + password + "\nGeschlecht: " + gender;
+		return "Username: "+ name + "\nPasswort: " + password + "\nGeschlecht: " + gender + "Birthdate :" + new SimpleDateFormat("d.MM.yyyy").format(birthdate);
 		
 	}
 

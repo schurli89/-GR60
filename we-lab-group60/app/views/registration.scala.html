@@ -1,7 +1,7 @@
 @(form: Form[models.ComplexUser])
 
 @main("Business Informatics Group Jeopardy") {
-   <body id="register-page">
+   <body >
         <a class="accessibility" href="#register">Zur Registrierung springen</a>
          
       <!-- Header -->
@@ -23,34 +23,34 @@
 		<!-- Content -->
       <div id="register" role="main"> 
             <!-- Register section -->
-            <h2 id="registerheading" class="accessibility">Registrierung</h2>
+            <h2 id="registerheading" class="accessibility">@Messages("register.button")</h2>
              @helper.form(action = routes.Registration.register()) {
                 <fieldset>
-                    <legend>Persönliche Daten</legend>
+                    <legend>@Messages("register.personal")</legend>
 					
-					@helper.inputText(form("firstname"), 'id -> "firstname", 'type -> "text", '_label -> "Vorname:")
+					@helper.inputText(form("firstname"), 'id -> "firstname", 'type -> "text", '_label -> Messages("register.firstname"))
                     
-                    @helper.inputText(form("lastname"), 'id -> "lastname", 'type -> "text", '_label -> "Nachname:")
+                    @helper.inputText(form("lastname"), 'id -> "lastname", 'type -> "text", '_label -> Messages("register.lastname"))
                     
-                    @helper.inputDate(form("birthdate"), 'id -> "birthdate", 'type -> "date", '_label -> "Geburtstag:", '_showErrors -> true)
+                    @helper.inputDate(form("birthdate"), 'id -> "birthdate", '_label -> Messages("register.birthdate"), '_showErrors -> false)
                     
 					@for(error <- form("birthdateError").error) {
-					<div id="error_msg_birthdate" class="error" role="alert">"Verwenden Sie bitte folgendes Datumsformat: dd.mm.yyyy (z.B. 24.12.2012)."</div>
+					<div id="error_msg_birthdate" class="error" role="alert">@Messages("register.birthdate_error")</div>
 					}
                    		
-                       <label>Geschlecht:</label>
+                       <label>@Messages("register.gender")</label>
                     <fieldset class="inputset">
                         <input type="radio" name="gender" id="male" value="m" checked="checked" />
-                        <label for="male">Männlich</label>
+                        <label for="male">@Messages("register.male")</label>
                         <input type="radio" name="gender" id="female" value="f" />
-                        <label for="female">Weiblich</label>
+                        <label for="female">@Messages("register.female")</label>
                     </fieldset>
                     
                     
                 </fieldset>
                 <fieldset>
-                    <legend>Spielerdaten</legend>
-                    <label for="avatar">Avatar:</label>
+                    <legend>@Messages("register.userinfo")</legend>
+                    <label for="avatar">@Messages("register.avatar")</label>
                     <select id="avatar" name="avatar">
                         <option value="aldrich-killian">Aldrich Killian</option>
                         <option value="beetle">Beetle</option>
@@ -95,30 +95,30 @@
 						<option value="war-machine">War Machine</option>
 						<option value="wolverine">Wolverine</option>
                     </select>			
-					<legend>Spielerdaten</legend>
-
-                    @helper.inputText(form("name"), 'id -> "name", 'type -> "text", '_label -> "Benutzername*:", 'required -> "required", '_showConstraints -> false, '_showErrors -> false)
+			
+                    @helper.inputText(form("name"), 'id -> "name", 'type -> "text", '_label -> Messages("register.username"), 'required -> "required", '_showConstraints -> false, '_showErrors -> false)
+                   	
                     @for(error <- form("usernameError").error) {
-                    <div id="error_msg_username" class="error" role="alert">Der Benutzername muss mindestens 4 Zeichen und darf maximal 8 Zeichen enthalten.</div>
+                    <div id="error_msg_username" class="error" role="alert">@Messages("register.username_error")</div>
                     }
                     
                     
-                    @helper.inputText(form("password"), 'id -> "password", 'type -> "password", '_label -> "Passwort*:", 'required -> "required", '_showConstraints -> false, '_showErrors -> false)
+                    @helper.inputText(form("password"), 'id -> "password", 'type -> "password", '_label -> Messages("register.password"), 'required -> "required", '_showConstraints -> false, '_showErrors -> false)
                     @for(error <- form("passwordError").error) {
-                    <div id="error_msg_password" class="error" role="alert">Das Passwort muss mindestens 4 Zeichen und darf maximal 8 Zeichen enthalten.</div>
+                    <div id="error_msg_password" class="error" role="alert">@Messages("register.password_error")</div>
                     }
                     
                     @for(error <- form("userExist").error) {
-                    <div id="error_msg_password" class="error" role="alert">User existiert bereits.</div>
+                    <div id="error_msg_password" class="error" role="alert">@Messages("register.user_exists_error")</div>
                     }
                     
-                    <input id="registersubmit" type="submit" value="Registrieren" accesskey="s"/>
-                    <p id="requiredhint">Mit "*" gekennzeichnete Felder sind Pflichtfelder</p>
+                    <input class="greenlink formlink" id="registersubmit" type="submit" value=@Messages("register.button") accesskey="s"/>
+                    <p id="requiredhint">@Messages("register.required")</p>
 				</fieldset>
             }
         </div>
   
         <!-- footer -->
-        <footer role="contentinfo">© 2015 BIG Jeopardy</footer>
+        <footer role="contentinfo">(C) 2015 BIG Jeopardy</footer>
     </body>
 	}

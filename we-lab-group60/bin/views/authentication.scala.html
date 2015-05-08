@@ -1,0 +1,52 @@
+@(form: Form[models.ComplexUser])
+
+@main("Business Informatics Group Jeopardy! - Login") {
+
+<body id="login-page">
+      <a class="accessibility" href="#login">@Messages("login.accessibility_login")</a>
+	  <a class="accessibility" title=@Messages("login.accessibilty_register") href="/registration" accesskey="r">@Messages("register.button")</a>    
+      <!-- Header -->
+      <header role="banner" aria-labelledby="bannerheading">
+         <h1 id="bannerheading">
+            <span class="accessibility">Business Informatics Group </span><span class="gametitle">Jeopardy!</span>
+         </h1>
+      </header>
+      
+      <!-- Content -->
+        <div role="main">
+            <section id="login" aria-labelledby="loginheading">
+               <h2 id="loginheading" class="accessibility">@Messages("login.login")</h2>
+         		@helper.form(action = routes.Authentication.login()) {
+                    <fieldset>
+                        <legend id="logindata">@Messages("login.login")</legend>
+                         @helper.inputText(form("name"), 'id -> "name", 'type -> "text", '_label -> Messages("login.username"), '_showConstraints -> false, '_showErrors -> false)
+                    	@for(error <- form("usernameError").error) {
+                    	<div id="error_msg_username" class="error" role="alert">@Messages("login.username_error")</div>
+                    	}
+                    
+                    
+	                    @helper.inputText(form("password"), 'id -> "password", 'type -> "password", '_label -> Messages("login.password"), '_showConstraints -> false, '_showErrors -> false)
+	                    @for(error <- form("passwordError").error) {
+	                    <div id="error_msg_password" class="error" role="alert">@Messages("login.password_error")</div>
+	                    }
+	                    
+						@for(error <- form("authenticationError").error) {
+	                    <div id="error_msg_password" class="error" role="alert">@Messages("login.authentication_error")</div>
+	                    }
+                        <input name="login" id="loginsubmit" class="greenlink formlink clickable" type="submit" value=@Messages("login.button") />
+                    </fieldset>
+                }
+            </section>
+            <!-- Register section -->
+            <section id="registerforward" aria-labelledby="registerheading">
+                <h2 id="registerheading" class="accessibility">@Messages("login.registerheading")</h2>
+                <p id="registerhint">@Messages("login.hint")</p>
+                <a class="contentlink orangelink" title=@Messages("login.link") href="/registration" accesskey="r">@Messages("login.link_text")</a>
+            </section>
+        </div>
+
+        <!-- footer -->
+        <footer role="contentinfo">(C) 2015 BIG Jeopardy</footer>
+
+</body>        
+        }
