@@ -1,15 +1,16 @@
 @(form: Form[models.ComplexUser])
 
 @main("Business Informatics Group Jeopardy! - Login") {
-
 <body id="login-page">
       <a class="accessibility" href="#login">@Messages("login.accessibility_login")</a>
 	  <a class="accessibility" title=@Messages("login.accessibilty_register") href="/registration" accesskey="r">@Messages("register.button")</a>    
+      
       <!-- Header -->
       <header role="banner" aria-labelledby="bannerheading">
          <h1 id="bannerheading">
             <span class="accessibility">Business Informatics Group </span><span class="gametitle">Jeopardy!</span>
          </h1>
+         
       </header>
       
       <!-- Content -->
@@ -47,6 +48,5 @@
 
         <!-- footer -->
         <footer role="contentinfo">(C) 2015 BIG Jeopardy</footer>
-
-</body>        
-        }
+       
+}

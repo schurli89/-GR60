@@ -1,10 +1,13 @@
 package models;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.*;
 
+import at.ac.tuwien.big.we15.lab2.api.Avatar;
 import play.data.validation.*;
 
 @Entity
@@ -15,7 +18,7 @@ public class ComplexUser extends at.ac.tuwien.big.we15.lab2.api.impl.SimpleUser 
 	private Long id;
 
 	private String firstname;
-	
+	private String avatar_name;
 	private String lastname;
 
 	@Temporal(TemporalType.DATE)
@@ -48,6 +51,16 @@ public class ComplexUser extends at.ac.tuwien.big.we15.lab2.api.impl.SimpleUser 
 		
 	}
 
+	public ComplexUser(String firstname, String lastname, Date birthdate,
+			String gender, String username, String password, String avatar) {
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.birthdate = birthdate;
+		this.gender = gender;
+		this.name = username;
+		this.password = password;
+		setAvatar(Avatar.getAvatar(avatar));
+	}
 	public Long getId() {
 		return id;
 	}
@@ -98,7 +111,7 @@ public class ComplexUser extends at.ac.tuwien.big.we15.lab2.api.impl.SimpleUser 
 	
 	public String toString(){
 		
-		return "Username: "+ name + "\nPasswort: " + password + "\nGeschlecht: " + gender + "Birthdate :" + new SimpleDateFormat("d.MM.yyyy").format(birthdate);
+		return "Username: "+ name + "\nPasswort: " + password + "\nGeschlecht: " + gender;
 		
 	}
 
@@ -110,5 +123,4 @@ public class ComplexUser extends at.ac.tuwien.big.we15.lab2.api.impl.SimpleUser 
 		this.name=name;
 		
 	}
-
 }

@@ -1,7 +1,7 @@
 @(form: Form[models.ComplexUser])
 
-@main("Business Informatics Group Jeopardy") {
-   <body >
+@main("Business Informatics Group Jeopardy! - Registrieren") {
+   <body id="register-page">
         <a class="accessibility" href="#register">Zur Registrierung springen</a>
          
       <!-- Header -->
@@ -38,7 +38,7 @@
 					<div id="error_msg_birthdate" class="error" role="alert">@Messages("register.birthdate_error")</div>
 					}
                    		
-                       <label>@Messages("register.gender")</label>
+                     <label>@Messages("register.gender")</label>
                     <fieldset class="inputset">
                         <input type="radio" name="gender" id="male" value="m" checked="checked" />
                         <label for="male">@Messages("register.male")</label>
@@ -50,8 +50,9 @@
                 </fieldset>
                 <fieldset>
                     <legend>@Messages("register.userinfo")</legend>
-                    <label for="avatar">@Messages("register.avatar")</label>
-                    <select id="avatar" name="avatar">
+                    <label for="avatar_name">@Messages("register.avatar")</label>
+                    
+                    <select id="avatar_name" name="avatar_name">
                         <option value="aldrich-killian">Aldrich Killian</option>
                         <option value="beetle">Beetle</option>
 						<option value="black-widow">Black Widow</option>

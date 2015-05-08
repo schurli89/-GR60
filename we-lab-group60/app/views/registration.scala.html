@@ -1,11 +1,7 @@
 @(form: Form[models.ComplexUser])
 
 @main("Business Informatics Group Jeopardy! - Registrieren") {
-    <meta charset="utf-8"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-         <link rel="stylesheet" type="text/css" href='@routes.Assets.at("stylesheets/base.css")' />
-        	<link rel="stylesheet" type="text/css" href='@routes.Assets.at("screen.css")' />
-   <body >
+   <body id="register-page">
         <a class="accessibility" href="#register">Zur Registrierung springen</a>
          
       <!-- Header -->
@@ -54,8 +50,9 @@
                 </fieldset>
                 <fieldset>
                     <legend>@Messages("register.userinfo")</legend>
-                    <label for="avatar">@Messages("register.avatar")</label>
-                    <select id="avatar" name="avatar">
+                    <label for="avatar_name">@Messages("register.avatar")</label>
+                    
+                    <select id="avatar_name" name="avatar_name">
                         <option value="aldrich-killian">Aldrich Killian</option>
                         <option value="beetle">Beetle</option>
 						<option value="black-widow">Black Widow</option>
