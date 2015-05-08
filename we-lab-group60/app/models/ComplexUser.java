@@ -21,8 +21,7 @@ public class ComplexUser extends at.ac.tuwien.big.we15.lab2.api.impl.SimpleUser 
 	private String avatar_name;
 	private String lastname;
 
-	@Temporal(TemporalType.DATE)
-	private java.util.Date birthdate;
+	private Date birthdate;
 
 	private String gender;
 	
@@ -40,7 +39,7 @@ public class ComplexUser extends at.ac.tuwien.big.we15.lab2.api.impl.SimpleUser 
 	public ComplexUser() {
 	};
 
-	public ComplexUser(String firstname, String lastname, Date birthdate,
+	/*public ComplexUser(String firstname, String lastname, Date birthdate,
 			String gender, String username, String password) {
 		this.firstname = firstname;
 		this.lastname = lastname;
@@ -49,18 +48,21 @@ public class ComplexUser extends at.ac.tuwien.big.we15.lab2.api.impl.SimpleUser 
 		this.name = username;
 		this.password = password;
 		
-	}
+	}*/
 
 	public ComplexUser(String firstname, String lastname, Date birthdate,
-			String gender, String username, String password, String avatar) {
+			String gender, String username, String password, String avatar_name) {
+		System.out.println("USER CONSTRUCTOR");
 		this.firstname = firstname;
 		this.lastname = lastname;
 		this.birthdate = birthdate;
 		this.gender = gender;
 		this.name = username;
 		this.password = password;
-		setAvatar(Avatar.getAvatar(avatar));
+		this.avatar_name = avatar_name;
+		setAvatar(Avatar.getAvatar(avatar_name));
 	}
+	
 	public Long getId() {
 		return id;
 	}
@@ -85,11 +87,11 @@ public class ComplexUser extends at.ac.tuwien.big.we15.lab2.api.impl.SimpleUser 
 		this.lastname = surname;
 	}
 
-	public java.util.Date getBirthdate() {
+	public Date getBirthdate() {
 		return birthdate;
 	}
 
-	public void setBirthdate(java.util.Date birthdate) {
+	public void setBirthdate(Date birthdate) {
 		this.birthdate = birthdate;
 	}
 
@@ -111,7 +113,7 @@ public class ComplexUser extends at.ac.tuwien.big.we15.lab2.api.impl.SimpleUser 
 	
 	public String toString(){
 		
-		return "Username: "+ name + "\nPasswort: " + password + "\nGeschlecht: " + gender;
+		return "Username: "+ name + "\nPasswort: " + password + "\nGeschlecht: " + gender + "\nAvatar: "+ avatar_name;
 		
 	}
 
@@ -122,5 +124,13 @@ public class ComplexUser extends at.ac.tuwien.big.we15.lab2.api.impl.SimpleUser 
 	public void setName(String name) {
 		this.name=name;
 		
+	}
+	
+	public String getAvatar_name(){
+		return this.avatar_name;
+	}
+	
+	public void setAvatar_name(String avatar_name){
+		this.avatar_name = avatar_name;
 	}
 }

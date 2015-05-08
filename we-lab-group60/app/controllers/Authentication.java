@@ -59,7 +59,7 @@ public class Authentication extends Controller {
 
 		initCache(local);
 
-		return ok(index.render(local.getName()));
+		return ok(index.render(local.toString()));
 	}
 
 	public static Result logout() {

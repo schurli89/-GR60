@@ -44,7 +44,7 @@ public class Registration extends Controller {
 		
 		System.out.println("LOG: New Registration request");
 		System.out.println("LOG GENDER: " + form.field("gender").value());
-		System.out.println("LOG avatar: " + form.field("avatar").value());
+		System.out.println("LOG avatar: " + form.field("avatar_name").value());
 		
 		if(!form.field("birthdate").valueOr("").isEmpty()){
 			if (!form.field("birthdate").value().matches(datePattern)){
@@ -70,7 +70,7 @@ public class Registration extends Controller {
         } else{
         	
         	ComplexUser user = form.get();
-        	
+        	System.out.println("LOG form.get: " + user);
         	String queryString = "SELECT u FROM ComplexUser u where u.name = '" + user.getName() + "'";
     		TypedQuery<ComplexUser> query = play.db.jpa.JPA.em().createQuery(queryString, ComplexUser.class);
         	
