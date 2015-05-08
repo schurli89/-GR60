@@ -35,7 +35,7 @@ public class Authentication extends Controller {
 			return badRequest(authentication.render(form));
 		}
 
-		String queryString = "SELECT u FROM User u where u.name = '"
+		String queryString = "SELECT u FROM ComplexUser u where u.name = '"
 				+ username + "' and u.password = '" + password + "'";
 		TypedQuery<ComplexUser> query = play.db.jpa.JPA.em().createQuery(queryString,
 				ComplexUser.class);

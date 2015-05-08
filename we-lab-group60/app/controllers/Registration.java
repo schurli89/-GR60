@@ -71,7 +71,7 @@ public class Registration extends Controller {
         	
         	ComplexUser user = form.get();
         	
-        	String queryString = "SELECT u FROM User u where u.name = '" + user.getName() + "'";
+        	String queryString = "SELECT u FROM ComplexUser u where u.name = '" + user.getName() + "'";
     		TypedQuery<ComplexUser> query = play.db.jpa.JPA.em().createQuery(queryString, ComplexUser.class);
         	
     		if(!query.getResultList().isEmpty()){

@@ -1,6 +1,10 @@
 @(form: Form[models.ComplexUser])
 
-@main("Business Informatics Group Jeopardy") {
+@main("Business Informatics Group Jeopardy! - Registrieren") {
+    <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+         <link rel="stylesheet" type="text/css" href='@routes.Assets.at("stylesheets/base.css")' />
+        	<link rel="stylesheet" type="text/css" href='@routes.Assets.at("screen.css")' />
    <body >
         <a class="accessibility" href="#register">Zur Registrierung springen</a>
          
@@ -38,7 +42,7 @@
 					<div id="error_msg_birthdate" class="error" role="alert">@Messages("register.birthdate_error")</div>
 					}
                    		
-                       <label>@Messages("register.gender")</label>
+                     <label>@Messages("register.gender")</label>
                     <fieldset class="inputset">
                         <input type="radio" name="gender" id="male" value="m" checked="checked" />
                         <label for="male">@Messages("register.male")</label>
