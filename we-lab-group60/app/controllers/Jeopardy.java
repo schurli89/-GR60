@@ -36,7 +36,7 @@ public class Jeopardy extends Controller{
 	
 	}
 	
-	public static Result answer()
+	public static Result loadQuestion()
 	{
 
 		DynamicForm form = Form.form().bindFromRequest();
@@ -47,6 +47,15 @@ public class Jeopardy extends Controller{
 		System.out.println("LOG CHOOSEN QUESTION "+quest.getText());
 	
 		return ok(question.render(quest));
+	}
+	
+	public static Result answerQuestion()
+	{
+		DynamicForm form= Form.form().bindFromRequest();
+		
+		System.out.println("LOG answer Question ");
+
+		return ok(jeopardy.render(game));
 	}
 	
 }

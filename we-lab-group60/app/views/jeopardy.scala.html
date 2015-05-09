@@ -60,10 +60,10 @@
             <p class="user-info positive-change">Du hast richtig geantwortet: +1000 �</p>
             <p class="user-info negative-change">Deadpool hat falsch geantwortet: -500 �</p>
             <p class="user-info">Deadpool hat TUWIEN f�r � 1000 gew�hlt.</p>
-         	@helper.form(action = routes.Jeopardy.answer()) {
+         	@helper.form(action = routes.Jeopardy.loadQuestion()) {
                <fieldset>
                <legend class="accessibility">Fragenauswahl</legend>
-               @for((category,index) <- game.getCategories.zipWithIndex){
+               @for((category) <- game.getCategories){
                <section class="questioncategory" aria-labelledby="tvheading">
                   <h3 id="tvheading" class="tile category-title"><span class="accessibility">Kategorie: </span>@category.getName </h3>
                   @for(question <- category.getQuestions){
