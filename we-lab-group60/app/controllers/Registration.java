@@ -1,22 +1,12 @@
 package controllers;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map.Entry;
-import java.util.logging.SimpleFormatter;
 
 import javax.persistence.TypedQuery;
 
-import at.ac.tuwien.big.we15.lab2.api.Avatar;
-import at.ac.tuwien.big.we15.lab2.api.User;
 import models.ComplexUser;
-import play.api.i18n.Lang;
-import play.api.libs.iteratee.Input.El;
 import play.data.Form;
-import play.data.format.Formatters;
 import play.data.validation.ValidationError;
 import play.db.jpa.JPA;
 import play.db.jpa.Transactional;
@@ -24,7 +14,6 @@ import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.authentication;
 import views.html.registration;
-import play.data.*;
 
 public class Registration extends Controller {
 

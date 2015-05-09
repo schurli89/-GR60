@@ -52,7 +52,6 @@ public class Jeopardy extends Controller{
 	public static Result answerQuestion()
 	{
 		DynamicForm form= Form.form().bindFromRequest();
-		
 		System.out.println("LOG answer Question ");
 
 		return ok(jeopardy.render(game));

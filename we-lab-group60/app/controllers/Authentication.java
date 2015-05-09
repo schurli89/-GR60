@@ -9,10 +9,6 @@ import play.db.jpa.Transactional;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.authentication;
-import views.html.jeopardy;
-
-import  at.ac.tuwien.big.we15.lab2.api.*;
-import  at.ac.tuwien.big.we15.lab2.api.impl.*;
 
 public class Authentication extends Controller {
 

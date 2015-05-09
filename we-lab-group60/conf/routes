@@ -18,11 +18,11 @@ GET		/logout								controllers.Authentication.logout()
 
 POST    /loadQuestion							controllers.Jeopardy.loadQuestion()
 
-GET		/answerQuestion							controllers.Jeopardy.answerQuestion
+GET		/answerQuestion							controllers.Jeopardy.answerQuestion()
 
 #Jeopardy
 
-GET /startGame/:user 								controllers.Jeopardy.start(user)
+GET /startGame/:user 							controllers.Jeopardy.start(user)
 
 
 # Map static resources from the /public folder to the /assets URL path
