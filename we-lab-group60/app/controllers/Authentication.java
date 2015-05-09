@@ -9,7 +9,10 @@ import play.db.jpa.Transactional;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.authentication;
-import views.html.index;
+import views.html.jeopardy;
+
+import  at.ac.tuwien.big.we15.lab2.api.*;
+import  at.ac.tuwien.big.we15.lab2.api.impl.*;
 
 public class Authentication extends Controller {
 
@@ -40,26 +43,28 @@ public class Authentication extends Controller {
 		TypedQuery<ComplexUser> query = play.db.jpa.JPA.em().createQuery(queryString,
 				ComplexUser.class);
 
-		ComplexUser local = null;
+		ComplexUser user = null;
 
 		if (!query.getResultList().isEmpty()) {
-			local = query.getResultList().get(0);
+			user = query.getResultList().get(0);
 		}
 
-		if (local == null) {
+		if (user == null) {
 			form.reject("authenticationError",
 					"Benutzername und/oder Passwort falsch.");
 			return badRequest(authentication.render(form));
 		}
 
-		System.out.println("LOCAL ID: " + local.getId()); // TEST
-
+		System.out.println("LOCAL ID: " + user.getId()); // TEST
+		System.out.println("LOG: USER: "+user.toString());
 		session().clear();
 		session("user", username);
 
-		initCache(local);
-
-		return ok(index.render(local.toString()));
+		initCache(user);
+		System.out.println("LOG: GET AVATAR "+user.getAvatar().getName());
+		JeopardyFactory factory= new PlayJeopardyFactory("data.de.json");
+		JeopardyGame game= factory.createGame(user);
+		return ok(jeopardy.render(game));
 	}
 
 	public static Result logout() {

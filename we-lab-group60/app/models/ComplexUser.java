@@ -11,20 +11,20 @@ import at.ac.tuwien.big.we15.lab2.api.Avatar;
 import play.data.validation.*;
 
 @Entity
-public class ComplexUser extends at.ac.tuwien.big.we15.lab2.api.impl.SimpleUser {
+public class ComplexUser implements at.ac.tuwien.big.we15.lab2.api.User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	private String firstname;
+	private Avatar avatar;
 	private String avatar_name;
 	private String lastname;
-
 	private Date birthdate;
 
 	private String gender;
-	
+
 	@Constraints.Required
 	@Constraints.MinLength(4)
 	@Constraints.MaxLength(8)
@@ -59,8 +59,9 @@ public class ComplexUser extends at.ac.tuwien.big.we15.lab2.api.impl.SimpleUser 
 		this.gender = gender;
 		this.name = username;
 		this.password = password;
-		this.avatar_name = avatar_name;
-		setAvatar(Avatar.getAvatar(avatar_name));
+		this.avatar_name=avatar_name;
+		this.avatar= Avatar.getAvatar(avatar_name);
+		System.out.println("LOG CON USER: "+this.avatar.getName());
 	}
 	
 	public Long getId() {
@@ -112,8 +113,10 @@ public class ComplexUser extends at.ac.tuwien.big.we15.lab2.api.impl.SimpleUser 
 	}
 	
 	public String toString(){
+		this.avatar= Avatar.getAvatar(avatar_name);
+
 		
-		return "Username: "+ name + "\nPasswort: " + password + "\nGeschlecht: " + gender + "\nAvatar: "+ avatar_name;
+		return "Username: "+ name + "\nPasswort: " + password + "\nGeschlecht: " + gender + "\nAvatar: "+avatar.getName();
 		
 	}
 
@@ -126,11 +129,28 @@ public class ComplexUser extends at.ac.tuwien.big.we15.lab2.api.impl.SimpleUser 
 		
 	}
 	
-	public String getAvatar_name(){
-		return this.avatar_name;
+	public Avatar getAvatar()
+	{
+		return this.avatar;
 	}
-	
-	public void setAvatar_name(String avatar_name){
+	public void setAvatar(Avatar avatar)
+	{
+		this.avatar=avatar;
+	}
+
+	public String getAvatar_name() {
+		
+		return avatar_name;
+	}
+
+	public void setAvatar_name(String avatar_name) {
+		this.avatar= Avatar.getAvatar(avatar_name);
+
 		this.avatar_name = avatar_name;
 	}
+	
+
+
+	
+	
 }

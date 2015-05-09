@@ -13,5 +13,12 @@ POST 	/register							controllers.Registration.register()
 POST    /login                           	controllers.Authentication.login()
 GET		/logout								controllers.Authentication.logout()
 
+
+#Question
+
+POST    /answer/						controllers.Question.answer()
+
+
+
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

@@ -11,6 +11,7 @@ import java.util.logging.SimpleFormatter;
 import javax.persistence.TypedQuery;
 
 import at.ac.tuwien.big.we15.lab2.api.Avatar;
+import at.ac.tuwien.big.we15.lab2.api.User;
 import models.ComplexUser;
 import play.api.i18n.Lang;
 import play.api.libs.iteratee.Input.El;
