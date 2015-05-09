@@ -39,7 +39,7 @@
             </section>
             <section id="secondplayer" class="playerinfo" aria-labelledby="secondplayerheading">
                <h3 id="secondplayerheading" class="accessibility">Zweiter Spieler</h3>
-               <img class="avatar" src="@{"assets/images/avatar/"+game.getSecond.getUser.getAvatar.getImageHead}" alt="Spieler-Avata @game.getSecond.getUser.getAvatar.getName" />
+               <img class="avatar" src="@{"assets/images/avatar/"+game.getSecond.getUser.getAvatar.getImageHead}" alt="Spieler-Avatar @game.getSecond.getUser.getAvatar.getName" />
                <table>
                   <tr>
                      <th class="accessibility">Spielername</th>
@@ -60,7 +60,7 @@
             <p class="user-info positive-change">Du hast richtig geantwortet: +1000 �</p>
             <p class="user-info negative-change">Deadpool hat falsch geantwortet: -500 �</p>
             <p class="user-info">Deadpool hat TUWIEN f�r � 1000 gew�hlt.</p>
-         	@helper.form(action = routes.Question.answer()) {
+         	@helper.form(action = routes.Jeopardy.answer()) {
                <fieldset>
                <legend class="accessibility">Fragenauswahl</legend>
                @for((category,index) <- game.getCategories.zipWithIndex){
@@ -68,7 +68,7 @@
                   <h3 id="tvheading" class="tile category-title"><span class="accessibility">Kategorie: </span>@category.getName </h3>
                   @for(question <- category.getQuestions){
                   <ol class="category_questions">
-                     <li><input name="question_selection" id="@question.getId" value="@question.getValue" type="radio" /><label class="tile clickable" for="@question.getId">@question.getValue</label></li>
+                     <li><input name="question_selection" id="@question.getId" value="@question.getId" type="radio" @if(game.hasBeenChosen(question)) {disabled="disabled"} /><label class="tile clickable" for="@question.getId">@question.getValue</label></li>
                     </ol>
                     }
                </section>

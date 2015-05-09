@@ -61,10 +61,8 @@ public class Authentication extends Controller {
 		session("user", username);
 
 		initCache(user);
-		System.out.println("LOG: GET AVATAR "+user.getAvatar().getName());
-		JeopardyFactory factory= new PlayJeopardyFactory("data.de.json");
-		JeopardyGame game= factory.createGame(user);
-		return ok(jeopardy.render(game));
+		
+		return redirect(controllers.routes.Jeopardy.start(user.getName()));
 	}
 
 	public static Result logout() {
