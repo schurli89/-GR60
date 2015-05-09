@@ -45,6 +45,7 @@ login.accessibilty_register=Click for registration
 question.accessibility_questions=Jump to question selection
 question.gameinfo=Game info
 question.timeleft=Time left
+questionpage=Question answering
 
 winner.info=Winnerinformation
 winner=Winner

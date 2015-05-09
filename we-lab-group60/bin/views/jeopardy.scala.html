@@ -58,7 +58,7 @@
          <section id="question-selection" aria-labelledby="questionheading">
             <h2 id="questionheading" class="black accessibility">Jeopardy</h2>
             <p class="user-info positive-change">Du hast richtig geantwortet: +1000 �</p>
-            <p class="user-info negative-change">Deadpool hat falsch geantwortet: -500 �</p>
+            <p @if(game.getMarvinPlayer.getLatestProfitChange == null) {class="hidden"} else {@if(game.getMarvinPlayer.getLatestProfitChange < 0) {class="user-info negative-change"} else{class="user-info positive-change"}}>@if(game.getMarvinPlayer.getLatestProfitChange == null) { } else {@if(game.getMarvinPlayer.getLatestProfitChange < 0) {@game.getMarvin.getName hast falsch geantwortet @Messages("currency") @game.getMarvinPlayer.getLatestProfitChange} else {Du hast richtig}}</p>
             <p class="user-info">Deadpool hat TUWIEN f�r � 1000 gew�hlt.</p>
          	@helper.form(action = routes.Jeopardy.loadQuestion()) {
                <fieldset>

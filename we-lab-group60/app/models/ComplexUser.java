@@ -21,7 +21,7 @@ public class ComplexUser implements at.ac.tuwien.big.we15.lab2.api.User {
 	private Avatar avatar;
 	private String avatar_name;
 	private String lastname;
-	private Date birthdate;
+	private String birthdate;
 
 	private String gender;
 
@@ -50,7 +50,7 @@ public class ComplexUser implements at.ac.tuwien.big.we15.lab2.api.User {
 		
 	}*/
 
-	public ComplexUser(String firstname, String lastname, Date birthdate,
+	public ComplexUser(String firstname, String lastname, String birthdate,
 			String gender, String username, String password, String avatar_name) {
 		System.out.println("USER CONSTRUCTOR");
 		this.firstname = firstname;
@@ -88,11 +88,11 @@ public class ComplexUser implements at.ac.tuwien.big.we15.lab2.api.User {
 		this.lastname = surname;
 	}
 
-	public Date getBirthdate() {
+	public String getBirthdate() {
 		return birthdate;
 	}
 
-	public void setBirthdate(Date birthdate) {
+	public void setBirthdate(String birthdate) {
 		this.birthdate = birthdate;
 	}
 
