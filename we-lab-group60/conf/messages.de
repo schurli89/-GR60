@@ -1,3 +1,14 @@
+you=(DU)
+logout=Klicke hier um dich abzumelden
+currency=€
+alt_avatar=Spieler-Avatar
+player_leading=Führender Spieler
+player_second=Zweiter Spieler
+username=Spielername
+points=Spielerpunkte
+numOfquestion=Frage
+for=für
+
 register.personal=Persönliche Daten
 register.firstname=Vorname: 
 register.lastname=Nachname: 
@@ -29,3 +40,7 @@ login.login=Login
 login.button=Anmelden
 login.accessibilty_login=Zum Login springen
 login.accessibilty_register=Klicke hier um dich zu registrieren
+
+question.accessibility_questions=Zur Fragenauswahl springen
+question.gameinfo=Spielinformationen
+question.timeleft=Verbleibende Zeit

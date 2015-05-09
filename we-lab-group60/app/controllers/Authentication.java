@@ -58,7 +58,7 @@ public class Authentication extends Controller {
 
 		initCache(user);
 		
-		return redirect(controllers.routes.Jeopardy.start(user.getName()));
+		return Jeopardy.start(user);
 	}
 
 	public static Result logout() {
