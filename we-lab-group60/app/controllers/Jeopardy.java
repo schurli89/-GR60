@@ -73,6 +73,6 @@ public class Jeopardy extends Controller{
 		
 		//answer
 		game.answerHumanQuestion(answerIds);
-		return ok(jeopardy.render(game));
+		return ok(winner.render(game));
 	}
 }

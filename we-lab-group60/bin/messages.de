@@ -44,3 +44,9 @@ login.accessibilty_register=Klicke hier um dich zu registrieren
 question.accessibility_questions=Zur Fragenauswahl springen
 question.gameinfo=Spielinformationen
 question.timeleft=Verbleibende Zeit
+
+
+winner.info=Gewinnerinformationen
+winner=Gewinner
+loser=Verlierer
+new_game=Neues Spiel

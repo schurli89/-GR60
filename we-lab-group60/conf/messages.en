@@ -17,7 +17,7 @@ register.birthdate=Birthday:
 register.birthdate_error=Please use the format: dd.mm.yyyy (z.B. 24.12.2010).
 register.gender=Sex: 
 register.male=Male
-register.female=Femal
+register.female=Female
 register.userinfo=Player
 register.avatar=Avatar: 
 register.username=User*: 
@@ -45,3 +45,8 @@ login.accessibilty_register=Click for registration
 question.accessibility_questions=Jump to question selection
 question.gameinfo=Game info
 question.timeleft=Time left
+
+winner.info=Winnerinformation
+winner=Winner
+loser=Loser
+new_game=New game
