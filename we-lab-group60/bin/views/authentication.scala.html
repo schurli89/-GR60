@@ -1,9 +1,7 @@
-@(form: Form[models.ComplexUser])
-
-@main("Business Informatics Group Jeopardy! - Login") {
+@(form: Form[models.ComplexUser])@main(Messages("login.login")){
 <body id="login-page">
       <a class="accessibility" href="#login">@Messages("login.accessibility_login")</a>
-	  <a class="accessibility" title=@Messages("login.accessibilty_register") href="/registration" accesskey="r">@Messages("register.button")</a>    
+	  <a class="accessibility" title="@Messages("login.accessibilty_register")" href="/registration" accesskey="r">@Messages("register.button")</a>    
       
       <!-- Header -->
       <header role="banner" aria-labelledby="bannerheading">
@@ -34,7 +32,7 @@
 						@for(error <- form("authenticationError").error) {
 	                    <div id="error_msg_password" class="error" role="alert">@Messages("login.authentication_error")</div>
 	                    }
-                        <input name="login" id="loginsubmit" class="greenlink formlink clickable" type="submit" value=@Messages("login.button") />
+                        <input name="login" id="loginsubmit" class="greenlink formlink clickable" type="submit" value="@Messages("login.button")" />
                     </fieldset>
                 }
             </section>
@@ -42,11 +40,11 @@
             <section id="registerforward" aria-labelledby="registerheading">
                 <h2 id="registerheading" class="accessibility">@Messages("login.registerheading")</h2>
                 <p id="registerhint">@Messages("login.hint")</p>
-                <a class="contentlink orangelink" title=@Messages("login.link") href="/registration" accesskey="r">@Messages("login.link_text")</a>
+                <a class="contentlink orangelink" title="@Messages("login.link")" href="/registration" accesskey="r">@Messages("login.link_text")</a>
             </section>
         </div>
 
         <!-- footer -->
         <footer role="contentinfo">(C) 2015 BIG Jeopardy</footer>
-       
+       </body>
 }

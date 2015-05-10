@@ -1,8 +1,6 @@
-@(form: Form[models.ComplexUser])
-
-@main("Business Informatics Group Jeopardy! - Registrieren") {
+@(form: Form[models.ComplexUser])@main(Messages("register.button")) {
    <body id="register-page">
-        <a class="accessibility" href="#register">Zur Registrierung springen</a>
+        <a class="accessibility" href="#register">@Messages("register.accessibility_register")</a>
          
       <!-- Header -->
         <header role="banner" aria-labelledby="bannerheading">
@@ -15,7 +13,7 @@
 		<nav role="navigation" aria-labelledby="navheading">
 			<h2 id="navheading" class="accessibility">Navigation</h2>
 			<ul>
-				<li><a class="orangelink navigationlink" id="loginlink" title="Klicke hier um dich anzumelden" href="/" accesskey="l">Anmelden</a></li>
+				<li><a class="orangelink navigationlink" id="loginlink" title="@Messages("jump_login")" href="/" accesskey="l">@Messages("login.login")</a></li>
 			</ul>
 		</nav>
 		
@@ -32,7 +30,7 @@
                     
                     @helper.inputText(form("lastname"), 'id -> "lastname", 'type -> "text", '_label -> Messages("register.lastname"))
                     
-                    @helper.inputText(form("birthdate"), 'id -> "birthdate" ,  '_id -> "birthdate" , '_label -> Messages("register.birthdate"), '_showErrors -> false)
+                    @helper.inputText(form("birthdate"), 'id -> "birthdate" , '_label -> Messages("register.birthdate"), '_showErrors -> false)
                     
 					@for(error <- form("birthdateError").error) {
 					<div id="error_msg_birthdate" class="error" role="alert">@Messages("register.birthdate_error")</div>
@@ -52,7 +50,7 @@
                     <legend>@Messages("register.userinfo")</legend>
                     <label for="avatar_name">@Messages("register.avatar")</label>
                     
-                    <select id="avatar" name="avatar_name">
+                    <select id="avatar_name" name="avatar_name">
                         <option value="aldrich-killian">Aldrich Killian</option>
                         <option value="beetle">Beetle</option>
 						<option value="black-widow">Black Widow</option>
@@ -113,7 +111,7 @@
                     <div id="error_msg_password" class="error" role="alert">@Messages("register.user_exists_error")</div>
                     }
                     
-                    <input class="greenlink formlink" id="registersubmit" type="submit" value=@Messages("register.button") accesskey="s"/>
+                    <input class="greenlink formlink" id="registersubmit" type="submit" value="@Messages("register.button")" accesskey="s"/>
                     <p id="requiredhint">@Messages("register.required")</p>
 				</fieldset>
             }

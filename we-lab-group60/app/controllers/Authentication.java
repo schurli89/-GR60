@@ -51,8 +51,6 @@ public class Authentication extends Controller {
 			return badRequest(authentication.render(form));
 		}
 
-		System.out.println("LOCAL ID: " + user.getId()); // TEST
-		System.out.println("LOG: USER: "+user.toString());
 		session().clear();
 		session("user", username);
 
@@ -62,7 +60,8 @@ public class Authentication extends Controller {
 	}
 
 	public static Result logout() {
-		session().clear();
+		Cache.remove(session("uuid")+"user");
+		session().clear();		
 		return Application.index();
 	}
 

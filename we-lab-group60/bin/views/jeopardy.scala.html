@@ -1,8 +1,6 @@
-@(game: at.ac.tuwien.big.we15.lab2.api.JeopardyGame)
-
-@main("Business Informatics Group Jeopardy! - Fragenauswahl"){
+@(game: at.ac.tuwien.big.we15.lab2.api.JeopardyGame, marvin_question : at.ac.tuwien.big.we15.lab2.api.Question)@main(Messages("questionpool")){
    <body id="selection-page">
-      <a class="accessibility" href="#question-selection">Zur Fragenauswahl springen</a>
+      <a class="accessibility" href="#question-selection">@Messages("question.accessibility_questions")</a>
       <!-- Header -->
       <header role="banner" aria-labelledby="bannerheading">
          <h1 id="bannerheading">
@@ -14,7 +12,7 @@
 		<nav role="navigation" aria-labelledby="navheading">
 			<h2 id="navheading" class="accessibility">Navigation</h2>
 			<ul>
-				<li><a class="orangelink navigationlink" id="logoutlink" title="Klicke hier um dich abzumelden" href="/logout" accesskey="l">Abmelden</a></li>
+				<li><a class="orangelink navigationlink" id="logoutlink" title="@Messages("jump_logout")" href="/logout" accesskey="l">@Messages("logout")</a></li>
 			</ul>
 		</nav>
       
@@ -22,50 +20,51 @@
       <div role="main"> 
          <!-- info -->
          <section id="gameinfo" aria-labelledby="gameinfoinfoheading">
-            <h2 id="gameinfoinfoheading" class="accessibility">Spielinformationen</h2>
+            <h2 id="gameinfoinfoheading" class="accessibility">@Messages("question.gameinfo")</h2>
             <section id="firstplayer" class="playerinfo leader" aria-labelledby="firstplayerheading">
-               <h3 id="firstplayerheading" class="accessibility">F�hrender Spieler</h3>
-               <img class="avatar" src="@{"assets/images/avatar/"+game.getLeader.getUser.getAvatar.getImageHead}" alt="Spieler-Avatar @game.getLeader.getUser.getAvatar.getName" />
+               <h3 id="firstplayerheading" class="accessibility">@Messages("player_leading")</h3>
+               <img class="avatar" src="@{"assets/images/avatar/"+game.getHuman.getAvatar.getImageHead}" alt="@Messages("alt_avatar") @game.getHuman.getAvatar.getName" />
                <table>
                   <tr>
-                     <th class="accessibility">Spielername</th>
-                     <td class="playername">@game.getLeader.getUser.getName</td>
+                     <th class="accessibility">@Messages("username")</th>
+                     <td class="playername">@game.getHuman.getName @Messages("you")</td>
                   </tr>
                   <tr>
-                     <th class="accessibility">Spielerpunkte</th>
-                     <td class="playerpoints">@game.getLeader.getProfit €</td>
+                     <th class="accessibility">@Messages("points")</th>
+                     <td class="playerpoints">@game.getHumanPlayer.getProfit @Messages("currency")</td>
                   </tr>
                </table>
             </section>
             <section id="secondplayer" class="playerinfo" aria-labelledby="secondplayerheading">
-               <h3 id="secondplayerheading" class="accessibility">Zweiter Spieler</h3>
-               <img class="avatar" src="@{"assets/images/avatar/"+game.getSecond.getUser.getAvatar.getImageHead}" alt="Spieler-Avatar @game.getSecond.getUser.getAvatar.getName" />
+               <h3 id="secondplayerheading" class="accessibility">@Messages("player_second")</h3>
+               <img class="avatar" src="@{"assets/images/avatar/"+game.getMarvin.getAvatar.getImageHead}" alt="@Messages("alt_avatar") @game.getMarvin.getAvatar.getName" />
                <table>
                   <tr>
-                     <th class="accessibility">Spielername</th>
-                     <td class="playername">@game.getSecond.getUser.getName</td>
+                     <th class="accessibility">@Messages("username")</th>
+                     <td class="playername">@game.getMarvin.getName</td>
                   </tr>
                   <tr>
-                     <th class="accessibility">Spielerpunkte</th>
-                     <td class="playerpoints"> @game.getSecond.getProfit €</td>
+                     <th class="accessibility">@Messages("points")</th>
+                     <td class="playerpoints"> @game.getMarvinPlayer.getProfit @Messages("currency")</td>
                   </tr>
                </table>
             </section>
-            <p id="round">Fragen: 2 / @game.getMaxQuestions</p>
+            <p id="round">@Messages("fragen"): @game.getHumanPlayer.getAnsweredQuestions.size / @game.getMaxQuestions</p> 
          </section>
 
          <!-- Question -->
          <section id="question-selection" aria-labelledby="questionheading">
             <h2 id="questionheading" class="black accessibility">Jeopardy</h2>
-            <p class="user-info positive-change">Du hast richtig geantwortet: +1000 �</p>
-            <p @if(game.getMarvinPlayer.getLatestProfitChange == null) {class="hidden"} else {@if(game.getMarvinPlayer.getLatestProfitChange < 0) {class="user-info negative-change"} else{class="user-info positive-change"}}>@if(game.getMarvinPlayer.getLatestProfitChange == null) { } else {@if(game.getMarvinPlayer.getLatestProfitChange < 0) {@game.getMarvin.getName hast falsch geantwortet @Messages("currency") @game.getMarvinPlayer.getLatestProfitChange} else {Du hast richtig}}</p>
-            <p class="user-info">Deadpool hat TUWIEN f�r � 1000 gew�hlt.</p>
+            <p @if(game.getHumanPlayer.getLatestProfitChange == null) {class="hidden"} else {@if(game.getHumanPlayer.getLatestProfitChange < 0) {class="user-info negative-change"} else{class="user-info positive-change"}}>@if(game.getHumanPlayer.getLatestProfitChange == null) { } else {@if(game.getHumanPlayer.getLatestProfitChange < 0) {@Messages("negativ_human"): @game.getHumanPlayer.getLatestProfitChange @Messages("currency") } else {@Messages("positive_human"): @game.getHumanPlayer.getLatestProfitChange @Messages("currency") }}</p>
+			<p @if(game.getMarvinPlayer.getLatestProfitChange == null) {class="hidden"} else {@if(game.getMarvinPlayer.getLatestProfitChange < 0) {class="user-info negative-change"} else{class="user-info positive-change"}}>@if(game.getMarvinPlayer.getLatestProfitChange == null) { } else {@if(game.getMarvinPlayer.getLatestProfitChange < 0) {@game.getMarvin.getName @Messages("negativ_marvin"): @game.getMarvinPlayer.getLatestProfitChange @Messages("currency") } else {@game.getMarvin.getName @Messages("positiv_marvin"): @game.getMarvinPlayer.getLatestProfitChange @Messages("currency")}}</p>
+            <p @if(marvin_question == null) {class="hidden"} else {class="user-info"}>@if(marvin_question != null){@game.getMarvin.getName @Messages("has") @marvin_question.getCategory.getName @Messages("for") @marvin_question.getValue @Messages("chosen")} else {} </p>
+            
          	@helper.form(action = routes.Jeopardy.loadQuestion()) {
                <fieldset>
-               <legend class="accessibility">Fragenauswahl</legend>
+               <legend class="accessibility">@Messages("questionpool")</legend>
                @for((category) <- game.getCategories){
-               <section class="questioncategory" aria-labelledby="tvheading">
-                  <h3 id="tvheading" class="tile category-title"><span class="accessibility">Kategorie: </span>@category.getName </h3>
+               <section class="questioncategory" aria-labelledby="@{category.getName.toLowerCase.replace(" ", "") + "_heading"}">
+                  <h3 id="@{category.getName.toLowerCase.replace(" ", "") + "_heading"}" class="tile category-title"><span class="accessibility">@Messages("category") </span>@category.getName </h3>
                   @for(question <- category.getQuestions){
                   <ol class="category_questions">
                      <li><input name="question_selection" id="@question.getId" value="@question.getId" type="radio" @if(game.hasBeenChosen(question)) {disabled="disabled"} /><label class="tile clickable" for="@question.getId">@question.getValue</label></li>
@@ -74,15 +73,37 @@
                </section>
                }
                </fieldset>               
-               <input class="greenlink formlink clickable" name="question_submit" id="next" type="submit" value="wählen" accesskey="s" />
+               <input class="greenlink formlink clickable" name="question_submit" id="next" type="submit" value="@Messages("choose")" accesskey="s" />
+        }
          </section>
-         }
+         
          <section id="lastgame" aria-labelledby="lastgameheading">
-            <h2 id="lastgameheading" class="accessibility">Letztes Spielinfo</h2>
-            <p>Letztes Spiel: Nie</p>
+            <h2 id="lastgameheading" class="accessibility">@Messages("last_game_info")</h2>
+            <p>@Messages("last_game") @Messages("never")</p>
          </section>
 		</div>
 		
       <!-- footer -->
       <footer role="contentinfo">(C) 2015 BIG Jeopardy!</footer>
+      <script type="text/javascript">
+            //<![CDATA[
+            
+            // initialize time
+            $(document).ready(function() {
+                // set last game
+                if(supportsLocalStorage()) {
+	                var lastGameMillis = parseInt(localStorage['lastGame'])
+	                if(!isNaN(parseInt(localStorage['lastGame']))){
+	                    var lastGame = new Date(lastGameMillis);
+	                	$("#lastgame p").replaceWith('<p>@Messages("last_game"): <time datetime="'
+	                			+ lastGame.toUTCString()
+	                			+ '">'
+	                			+ lastGame.toLocaleString()
+	                			+ '</time></p>')
+	                }
+            	}
+            });            
+            //]]>
+        </script>
+      </body>
 }

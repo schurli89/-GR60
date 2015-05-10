@@ -31,11 +31,7 @@ public class Registration extends Controller {
 	@Transactional
 	public static Result register() {
 		Form<ComplexUser> form = signupForm.bindFromRequest();
-		
-		System.out.println("LOG: New Registration request");
-		System.out.println("LOG GENDER: " + form.field("gender").value());
-		System.out.println("LOG avatar: " + form.field("avatar_name").value());
-		
+				
 		if(!form.field("birthdate").valueOr("").isEmpty()){
 			if (!form.field("birthdate").value().matches(datePattern)){
 				form.reject("birthdateError", "");
@@ -51,33 +47,22 @@ public class Registration extends Controller {
 		}
 		
 		
-		if(form.hasErrors()) {
-			
-			for(Entry<String, List<ValidationError>> e : form.errors().entrySet()){
-				System.out.println("LOG has errors: " + e.getKey() + " , " + e.getValue());
-			}
+		if(form.hasErrors()) {			
 			return badRequest(registration.render(form));
         } else{
         	
         	ComplexUser user = form.get();
-        	System.out.println("LOG form.get: " + user);
         	String queryString = "SELECT u FROM ComplexUser u where u.name = '" + user.getName() + "'";
     		TypedQuery<ComplexUser> query = play.db.jpa.JPA.em().createQuery(queryString, ComplexUser.class);
         	
     		if(!query.getResultList().isEmpty()){
-    			form.reject("userExist", "");
-    			
-    			System.out.println("LOG reject" + query.getResultList().get(0));
-    			
-    			
+    			form.reject("userExist", "");				
     			return badRequest(registration.render(form));
     		}
     		else{
     			JPA.em().persist(user);
-    			System.out.println("LOG persist: " + user);
     		}
         }
-		System.out.println("LOG: redirect to authentication");
 		return ok(authentication.render(signupForm));
 		
 	}

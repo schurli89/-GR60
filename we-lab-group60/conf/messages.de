@@ -1,5 +1,8 @@
+file=data.de.json
 you=(DU)
-logout=Klicke hier um dich abzumelden
+jump_logout=Klicke hier um dich abzumelden
+jump_login=Klicke hier um dich anzumelden
+logout=Abmelden
 currency=€
 alt_avatar=Spieler-Avatar
 player_leading=Führender Spieler
@@ -8,6 +11,20 @@ username=Spielername
 points=Spielerpunkte
 numOfquestion=Frage
 for=für
+has=hat
+chosen=gewählt
+choose=wählen
+fragen=Fragen
+last_game=Letztes Spiel:
+never=Nie
+last_game_info=Letztes Spielinfo
+
+
+
+positive_human=Du hast richtig geantwortet
+negativ_human=Du hast falsch geantwortet
+positiv_marvin=hat richtig geantwortet
+negativ_marvin=hat falsch geantwortet
 
 register.personal=Persönliche Daten
 register.firstname=Vorname: 
@@ -26,6 +43,7 @@ register.password_error=Das Passwort muss mindestens 4 Zeichen und darf maximal 
 register.button=Registrieren
 register.required=Mit '*' gekennzeichnete Felder sind Pflichtfelder.
 register.user_exists_error=User existiert bereits.
+register.accessibility_register=Zur Registrierung springen
 
 login.hint=Nicht registriert?
 login.link=Klicke hier um dich zu registrieren
@@ -41,13 +59,16 @@ login.button=Anmelden
 login.accessibilty_login=Zum Login springen
 login.accessibilty_register=Klicke hier um dich zu registrieren
 
+questionpool=Fragenauswahl
+category=Kategorie:
 question.accessibility_questions=Zur Fragenauswahl springen
 question.gameinfo=Spielinformationen
 question.timeleft=Verbleibende Zeit
 questionpage=Fragenbeantwortung
 
-
+winnerannounce=Gewinnanzeige
 winner.info=Gewinnerinformationen
+winner.accessibility_winner=Zur Gewinnanzeige springen
 winner=Gewinner
 loser=Verlierer
 new_game=Neues Spiel

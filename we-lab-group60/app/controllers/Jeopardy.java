@@ -2,62 +2,65 @@ package controllers;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
-import javax.persistence.TypedQuery;
-
 import models.ComplexUser;
+import play.cache.Cache;
+import play.data.DynamicForm;
+import play.data.Form;
+import play.i18n.Messages;
+import play.mvc.Controller;
+import play.mvc.Result;
+import views.html.jeopardy;
+import views.html.question;
+import views.html.winner;
 import at.ac.tuwien.big.we15.lab2.api.Answer;
 import at.ac.tuwien.big.we15.lab2.api.JeopardyFactory;
 import at.ac.tuwien.big.we15.lab2.api.JeopardyGame;
 import at.ac.tuwien.big.we15.lab2.api.Question;
 import at.ac.tuwien.big.we15.lab2.api.impl.PlayJeopardyFactory;
 import at.ac.tuwien.big.we15.lab2.api.impl.SimpleQuestion;
-import play.cache.Cache;
-import play.data.DynamicForm;
-import play.data.Form;
-import play.db.jpa.Transactional;
-import play.mvc.*;
-import views.html.jeopardy;
-import views.html.question;
-import views.html.winner;
 
 public class Jeopardy extends Controller{
 
-	@Transactional
+
 	public static Result start(ComplexUser user){
-			JeopardyFactory factory= new PlayJeopardyFactory("data.de.json");
+			JeopardyFactory factory= new PlayJeopardyFactory(Messages.get("file"));
 			JeopardyGame game= factory.createGame(user);
 			String uuid = session("uuid");
 			Cache.set(uuid+"game", game);
-			return ok(jeopardy.render(game));
+			return ok(jeopardy.render(game, game.getMarvinPlayer().getChosenQuestion()));
 	}
 	
+	
+	public static Result newGame(){
+		String uuid = session("uuid");
+		ComplexUser user = (ComplexUser) Cache.get(uuid+"user");
+		
+		JeopardyFactory factory= new PlayJeopardyFactory(Messages.get("file"));
+		JeopardyGame game= factory.createGame(user);
+		
+		Cache.set(uuid+"game", game);
+		return ok(jeopardy.render(game, game.getMarvinPlayer().getChosenQuestion()));
+	}
+
 	public static Result loadQuestion()	{
 		String uuid = session("uuid");
 		JeopardyGame game = (JeopardyGame) Cache.get(uuid+"game");
 		
 		DynamicForm form = Form.form().bindFromRequest();
 		String questionId=form.get("question_selection");
-		System.out.println("LOG QUESTION: "+questionId);
+		
+		if(questionId == null){
+			return badRequest(jeopardy.render(game, game.getMarvinPlayer().getChosenQuestion()));
+		}
+		
 		game.chooseHumanQuestion(Integer.valueOf(questionId));
 		SimpleQuestion quest=(SimpleQuestion) game.getHumanPlayer().getChosenQuestion();
-		System.out.println("LOG CHOOSEN QUESTION "+quest.getText());
-		
+			
 		Cache.set(uuid+"game", game);
 		return ok(question.render(game, quest));
-	}
-	
-	public static Result answerQuestion(){
-		String uuid = session("uuid");
-		JeopardyGame game = (JeopardyGame) Cache.get(uuid+"game");
-		
-		DynamicForm form= Form.form().bindFromRequest();
-		System.out.println("LOG answer Question ");
-
-		return ok(jeopardy.render(game));
 	}
 	
 	public static Result retrieveAnswers(){
@@ -78,6 +81,7 @@ public class Jeopardy extends Controller{
 			answerIds.add(Integer.parseInt(iterator.next()));
 		}
 		
+		Question question = game.getMarvinPlayer().getChosenQuestion();
 		//answer
 		game.answerHumanQuestion(answerIds);
 		Cache.set(uuid+"game", game);
@@ -85,7 +89,7 @@ public class Jeopardy extends Controller{
 		    return ok(winner.render(game));
 		}
 		else{
-		    return ok(jeopardy.render(game));
+		    return ok(jeopardy.render(game, question));
 		}
 	}
 }

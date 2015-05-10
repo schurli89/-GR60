@@ -1,5 +1,8 @@
+file=data.en.json
 you=(YOU)
-logout= Click here to logout
+jump_logout= Click here to logout
+jump_login=Click here to login
+logout=Logout
 currency=$
 alt_avatar=Player-Avatar
 player_leading=Leading Player
@@ -8,7 +11,18 @@ username=Username
 points=Playerpoints
 numOfquestion=Question
 for = for
+has=has chosen
+chosen= 
+choose=choose
+fragen=Questions
+last_game=Last game:
+never=never
+last_game_info=Last game info
 
+positive_change=You answered correctly
+negativ_change=You answered wrong
+positiv_marvin=answered correctly
+negativ_marvin=answered wrong
 
 register.personal=Personal Data
 register.firstname=Firstname: 
@@ -27,6 +41,7 @@ register.password_error=The password has to be between 4 and 8 characters long.
 register.button=Register
 register.required=Fields with * are mandatory fields.
 register.user_exists_error=User already exists.
+register.accessibility_register=Jump to registration
 
 login.hint=Registered?
 login.link=Click to register
@@ -42,12 +57,16 @@ login.button=Login
 login.accessibilty_login=To the login page
 login.accessibilty_register=Click for registration
 
+questionpool=Choose Question
+category=Category:
 question.accessibility_questions=Jump to question selection
 question.gameinfo=Game info
 question.timeleft=Time left
 questionpage=Question answering
 
+winnerannounce=Winner Announcement
 winner.info=Winnerinformation
 winner=Winner
+winner.accessibility_winner=Jump to Winner announcement
 loser=Loser
 new_game=New game

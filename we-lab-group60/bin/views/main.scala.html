@@ -1,13 +1,12 @@
-@(title: String)(content: Html)
+@(title: String)(content: Html)<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
     <head>
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>@title</title>
-        <link rel="shortcut icon" type="image/png" href='@routes.Assets.at("images/favicon.png")'>
-        <link rel="stylesheet" type="text/css" href='@routes.Assets.at("stylesheets/base.css")' />
-        <link rel="stylesheet" type="text/css" href='@routes.Assets.at("stylesheets/screen.css")' />
+        <title>Business Informatics Group Jeopardy! - @title</title>
+        <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/base.css")" />
+        <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/screen.css")" />
         <script src="@routes.Assets.at("javascripts/framework.js")" type="text/javascript"></script>
         <script src="@routes.Assets.at("javascripts/jquery.js")" type="text/javascript"></script>
     </head>

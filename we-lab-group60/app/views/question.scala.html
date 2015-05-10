@@ -1,5 +1,4 @@
-@(game: at.ac.tuwien.big.we15.lab2.api.JeopardyGame, question: at.ac.tuwien.big.we15.lab2.api.impl.SimpleQuestion)
-@main("Business Informatics Group Jeopardy! - Fragenbeantwortung"){
+@(game: at.ac.tuwien.big.we15.lab2.api.JeopardyGame, question: at.ac.tuwien.big.we15.lab2.api.impl.SimpleQuestion)@main(Messages("questionpage")){
     <body id="question-page">
       <a class="accessibility" href="#questions">@Messages("question.accessibility_questions")</a>
       <!-- Header -->
@@ -24,7 +23,7 @@
             <h2 id="gameinfoinfoheading" class="accessibility">@Messages("question.gameinfo")</h2>
             <section id="firstplayer" class="playerinfo leader" aria-labelledby="firstplayerheading">
                <h3 id="firstplayerheading" class="accessibility">@Messages("player_leading")</h3>
-               <img class="avatar" src="@{"assets/images/avatar/"+game.getLeader.getUser.getAvatar.getImageHead}" alt="@{Messages("alt_avatar")+ game.getLeader.getUser.getAvatar.getName}" />
+               <img class="avatar" src="@{"assets/images/avatar/"+game.getHuman.getAvatar.getImageHead}" alt="@{Messages("alt_avatar")+ game.getHuman.getAvatar.getName}" />
                <table>
                   <tr>
                      <th class="accessibility">@Messages("question.username")</th>
@@ -32,21 +31,21 @@
                   </tr>
                   <tr>
                      <th class="accessibility">@Messages("points")</th>
-                     <td class="playerpoints">@game.getLeader.getProfit @Messages("currency")</td>
+                     <td class="playerpoints">@game.getHumanPlayer.getProfit @Messages("currency")</td>
                   </tr>
                </table>
             </section>
             <section id="secondplayer" class="playerinfo" aria-labelledby="secondplayerheading">
                <h3 id="secondplayerheading" class="accessibility">@Messages("player_second")</h3>
-               <img class="avatar" src="@{"assets/images/avatar/"+game.getSecond.getUser.getAvatar.getImageHead}" alt="@{Messages("alt_avatar")+game.getSecond.getUser.getAvatar.getName}" />
+               <img class="avatar" src="@{"assets/images/avatar/"+game.getMarvin.getAvatar.getImageHead}" alt="@{Messages("alt_avatar")+game.getMarvin.getAvatar.getName}" />
                <table>
                   <tr>
                      <th class="accessibility">@Messages("username")</th>
-                     <td class="playername">@game.getSecond.getUser.getName</td>
+                     <td class="playername">@game.getMarvin.getName</td>
                   </tr>
                   <tr>
                      <th class="accessibility">@Messages("points")</th>
-                     <td class="playerpoints">@game.getSecond.getProfit @Messages("currency")</td>
+                     <td class="playerpoints">@game.getMarvinPlayer.getProfit @Messages("currency")</td>
                   </tr>
                </table>
             </section>
