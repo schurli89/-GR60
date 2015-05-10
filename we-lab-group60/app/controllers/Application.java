@@ -1,9 +1,10 @@
 package controllers;
 
-import play.data.Form;
-import play.mvc.*;
-import views.html.*;
 import models.ComplexUser;
+import play.data.Form;
+import play.mvc.Controller;
+import play.mvc.Result;
+import views.html.authentication;
 
 public class Application extends Controller {
 

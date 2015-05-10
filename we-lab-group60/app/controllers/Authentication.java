@@ -6,9 +6,9 @@ import models.ComplexUser;
 import play.cache.Cache;
 import play.data.Form;
 import play.db.jpa.Transactional;
-import play.mvc.Security;
 import play.mvc.Controller;
 import play.mvc.Result;
+import play.mvc.Security;
 import views.html.authentication;
 
 public class Authentication extends Controller {

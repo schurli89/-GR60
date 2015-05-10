@@ -16,7 +16,6 @@ import play.mvc.Security;
 import views.html.jeopardy;
 import views.html.question;
 import views.html.winner;
-import at.ac.tuwien.big.we15.lab2.api.Answer;
 import at.ac.tuwien.big.we15.lab2.api.JeopardyFactory;
 import at.ac.tuwien.big.we15.lab2.api.JeopardyGame;
 import at.ac.tuwien.big.we15.lab2.api.Question;
@@ -77,7 +76,6 @@ public class Jeopardy extends Controller{
 		Iterator<String> iterator = ids.iterator();
 		iterator.next();
 		iterator.remove();
-		List<Answer> correctAnswers = game.getHumanPlayer().getChosenQuestion().getCorrectAnswers();
 		List<Integer> answerIds = new ArrayList<Integer>();
 		while(iterator.hasNext()){
 			//System.out.println("form.data: " + s);	

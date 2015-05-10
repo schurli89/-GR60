@@ -1,13 +1,9 @@
 package controllers;
 
-import java.util.List;
-import java.util.Map.Entry;
-
 import javax.persistence.TypedQuery;
 
 import models.ComplexUser;
 import play.data.Form;
-import play.data.validation.ValidationError;
 import play.db.jpa.JPA;
 import play.db.jpa.Transactional;
 import play.mvc.Controller;
@@ -38,7 +34,7 @@ public class Registration extends Controller {
 			}
 		}
 		
-		if (!form.field("name").value().matches(".{4,8}")){
+		if (!form.field("username").value().matches(".{4,8}")){
 			form.reject("usernameError", "");
 		}
 		
@@ -60,6 +56,7 @@ public class Registration extends Controller {
     			return badRequest(registration.render(form));
     		}
     		else{
+    			System.out.println("LOG "+user);
     			JPA.em().persist(user);
     		}
         }

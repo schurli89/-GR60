@@ -30,7 +30,8 @@
                     
                     @helper.inputText(form("lastname"), 'id -> "lastname", 'type -> "text", '_label -> Messages("register.lastname"))
                     
-                    @helper.inputText(form("birthdate"), 'id -> "birthdate" , '_label -> Messages("register.birthdate"), '_showErrors -> false)
+                    <label>@Messages("register.birthdate")</label>
+                    <input type="date" name="birthdate" id="birthdate" />
                     
 					@for(error <- form("birthdateError").error) {
 					<div id="error_msg_birthdate" class="error" role="alert">@Messages("register.birthdate_error")</div>

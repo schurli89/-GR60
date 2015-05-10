@@ -1,12 +1,11 @@
 package controllers;
 
-import play.mvc.*;
-
-import views.html.authentication;
 import models.ComplexUser;
-import play.cache.Cache;
-import play.data.DynamicForm;
 import play.data.Form;
+import play.mvc.Http;
+import play.mvc.Result;
+import play.mvc.Security;
+import views.html.authentication;
 
 public class JeopardyAuthenticator extends Security.Authenticator {
 	

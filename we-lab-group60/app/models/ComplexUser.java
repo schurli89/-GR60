@@ -1,14 +1,15 @@
 package models;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import play.data.format.*;
 
+import play.data.validation.Constraints;
 import at.ac.tuwien.big.we15.lab2.api.Avatar;
-import play.data.validation.*;
 
 @Entity
 public class ComplexUser implements at.ac.tuwien.big.we15.lab2.api.User {
@@ -21,7 +22,8 @@ public class ComplexUser implements at.ac.tuwien.big.we15.lab2.api.User {
 	private Avatar avatar;
 	private String avatar_name;
 	private String lastname;
-	private String birthdate;
+	@Formats.DateTime(pattern="dd.MM.yyyy")
+	private Date birthdate;
 
 	private String gender;
 
@@ -39,18 +41,7 @@ public class ComplexUser implements at.ac.tuwien.big.we15.lab2.api.User {
 	public ComplexUser() {
 	};
 
-	/*public ComplexUser(String firstname, String lastname, Date birthdate,
-			String gender, String username, String password) {
-		this.firstname = firstname;
-		this.lastname = lastname;
-		this.birthdate = birthdate;
-		this.gender = gender;
-		this.name = username;
-		this.password = password;
-		
-	}*/
-
-	public ComplexUser(String firstname, String lastname, String birthdate,
+	public ComplexUser(String firstname, String lastname, Date birthdate,
 			String gender, String username, String password, String avatar_name) {
 		System.out.println("USER CONSTRUCTOR");
 		this.firstname = firstname;
@@ -88,11 +79,11 @@ public class ComplexUser implements at.ac.tuwien.big.we15.lab2.api.User {
 		this.lastname = surname;
 	}
 
-	public String getBirthdate() {
+	public Date getBirthdate() {
 		return birthdate;
 	}
 
-	public void setBirthdate(String birthdate) {
+	public void setBirthdate(Date birthdate) {
 		this.birthdate = birthdate;
 	}
 
@@ -116,7 +107,7 @@ public class ComplexUser implements at.ac.tuwien.big.we15.lab2.api.User {
 		this.avatar= Avatar.getAvatar(avatar_name);
 
 		
-		return "Username: "+ username + "\nPasswort: " + password + "\nGeschlecht: " + gender + "\nAvatar: "+avatar.getName();
+		return "Username: "+ username + "\nPasswort: " + password + "\nGeschlecht: " + gender + "\nAvatar: "+avatar.getName() +"\n Birthday "+birthdate;
 		
 	}
 
