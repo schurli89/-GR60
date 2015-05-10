@@ -19,9 +19,9 @@ public class Authentication extends Controller {
 
 		Form<ComplexUser> form = user.bindFromRequest();
 
-		String username = form.field("name").value().trim();
+		String username = form.field("username").value().trim();
 		String password = form.field("password").value().trim();
-
+System.out.println("username: " + username);
 		if (!username.matches(".{4,8}")) {
 			form.reject("usernameError", "Benutzername ungültig.");
 		}
@@ -34,7 +34,7 @@ public class Authentication extends Controller {
 			return badRequest(authentication.render(form));
 		}
 
-		String queryString = "SELECT u FROM ComplexUser u where u.name = '"
+		String queryString = "SELECT u FROM ComplexUser u where u.username = '"
 				+ username + "' and u.password = '" + password + "'";
 		TypedQuery<ComplexUser> query = play.db.jpa.JPA.em().createQuery(queryString,
 				ComplexUser.class);
@@ -55,7 +55,7 @@ public class Authentication extends Controller {
 		session("user", username);
 
 		initCache(user);
-		
+		System.out.println("jeopard start");
 		return Jeopardy.start(user);
 	}
 

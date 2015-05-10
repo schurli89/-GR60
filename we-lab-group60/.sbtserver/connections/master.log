@@ -1,13 +1,13 @@
-New log file opened at Sun May 10 13:44:15 CEST 2015 by 5060@Julia
-Taking next connection to: 56532
-New client attempting to connect on port: 56533-56532
-  Address = /10.0.0.3:56532
-This client on port 56533 has uuid 68012932-fb28-4485-8c33-1927a77aad45 configName activator humanReadableName Activator protocolVersion 1 featureTags Vector()
-Connected Clients: activator-68012932-fb28-4485-8c33-1927a77aad45
-Taking next connection to: 56532
-New client attempting to connect on port: 56534-56532
-  Address = /10.0.0.3:56532
-Handshake exception on socket: 56534
+New log file opened at Sun May 10 14:36:30 CEST 2015 by 10960@Julia
+Taking next connection to: 57121
+New client attempting to connect on port: 57122-57121
+  Address = /10.0.0.3:57121
+This client on port 57122 has uuid 0637fb3f-4def-4860-a270-5f330386646f configName activator humanReadableName Activator protocolVersion 1 featureTags Vector()
+Connected Clients: activator-0637fb3f-4def-4860-a270-5f330386646f
+Taking next connection to: 57121
+New client attempting to connect on port: 57123-57121
+  Address = /10.0.0.3:57121
+Handshake exception on socket: 57123
 sbt.impl.ipc.HandshakeException: Unable to perform handshake
 	at sbt.impl.ipc.Peer.handshake(IPC.scala:46)
 	at sbt.impl.ipc.MultiClientServer.<init>(IPC.scala:150)
@@ -23,15 +23,15 @@ Caused by: java.net.SocketException: Software caused connection abort: recv fail
 	at sbt.impl.ipc.Peer.receive(IPC.scala:95)
 	at sbt.impl.ipc.Peer.handshake(IPC.scala:49)
 	... 2 more
-Taking next connection to: 56532
-New client attempting to connect on port: 56535-56532
-  Address = /10.0.0.3:56532
-This client on port 56535 has uuid 9b7ef34f-31c8-4ca2-8d62-0fae3ae4f040 configName activator humanReadableName Activator protocolVersion 1 featureTags Vector()
-Connected Clients: activator-68012932-fb28-4485-8c33-1927a77aad45, activator-9b7ef34f-31c8-4ca2-8d62-0fae3ae4f040
-Taking next connection to: 56532
-New client attempting to connect on port: 56539-56532
-  Address = /10.0.0.3:56532
-Handshake exception on socket: 56539
+Taking next connection to: 57121
+New client attempting to connect on port: 57124-57121
+  Address = /10.0.0.3:57121
+This client on port 57124 has uuid ab9231df-3cf3-4f98-a1c4-69276e6279df configName activator humanReadableName Activator protocolVersion 1 featureTags Vector()
+Connected Clients: activator-0637fb3f-4def-4860-a270-5f330386646f, activator-ab9231df-3cf3-4f98-a1c4-69276e6279df
+Taking next connection to: 57121
+New client attempting to connect on port: 57129-57121
+  Address = /10.0.0.3:57121
+Handshake exception on socket: 57129
 sbt.impl.ipc.HandshakeException: Unable to perform handshake
 	at sbt.impl.ipc.Peer.handshake(IPC.scala:46)
 	at sbt.impl.ipc.MultiClientServer.<init>(IPC.scala:150)
@@ -47,15 +47,12 @@ Caused by: java.net.SocketException: Software caused connection abort: recv fail
 	at sbt.impl.ipc.Peer.receive(IPC.scala:95)
 	at sbt.impl.ipc.Peer.handshake(IPC.scala:49)
 	... 2 more
-Taking next connection to: 56532
-New client attempting to connect on port: 56540-56532
-  Address = /10.0.0.3:56532
-This client on port 56540 has uuid 21a826d1-81b1-476b-ae21-77ca2bd5540c configName play-fork-run humanReadableName Play Fork Run protocolVersion 1 featureTags Vector()
-Connected Clients: activator-68012932-fb28-4485-8c33-1927a77aad45, activator-9b7ef34f-31c8-4ca2-8d62-0fae3ae4f040, play-fork-run-21a826d1-81b1-476b-ae21-77ca2bd5540c
-Taking next connection to: 56532
+Taking next connection to: 57121
+New client attempting to connect on port: 57130-57121
+  Address = /10.0.0.3:57121
+This client on port 57130 has uuid c6a21658-9915-45b7-860f-611ade2891df configName play-fork-run humanReadableName Play Fork Run protocolVersion 1 featureTags Vector()
+Connected Clients: activator-ab9231df-3cf3-4f98-a1c4-69276e6279df, play-fork-run-c6a21658-9915-45b7-860f-611ade2891df
+Taking next connection to: 57121
 Checking to see if clients are empty...
 We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 56532
-Checking to see if clients are empty...
-We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 56532
+Taking next connection to: 57121

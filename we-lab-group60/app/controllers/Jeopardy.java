@@ -50,7 +50,7 @@ public class Jeopardy extends Controller{
 		JeopardyGame game = (JeopardyGame) Cache.get(uuid+"game");
 		
 		DynamicForm form = Form.form().bindFromRequest();
-		String questionId=form.get("question_selection");
+		String questionId=form.data().get("question_selection");
 		
 		if(questionId == null){
 			return badRequest(jeopardy.render(game, game.getMarvinPlayer().getChosenQuestion()));

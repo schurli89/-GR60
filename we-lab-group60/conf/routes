@@ -15,7 +15,7 @@ GET		/logout								controllers.Authentication.logout()
 
 
 #Question
-GET 	/newgame								controllers.Jeopardy.newGame()
+POST 	/newgame								controllers.Jeopardy.newGame()
 POST    /loadQuestion							controllers.Jeopardy.loadQuestion()
 
 POST	/submitAnswer							controllers.Jeopardy.retrieveAnswers()

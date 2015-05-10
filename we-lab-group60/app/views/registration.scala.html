@@ -13,7 +13,7 @@
 		<nav role="navigation" aria-labelledby="navheading">
 			<h2 id="navheading" class="accessibility">Navigation</h2>
 			<ul>
-				<li><a class="orangelink navigationlink" id="loginlink" title="@Messages("jump_login")" href="/" accesskey="l">@Messages("login.login")</a></li>
+				<li><a class="orangelink navigationlink" id="loginlink" title="@Messages("jump_login")" href="/" accesskey="l">@Messages("login.button")</a></li>
 			</ul>
 		</nav>
 		
@@ -48,9 +48,9 @@
                 </fieldset>
                 <fieldset>
                     <legend>@Messages("register.userinfo")</legend>
-                    <label for="avatar_name">@Messages("register.avatar")</label>
+                    <label for="avatar">@Messages("register.avatar")</label>
                     
-                    <select id="avatar_name" name="avatar_name">
+                    <select id="avatar" name="avatar_name">
                         <option value="aldrich-killian">Aldrich Killian</option>
                         <option value="beetle">Beetle</option>
 						<option value="black-widow">Black Widow</option>
@@ -95,7 +95,7 @@
 						<option value="wolverine">Wolverine</option>
                     </select>			
 			
-                    @helper.inputText(form("name"), 'id -> "name", 'type -> "text", '_label -> Messages("register.username"), 'required -> "required", '_showConstraints -> false, '_showErrors -> false)
+                    @helper.inputText(form("username"), 'id -> "username", 'type -> "text", '_label -> Messages("register.username"), 'required -> "required", '_showConstraints -> false, '_showErrors -> false)
                    	
                     @for(error <- form("usernameError").error) {
                     <div id="error_msg_username" class="error" role="alert">@Messages("register.username_error")</div>
@@ -111,7 +111,7 @@
                     <div id="error_msg_password" class="error" role="alert">@Messages("register.user_exists_error")</div>
                     }
                     
-                    <input class="greenlink formlink" id="registersubmit" type="submit" value="@Messages("register.button")" accesskey="s"/>
+                    <input class="greenlink formlink" type="submit" value="@Messages("register.button")" accesskey="s"/>
                     <p id="requiredhint">@Messages("register.required")</p>
 				</fieldset>
             }

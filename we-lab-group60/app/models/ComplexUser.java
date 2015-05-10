@@ -28,7 +28,7 @@ public class ComplexUser implements at.ac.tuwien.big.we15.lab2.api.User {
 	@Constraints.Required
 	@Constraints.MinLength(4)
 	@Constraints.MaxLength(8)
-	private String name;
+	private String username;
 
 	@Constraints.Required
 	@Constraints.MinLength(4)
@@ -57,7 +57,7 @@ public class ComplexUser implements at.ac.tuwien.big.we15.lab2.api.User {
 		this.lastname = lastname;
 		this.birthdate = birthdate;
 		this.gender = gender;
-		this.name = username;
+		this.username = username;
 		this.password = password;
 		this.avatar_name=avatar_name;
 		this.avatar= Avatar.getAvatar(avatar_name);
@@ -116,16 +116,16 @@ public class ComplexUser implements at.ac.tuwien.big.we15.lab2.api.User {
 		this.avatar= Avatar.getAvatar(avatar_name);
 
 		
-		return "Username: "+ name + "\nPasswort: " + password + "\nGeschlecht: " + gender + "\nAvatar: "+avatar.getName();
+		return "Username: "+ username + "\nPasswort: " + password + "\nGeschlecht: " + gender + "\nAvatar: "+avatar.getName();
 		
 	}
 
-	public String getName() {
-		return this.name;
+	public String getUsername() {
+		return this.username;
 	}
 
-	public void setName(String name) {
-		this.name=name;
+	public void setUsername(String username) {
+		this.username=username;
 		
 	}
 	
@@ -147,6 +147,17 @@ public class ComplexUser implements at.ac.tuwien.big.we15.lab2.api.User {
 		this.avatar= Avatar.getAvatar(avatar_name);
 
 		this.avatar_name = avatar_name;
+	}
+
+	@Override
+	public String getName() {
+		return this.username;
+	}
+
+	@Override
+	public void setName(String name) {
+		this.username = name;
+		
 	}
 	
 

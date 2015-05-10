@@ -59,15 +59,15 @@
 			<p @if(game.getMarvinPlayer.getLatestProfitChange == null) {class="hidden"} else {@if(game.getMarvinPlayer.getLatestProfitChange < 0) {class="user-info negative-change"} else{class="user-info positive-change"}}>@if(game.getMarvinPlayer.getLatestProfitChange == null) { } else {@if(game.getMarvinPlayer.getLatestProfitChange < 0) {@game.getMarvin.getName @Messages("negativ_marvin"): @game.getMarvinPlayer.getLatestProfitChange @Messages("currency") } else {@game.getMarvin.getName @Messages("positiv_marvin"): @game.getMarvinPlayer.getLatestProfitChange @Messages("currency")}}</p>
             <p @if(marvin_question == null) {class="hidden"} else {class="user-info"}>@if(marvin_question != null){@game.getMarvin.getName @Messages("has") @marvin_question.getCategory.getName @Messages("for") @marvin_question.getValue @Messages("chosen")} else {} </p>
             
-         	@helper.form(action = routes.Jeopardy.loadQuestion()) {
+         	@helper.form(action = routes.Jeopardy.loadQuestion(), 'id->"questionform") {
                <fieldset>
                <legend class="accessibility">@Messages("questionpool")</legend>
                @for((category) <- game.getCategories){
-               <section class="questioncategory" aria-labelledby="@{category.getName.toLowerCase.replace(" ", "") + "_heading"}">
-                  <h3 id="@{category.getName.toLowerCase.replace(" ", "") + "_heading"}" class="tile category-title"><span class="accessibility">@Messages("category") </span>@category.getName </h3>
+               <section class="questioncategory" aria-labelledby="@{category.getName.toLowerCase.replace(" ", "") + "heading"}">
+                  <h3 id="@{category.getName.toLowerCase.replace(" ", "") + "heading"}" class="tile category-title"><span class="accessibility">@Messages("category") </span>@category.getName </h3>
                   @for(question <- category.getQuestions){
                   <ol class="category_questions">
-                     <li><input name="question_selection" id="@question.getId" value="@question.getId" type="radio" @if(game.hasBeenChosen(question)) {disabled="disabled"} /><label class="tile clickable" for="@question.getId">@question.getValue</label></li>
+                     <li><input name="question_selection" id="@{"question_" +question.getId}" value="@question.getId" type="radio" @if(game.hasBeenChosen(question)) {disabled="disabled"} /><label class="tile clickable" for="@{"question_" +question.getId}">@question.getValue</label></li>
                     </ol>
                     }
                </section>

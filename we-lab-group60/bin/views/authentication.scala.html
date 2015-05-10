@@ -18,7 +18,7 @@
          		@helper.form(action = routes.Authentication.login()) {
                     <fieldset>
                         <legend id="logindata">@Messages("login.login")</legend>
-                         @helper.inputText(form("name"), 'id -> "name", 'type -> "text", '_label -> Messages("login.username"), '_showConstraints -> false, '_showErrors -> false)
+                         @helper.inputText(form("username"), 'id -> "username", 'type -> "text", '_label -> Messages("login.username"), '_showConstraints -> false, '_showErrors -> false)
                     	@for(error <- form("usernameError").error) {
                     	<div id="error_msg_username" class="error" role="alert">@Messages("login.username_error")</div>
                     	}
