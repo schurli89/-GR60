@@ -50,7 +50,7 @@
                   </tr>
                </table>
             </section>
-            <p id="round">@Messages("numOfquestion"): ? / 10</p>
+            <p id="round">@Messages("numOfquestion"): @game.getHumanPlayer.getAnsweredQuestions.size / @game.getMaxQuestions </p>
          </section>
             
       <!-- Question -->

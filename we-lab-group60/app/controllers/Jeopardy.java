@@ -81,6 +81,11 @@ public class Jeopardy extends Controller{
 		//answer
 		game.answerHumanQuestion(answerIds);
 		Cache.set(uuid+"game", game);
-		return ok(jeopardy.render(game));
+		if(game.getHumanPlayer().getAnsweredQuestions().size() == game.getMaxQuestions()){
+		    return ok(winner.render(game));
+		}
+		else{
+		    return ok(jeopardy.render(game));
+		}
 	}
 }

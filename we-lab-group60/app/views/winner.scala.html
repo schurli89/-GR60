@@ -22,10 +22,10 @@
       <div role="main">
          <section id="gameinfo" aria-labelledby="winnerinfoheading">
             <h2 id="winnerinfoheading" class="accessibility">@Messages("winner.info")</h2>
-            <p class="user-info positive-change">Du hast richtig geantwortet: +1000 €</p>
-            <p class="user-info negative-change">Deadpool hat falsch geantwortet: -500 €</p>
+            <p @if(game.getHumanPlayer.getLatestProfitChange == null) {class="hidden"} else {@if(game.getHumanPlayer.getLatestProfitChange < 0) {class="user-info negative-change"} else{class="user-info positive-change"}}>@if(game.getHumanPlayer.getLatestProfitChange == null) { } else {@if(game.getHumanPlayer.getLatestProfitChange < 0) {@game.getHuman.getName hast falsch geantwortet @Messages("currency") @game.getHumanPlayer.getLatestProfitChange} else {Du hast richtig geantwortet @Messages("currency") @game.getHumanPlayer.getLatestProfitChange}}</p>
+			<p @if(game.getMarvinPlayer.getLatestProfitChange == null) {class="hidden"} else {@if(game.getMarvinPlayer.getLatestProfitChange < 0) {class="user-info negative-change"} else{class="user-info positive-change"}}>@if(game.getMarvinPlayer.getLatestProfitChange == null) { } else {@if(game.getMarvinPlayer.getLatestProfitChange < 0) {@game.getMarvin.getName hast falsch geantwortet @Messages("currency") @game.getMarvinPlayer.getLatestProfitChange} else {@game.getMarvin.getName hat richtig geantwortet @Messages("currency") @game.getMarvinPlayer.getLatestProfitChange }}</p>
             <section class="playerinfo leader" aria-labelledby="winnerannouncement">
-               <h3 id="winnerannouncement">@Messages("winner"): @game.getWinner</h3>
+               <h3 id="winnerannouncement">@Messages("winner"): @game.getWinner.getUser.getName</h3>
                <img class="avatar" src="@{"assets/images/avatar/"+game.getWinner.getUser.getAvatar.getImageHead}" alt="Spieler-Avatar @game.getWinner.getUser.getAvatar.getName" />
                <table>
                   <tr>

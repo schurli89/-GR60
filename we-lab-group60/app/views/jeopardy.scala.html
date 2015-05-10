@@ -51,15 +51,16 @@
                   </tr>
                </table>
             </section>
-            <p id="round">Fragen: 2 / @game.getMaxQuestions</p>
+            <p id="round">Fragen: @game.getHumanPlayer.getAnsweredQuestions.size / @game.getMaxQuestions</p> 
          </section>
 
          <!-- Question -->
          <section id="question-selection" aria-labelledby="questionheading">
             <h2 id="questionheading" class="black accessibility">Jeopardy</h2>
-            <p class="user-info positive-change">Du hast richtig geantwortet: +1000 �</p>
-            <p class="user-info negative-change">Deadpool hat falsch geantwortet: -500 �</p>
-            <p class="user-info">Deadpool hat TUWIEN f�r � 1000 gew�hlt.</p>
+            <p @if(game.getHumanPlayer.getLatestProfitChange == null) {class="hidden"} else {@if(game.getHumanPlayer.getLatestProfitChange < 0) {class="user-info negative-change"} else{class="user-info positive-change"}}>@if(game.getHumanPlayer.getLatestProfitChange == null) { } else {@if(game.getHumanPlayer.getLatestProfitChange < 0) {@game.getHuman.getName hast falsch geantwortet @Messages("currency") @game.getHumanPlayer.getLatestProfitChange} else {Du hast richtig geantwortet @Messages("currency") @game.getHumanPlayer.getLatestProfitChange}}</p>
+			<p @if(game.getMarvinPlayer.getLatestProfitChange == null) {class="hidden"} else {@if(game.getMarvinPlayer.getLatestProfitChange < 0) {class="user-info negative-change"} else{class="user-info positive-change"}}>@if(game.getMarvinPlayer.getLatestProfitChange == null) { } else {@if(game.getMarvinPlayer.getLatestProfitChange < 0) {@game.getMarvin.getName hast falsch geantwortet @Messages("currency") @game.getMarvinPlayer.getLatestProfitChange} else {@game.getMarvin.getName hat richtig geantwortet @Messages("currency") @game.getMarvinPlayer.getLatestProfitChange }}</p>
+            <p @if(game.getMarvinPlayer.getChosenQuestion == null) {class="hidden"} else {class="user-info"}>@if(game.getMarvinPlayer.getChosenQuestion != null){@game.getMarvin.getName hat @game.getMarvinPlayer.getChosenQuestion.getCategory.getName für @game.getMarvinPlayer.getChosenQuestion.getValue gewählt} else {} </p>
+            
          	@helper.form(action = routes.Jeopardy.loadQuestion()) {
                <fieldset>
                <legend class="accessibility">Fragenauswahl</legend>
