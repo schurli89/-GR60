@@ -19,8 +19,8 @@ last_game=Last game:
 never=never
 last_game_info=Last game info
 
-positive_change=You answered correctly
-negativ_change=You answered wrong
+positive_human=You answered correctly
+negativ_human=You answered wrong
 positiv_marvin=answered correctly
 negativ_marvin=answered wrong
 
@@ -63,6 +63,7 @@ question.accessibility_questions=Jump to question selection
 question.gameinfo=Game info
 question.timeleft=Time left
 questionpage=Question answering
+question.answer=answer
 
 winnerannounce=Winner Announcement
 winner.info=Winnerinformation
