@@ -65,6 +65,7 @@ question.accessibility_questions=Zur Fragenauswahl springen
 question.gameinfo=Spielinformationen
 question.timeleft=Verbleibende Zeit
 questionpage=Fragenbeantwortung
+question.answer=antworten
 
 winnerannounce=Gewinnanzeige
 winner.info=Gewinnerinformationen

@@ -74,8 +74,10 @@ public class Jeopardy extends Controller{
 		//retrieve answer ids
 		Collection<String> ids = form.data().values();
 		Iterator<String> iterator = ids.iterator();
+	if(iterator.hasNext()){
 		iterator.next();
 		iterator.remove();
+	}
 		List<Integer> answerIds = new ArrayList<Integer>();
 		while(iterator.hasNext()){
 			//System.out.println("form.data: " + s);	
