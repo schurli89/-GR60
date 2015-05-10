@@ -1,0 +1,64 @@
+@(game: at.ac.tuwien.big.we15.lab2.api.JeopardyGame)@main(Messages("winnerannounce")){
+    <body id="winner-page">
+      <a class="accessibility" href="#winner">@Messages("winner.accessibility_winner")</a>
+      <!-- Header -->
+      <header role="banner" aria-labelledby="bannerheading">
+         <h1 id="bannerheading">
+            <span class="accessibility">Business Informatics Group </span><span class="gametitle">Jeopardy!</span>
+         </h1>
+      </header>
+      
+      <!-- Navigation -->
+		<nav role="navigation" aria-labelledby="navheading">
+			<h2 id="navheading" class="accessibility">Navigation</h2>
+			<ul>
+				<li><a class="orangelink navigationlink" id="logoutlink" title="@Messages("jump_logout")" href="/logout" accesskey="l">@Messages("logout")</a></li>
+			</ul>
+		</nav>
+      
+      <!-- Content -->
+      <div role="main">
+         <section id="gameinfo" aria-labelledby="winnerinfoheading">
+            <h2 id="winnerinfoheading" class="accessibility">@Messages("winner.info")</h2>
+            <p @if(game.getHumanPlayer.getLatestProfitChange == null) {class="hidden"} else {@if(game.getHumanPlayer.getLatestProfitChange < 0) {class="user-info negative-change"} else{class="user-info positive-change"}}>@if(game.getHumanPlayer.getLatestProfitChange == null) { } else {@if(game.getHumanPlayer.getLatestProfitChange < 0) {@Messages("negativ_human"): @game.getHumanPlayer.getLatestProfitChange @Messages("currency") } else {@Messages("positive_human"): @game.getHumanPlayer.getLatestProfitChange @Messages("currency") }}</p>
+			<p @if(game.getMarvinPlayer.getLatestProfitChange == null) {class="hidden"} else {@if(game.getMarvinPlayer.getLatestProfitChange < 0) {class="user-info negative-change"} else{class="user-info positive-change"}}>@if(game.getMarvinPlayer.getLatestProfitChange == null) { } else {@if(game.getMarvinPlayer.getLatestProfitChange < 0) {@game.getMarvin.getName @Messages("negativ_marvin"): @game.getMarvinPlayer.getLatestProfitChange @Messages("currency") } else {@game.getMarvin.getName @Messages("positiv_marvin"): @game.getMarvinPlayer.getLatestProfitChange @Messages("currency")}}</p>
+            <section class="playerinfo leader" aria-labelledby="winnerannouncement">
+               <h3 id="winnerannouncement">@Messages("winner"): @game.getWinner.getUser.getName</h3>
+               <img class="avatar" src="@{"assets/images/avatar/"+game.getWinner.getUser.getAvatar.getImageFull}" alt="@Messages("alt_avatar") @game.getWinner.getUser.getAvatar.getName" />
+               <table>
+                  <tr>
+                     <th class="accessibility">@Messages("username")</th>
+                     <td class="playername">@game.getWinner.getUser.getName</td>
+                  </tr>
+                  <tr>
+                     <th class="accessibility">@Messages("points")</th>
+                     <td class="playerpoints">@Messages("currency") @game.getWinner.getProfit</td>
+                  </tr>
+               </table>
+            </section>
+            <section class="playerinfo" aria-labelledby="loserheading">
+               <h3 id="loserheading" class="accessibility">@Messages("loser"): @game.getLoser.getUser.getName</h3>
+               <img class="avatar" src="@{"assets/images/avatar/"+game.getLoser.getUser.getAvatar.getImageHead}" alt="@Messages("alt_avatar") @game.getLoser.getUser.getAvatar.getName" />
+               <table>
+                  <tr>
+                     <th class="accessibility">@Messages("username")</th>
+                     <td class="playername">@game.getLoser.getUser.getName</td>
+                  </tr>
+                  <tr>
+                     <th class="accessibility">@Messages("points")</th>
+                     <td class="playerpoints">@Messages("currency") @game.getLoser.getProfit</td>
+                  </tr>
+               </table>
+            </section>
+         </section>
+         <section id="newgame" aria-labelledby="newgameheading">
+             <h2 id="newgameheading" class="accessibility">@Messages("new_game")</h2>
+         	<form action="/newgame" method="get">
+               	<input class="clickable orangelink contentlink" id="new_game" type="submit" name="restart" value="@Messages("new_game")" />
+            </form>
+         </section>
+      </div>
+        <!-- footer -->
+        <footer role="contentinfo">(C) 2015 BIG Jeopardy</footer>  
+        </body>
+}

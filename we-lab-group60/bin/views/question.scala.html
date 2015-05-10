@@ -1,0 +1,124 @@
+@(game: at.ac.tuwien.big.we15.lab2.api.JeopardyGame, question: at.ac.tuwien.big.we15.lab2.api.impl.SimpleQuestion)@main(Messages("questionpage")){
+    <body id="question-page">
+      <a class="accessibility" href="#questions">@Messages("question.accessibility_questions")</a>
+      <!-- Header -->
+      <header role="banner" aria-labelledby="bannerheading">
+         <h1 id="bannerheading">
+            <span class="accessibility">Business Informatics Group </span><span class="gametitle">Jeopardy!</span>
+         </h1>
+      </header>
+      
+      <!-- Navigation -->
+		<nav role="navigation" aria-labelledby="navheading">
+			<h2 id="navheading" class="accessibility">Navigation</h2>
+			<ul>
+				<li><a class="orangelink navigationlink" id="logoutlink" title="@Messages("logout")" href="/logout" accesskey="l">Abmelden</a></li>
+			</ul>
+		</nav>
+      
+      <!-- Content -->
+      <div role="main"> 
+         <!-- info -->
+         <section id="gameinfo" aria-labelledby="gameinfoinfoheading">
+            <h2 id="gameinfoinfoheading" class="accessibility">@Messages("question.gameinfo")</h2>
+            <section id="firstplayer" class="playerinfo leader" aria-labelledby="firstplayerheading">
+               <h3 id="firstplayerheading" class="accessibility">@Messages("player_leading")</h3>
+               <img class="avatar" src="@{"assets/images/avatar/"+game.getHuman.getAvatar.getImageHead}" alt="@{Messages("alt_avatar")+ game.getHuman.getAvatar.getName}" />
+               <table>
+                  <tr>
+                     <th class="accessibility">@Messages("question.username")</th>
+                     <td class="playername">@game.getHuman.getName @Messages("you")</td>
+                  </tr>
+                  <tr>
+                     <th class="accessibility">@Messages("points")</th>
+                     <td class="playerpoints">@game.getHumanPlayer.getProfit @Messages("currency")</td>
+                  </tr>
+               </table>
+            </section>
+            <section id="secondplayer" class="playerinfo" aria-labelledby="secondplayerheading">
+               <h3 id="secondplayerheading" class="accessibility">@Messages("player_second")</h3>
+               <img class="avatar" src="@{"assets/images/avatar/"+game.getMarvin.getAvatar.getImageHead}" alt="@{Messages("alt_avatar")+game.getMarvin.getAvatar.getName}" />
+               <table>
+                  <tr>
+                     <th class="accessibility">@Messages("username")</th>
+                     <td class="playername">@game.getMarvin.getName</td>
+                  </tr>
+                  <tr>
+                     <th class="accessibility">@Messages("points")</th>
+                     <td class="playerpoints">@game.getMarvinPlayer.getProfit @Messages("currency")</td>
+                  </tr>
+               </table>
+            </section>
+            <p id="round">@Messages("numOfquestion"): @game.getHumanPlayer.getAnsweredQuestions.size / @game.getMaxQuestions </p>
+         </section>
+            
+      <!-- Question -->
+      <section id="question" aria-labelledby="questionheading">
+           @helper.form(action = routes.Jeopardy.retrieveAnswers()){
+               <h2 id="questionheading" class="accessibility">@Messages("numOfquestion")</h2>
+               <p id="questiontype">@question.getCategory.getName @Messages("for") @Messages("currency") @question.getValue</p>
+               <p id="questiontext">@question.getText</p>
+               <ul id="answers">
+               @for(answer <- question.getAllAnswers){
+                  <li><input name="answer_selection[]" id="@{"answer_"+answer.getId}" value="@answer.getId" type="checkbox"/><label class="tile clickable" for="@{"answer_"+answer.getId}">@answer.getText</label></li>                
+               }
+               </ul>
+               <input id="timeleftvalue" type="hidden" value="100"/>
+               <input class="greenlink formlink clickable" name="answer_submit" id="next" type="submit" value="antworten" accesskey="s"/>
+            }
+         </section>
+            
+ 		<section id="timer" aria-labelledby="timerheading">
+            <h2 id="timerheading" class="accessibility">Timer</h2>
+            <p><span id="timeleftlabel">@Messages("question.timeleft"):</span> <time id="timeleft">00:30</time></p>
+            <meter id="timermeter" min="0" low="20" value="100" max="100"></meter>
+         </section>
+      </div>
+
+
+      <!-- footer -->
+      <footer role="contentinfo">(C) 2015 BIG Jeopardy!</footer>
+        
+      <script type="text/javascript">
+            //<![CDATA[
+            
+            // initialize time
+            $(document).ready(function() {
+                var maxtime = 30;
+                var hiddenInput = $("#timeleftvalue");
+                var meter = $("#timer meter");
+                var timeleft = $("#timeleft");
+                
+                hiddenInput.val(maxtime);
+                meter.val(maxtime);
+                meter.attr('max', maxtime);
+                meter.attr('low', maxtime/100*20);
+                timeleft.text(secToMMSS(maxtime));
+            });
+            
+            // update time
+            function timeStep() {
+                var hiddenInput = $("#timeleftvalue");
+                var meter = $("#timer meter");
+                var timeleft = $("#timeleft");
+                
+                var value = $("#timeleftvalue").val();
+                if(value > 0) {
+                    value = value - 1;   
+                }
+                
+                hiddenInput.val(value);
+                meter.val(value);
+                timeleft.text(secToMMSS(value));
+                
+                if(value <= 0) {
+                    $('#questionform').submit();
+                }
+            }
+            
+            window.setInterval(timeStep, 1000);
+            
+            //]]>
+        </script>
+    </body>
+}
