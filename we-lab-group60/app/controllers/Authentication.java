@@ -6,6 +6,7 @@ import models.ComplexUser;
 import play.cache.Cache;
 import play.data.Form;
 import play.db.jpa.Transactional;
+import play.mvc.Security;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.authentication;
@@ -59,6 +60,7 @@ System.out.println("username: " + username);
 		return Jeopardy.start(user);
 	}
 
+    @Security.Authenticated(JeopardyAuthenticator.class)
 	public static Result logout() {
 		Cache.remove(session("uuid")+"user");
 		session().clear();		

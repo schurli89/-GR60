@@ -12,6 +12,7 @@ import play.data.Form;
 import play.i18n.Messages;
 import play.mvc.Controller;
 import play.mvc.Result;
+import play.mvc.Security;
 import views.html.jeopardy;
 import views.html.question;
 import views.html.winner;
@@ -24,7 +25,7 @@ import at.ac.tuwien.big.we15.lab2.api.impl.SimpleQuestion;
 
 public class Jeopardy extends Controller{
 
-
+    @Security.Authenticated(JeopardyAuthenticator.class)
 	public static Result start(ComplexUser user){
 			JeopardyFactory factory= new PlayJeopardyFactory(Messages.get("file"));
 			JeopardyGame game= factory.createGame(user);
@@ -32,8 +33,8 @@ public class Jeopardy extends Controller{
 			Cache.set(uuid+"game", game);
 			return ok(jeopardy.render(game, game.getMarvinPlayer().getChosenQuestion()));
 	}
-	
-	
+
+	@Security.Authenticated(JeopardyAuthenticator.class)
 	public static Result newGame(){
 		String uuid = session("uuid");
 		ComplexUser user = (ComplexUser) Cache.get(uuid+"user");
@@ -45,6 +46,7 @@ public class Jeopardy extends Controller{
 		return ok(jeopardy.render(game, game.getMarvinPlayer().getChosenQuestion()));
 	}
 
+    @Security.Authenticated(JeopardyAuthenticator.class)
 	public static Result loadQuestion()	{
 		String uuid = session("uuid");
 		JeopardyGame game = (JeopardyGame) Cache.get(uuid+"game");
@@ -63,6 +65,7 @@ public class Jeopardy extends Controller{
 		return ok(question.render(game, quest));
 	}
 	
+	@Security.Authenticated(JeopardyAuthenticator.class)
 	public static Result retrieveAnswers(){
 		String uuid = session("uuid");
 		JeopardyGame game = (JeopardyGame) Cache.get(uuid+"game");
