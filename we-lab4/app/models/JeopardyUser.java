@@ -5,9 +5,6 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 
 import play.data.validation.Constraints;
 import play.data.validation.ValidationError;
@@ -20,11 +17,10 @@ public class JeopardyUser extends BaseEntity {
 		male, female
 	}
   
-  //@TODO - as soon as the id attribute has been introduced to the base entity - remove the ID
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
-
+//	@Id
+//	@GeneratedValue(strategy = GenerationType.IDENTITY)
+//    protected Long id;
+	
 	@Constraints.Required
 	@Constraints.MinLength(value = 4, message = "error.userName")
 	@Constraints.MaxLength(value = 8, message = "error.userName")

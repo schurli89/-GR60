@@ -4,9 +4,16 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
 /**
  * Represents a question, which is stored in the DB
  */
+@Entity
 public class Question extends BaseEntity {
 
     private String textDE;
@@ -14,10 +21,12 @@ public class Question extends BaseEntity {
     private int value;
 
     //The category to which this question belongs to
+    @ManyToOne
     private Category category;
 
 
     //A list of right choices in this category
+    @OneToMany(mappedBy="question",  fetch = FetchType.EAGER, cascade=CascadeType.ALL)  
     private List<Answer> answers = new ArrayList<Answer>();
 
 
