@@ -124,7 +124,7 @@ public class JeopardyDAO implements IGameDAO {
 	 */
 	@Override
 	public <E extends BaseEntity> List<E> findEntities(Class<E> entityClazz) {
-		String queryStr = "from " + entityClazz.getTypeName();
+		String queryStr = "from " + entityClazz.getSimpleName();
 		play.Logger.debug("findEntities: " + queryStr);
 
 		TypedQuery<E> query = em().createQuery(queryStr, entityClazz);
