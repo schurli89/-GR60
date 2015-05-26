@@ -2,14 +2,27 @@ package controllers;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.ws.WebServiceException;
+
+import at.ac.tuwien.big.we.highscore.Failure;
+import at.ac.tuwien.big.we.highscore.PublishHighScoreEndpoint;
+import at.ac.tuwien.big.we.highscore.PublishHighScoreService;
+import at.ac.tuwien.big.we.highscore.data.GenderType;
+import at.ac.tuwien.big.we.highscore.data.HighScoreRequestType;
+import at.ac.tuwien.big.we.highscore.data.UserDataType;
+import at.ac.tuwien.big.we.highscore.data.UserType;
 import models.Category;
 import models.JeopardyDAO;
 import models.JeopardyGame;
 import models.JeopardyUser;
+import models.Player;
 import play.Logger;
 import play.cache.Cache;
 import play.data.DynamicForm;
@@ -27,6 +40,8 @@ import views.html.winner;
 public class GameController extends Controller {
 	
 	protected static final int CATEGORY_LIMIT = 5;
+	private static final String USER_KEY = "3ke93-gue34-dkeu9";
+	private static final String ERROR_PUBLISH ="Service unavailable.";
 	
 	@Transactional
 	public static Result index() {
@@ -156,7 +171,82 @@ public class GameController extends Controller {
 		if(game == null || !game.isGameOver())
 			return redirect(routes.GameController.playGame());
 		
-		Logger.info("[" + request().username() + "] Game over.");		
+		Logger.info("[" + request().username() + "] Game over.");	
+		
+		String uuid = publishHighscore(game);
 		return ok(winner.render(game));
+	}
+
+	/**
+	 * @return uuid if highscore could be posted; ERROR_PUBLISH else
+	 * @param game current game instance	 
+	 */
+	private static String publishHighscore(JeopardyGame game) {
+		HighScoreRequestType requestType = new HighScoreRequestType();
+		requestType.setUserKey(USER_KEY);
+		JeopardyUser player_winner = game.getWinner().getUser();
+		GregorianCalendar date = new GregorianCalendar();
+		date.setTimeInMillis(player_winner.getBirthDate().getTime());
+
+		//set winner attributes
+		UserType winner = new UserType();
+		try {
+			winner.setBirthDate(DatatypeFactory.newInstance().newXMLGregorianCalendar(date));
+		} catch (DatatypeConfigurationException e) { 
+			Logger.error("Winner set Birthdate: " +e.getMessage());
+			e.printStackTrace();
+		}
+		
+		winner.setFirstName(player_winner.getFirstName());
+		winner.setLastName(player_winner.getLastName());
+		winner.setGender(GenderType.fromValue(player_winner.getGender().name()));
+		winner.setPoints(game.getWinner().getProfit());
+		winner.setPassword("");
+		
+		JeopardyUser player_loser = game.getLoser().getUser();
+		//set loser attributes
+		UserType loser = new UserType();
+		
+		date.setTimeInMillis(player_loser.getBirthDate().getTime());
+		try {
+			loser.setBirthDate(DatatypeFactory.newInstance().newXMLGregorianCalendar(date));
+		} catch (DatatypeConfigurationException e) {
+			Logger.error("Loser set Birthdate: " + e.getMessage());
+			
+		}
+		loser.setFirstName(player_loser.getFirstName());
+		loser.setLastName(player_loser.getLastName());
+		loser.setGender(GenderType.fromValue(player_loser.getGender().name()));
+		loser.setPoints(game.getLoser().getProfit());
+		loser.setPassword("");
+				
+				
+		UserDataType userData = new UserDataType();
+		userData.setLoser(loser);
+		userData.setWinner(winner);
+		
+		Logger.info("POINTS: " + winner.getPoints());
+		Logger.info("POINTS: " + loser.getPoints());
+		//set request data 
+		requestType.setUserData(userData);
+		String uuid = ERROR_PUBLISH;
+		
+		try {
+		//publish highscore
+		PublishHighScoreService service = new PublishHighScoreService();
+		//retrieve uuid
+		PublishHighScoreEndpoint endpoint = service.getPublishHighScorePort();		
+			uuid = endpoint.publishHighScore(requestType);
+			game.setHighscorePosted(true);
+			Logger.info("UUID from Highscoreboard: " +uuid);
+		} catch (Failure e) {
+			Logger.error("FAILURE - could not publisch highscore: " + e.getMessage());
+			game.setHighscorePosted(false);
+		}catch(WebServiceException e){
+			Logger.error("FAILURE - could not publisch highscore: " + e.getMessage());
+			game.setHighscorePosted(false);
+		}
+		
+		return uuid;
 	}
 }

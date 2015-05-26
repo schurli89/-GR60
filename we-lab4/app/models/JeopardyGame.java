@@ -22,7 +22,8 @@ import models.JeopardyUser.Gender;
 
 public class JeopardyGame {	
 	private static final int NUM_QUESTIONS = 5;
-
+	
+	private boolean highscorePosted = false;
 	private Random random = new Random();
 	
 	private List<Category> categories;
@@ -63,8 +64,8 @@ public class JeopardyGame {
 		JeopardyUser user = new JeopardyUser();
 		user.setAvatar(Avatar.getOpponent(getHumanPlayer().getUser().getAvatar()));
 		user.setName(user.getAvatar().getName());
-		user.setFirstName("Marvin");
-		user.setLastName("ParanoidAndroid");
+		user.setFirstName("Jon");
+		user.setLastName("Doe");
 		user.setGender(Gender.male);
 		Calendar calendar = Calendar.getInstance();
 		calendar.set(1979, 1, 1);
@@ -212,6 +213,14 @@ public class JeopardyGame {
 
 	public boolean hasBeenChosen(Question question) {
 		return chosenQuestions.contains(question);
+	}
+
+	public boolean isHighscorePosted() {
+		return highscorePosted;
+	}
+
+	public void setHighscorePosted(boolean highscorePosted) {
+		this.highscorePosted = highscorePosted;
 	}
 	
 }
