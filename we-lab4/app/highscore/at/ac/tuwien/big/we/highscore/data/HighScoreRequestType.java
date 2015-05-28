@@ -1,5 +1,5 @@
 
-package at.ac.tuwien.big.we.highscore.data;
+package highscore.at.ac.tuwien.big.we.highscore.data;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
