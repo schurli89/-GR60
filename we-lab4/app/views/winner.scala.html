@@ -1,10 +1,14 @@
-@(game: models.JeopardyGame)
+@(game: models.JeopardyGame, uuidPlayer: java.lang.String)
 @import play.i18n._
 @import helper._
 
 @main("winner-page", "Gewinnanzeige") {      
       <!-- Content -->
       <div role="main">
+      @if(uuidPlayer!=null){      
+         <p class="user-info">UUID  @uuidPlayer @Messages.get("twitter")</p>
+        
+         }
 		@gameInfo(game.getLeader(), game.getSecond(), game.getMaxQuestions(), game.isHumanPlayer(game.getLeader().getUser()))
          <section id="newgame" aria-labelledby="newgameheading">
              <h2 id="newgameheading" class="accessibility">@Messages.get("quizover.newgame")</h2>

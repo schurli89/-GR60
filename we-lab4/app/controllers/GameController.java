@@ -110,7 +110,9 @@ public class GameController extends Controller {
 			return ok(question.render(game));
 		} else if(game.isGameOver()) {
 			Logger.info("[" + request().username() + "] Game over... redirect");
-			return ok(winner.render(game));
+			String uuid = publishTwitter(publishHighscore(game));
+			
+			return ok(winner.render(game, uuid));
 		}			
 		return ok(jeopardy.render(game));
 	}
@@ -170,18 +172,9 @@ public class GameController extends Controller {
 		
 		Logger.info("[" + request().username() + "] Game over.");	
 		
-		String uuid = publishHighscore(game);
-			date.setTime(System.currentTimeMillis());
-			Logger.info("TwitterStatusMessage('"+request().username()+"','"+uuid+"','"+date+"')");
-			TwitterStatusMessage twitterStatusMessage = new TwitterStatusMessage(request().username(),uuid,date);
-			ITwitterClient twitterClient = new TwitterClient();
-			try {
-				twitterClient.publishUuid(twitterStatusMessage);
-			} catch(Exception e){
-			    Logger.error("FAILURE: Twitter status could not be updated: " + e.getMessage());
-			}
-		    Logger.info("status posted");
-		return ok(winner.render(game));
+		String uuid = publishTwitter(publishHighscore(game));
+		
+		return ok(winner.render(game, uuid));
 	}
 
 	/**
@@ -255,5 +248,22 @@ public class GameController extends Controller {
 		}
 		
 		return uuid;
+	}
+	
+	private static String publishTwitter(String uuid){
+		Date date = new Date();
+		date.setTime(System.currentTimeMillis());
+		Logger.info("TwitterStatusMessage('"+request().username()+"','"+uuid+"','"+date+"')");
+		TwitterStatusMessage twitterStatusMessage = new TwitterStatusMessage(request().username(),uuid,date);
+		ITwitterClient twitterClient = new TwitterClient();
+		
+		try {
+			twitterClient.publishUuid(twitterStatusMessage);
+		} catch(Exception e){
+		    Logger.error("FAILURE: Twitter status could not be updated: " + e.getMessage());
+		    uuid = null;
+		}
+	    Logger.info("status posted");
+	    return uuid;
 	}
 }
