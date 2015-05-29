@@ -1,16 +1,5 @@
 package controllers;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.GregorianCalendar;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-
-import javax.xml.datatype.DatatypeConfigurationException;
-import javax.xml.datatype.DatatypeFactory;
-import javax.xml.ws.WebServiceException;
-
 import highscore.at.ac.tuwien.big.we.highscore.Failure;
 import highscore.at.ac.tuwien.big.we.highscore.PublishHighScoreEndpoint;
 import highscore.at.ac.tuwien.big.we.highscore.PublishHighScoreService;
@@ -22,7 +11,6 @@ import models.Category;
 import models.JeopardyDAO;
 import models.JeopardyGame;
 import models.JeopardyUser;
-import models.Player;
 import play.Logger;
 import play.cache.Cache;
 import play.data.DynamicForm;
@@ -32,9 +20,17 @@ import play.db.jpa.Transactional;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
+import twitter.ITwitterClient;
+import twitter.TwitterClient;
+import twitter.TwitterStatusMessage;
 import views.html.jeopardy;
 import views.html.question;
 import views.html.winner;
+
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.ws.WebServiceException;
+import java.util.*;
 
 @Security.Authenticated(Secured.class)
 public class GameController extends Controller {
@@ -168,12 +164,23 @@ public class GameController extends Controller {
 	@play.db.jpa.Transactional(readOnly = true)
 	public static Result gameOver() {
 		JeopardyGame game = cachedGame(request().username());
+		Date date = new Date();
 		if(game == null || !game.isGameOver())
 			return redirect(routes.GameController.playGame());
 		
 		Logger.info("[" + request().username() + "] Game over.");	
 		
 		String uuid = publishHighscore(game);
+			date.setTime(System.currentTimeMillis());
+			Logger.info("TwitterStatusMessage('"+request().username()+"','"+uuid+"','"+date+"')");
+			TwitterStatusMessage twitterStatusMessage = new TwitterStatusMessage(request().username(),uuid,date);
+			ITwitterClient twitterClient = new TwitterClient();
+			try {
+				twitterClient.publishUuid(twitterStatusMessage);
+			} catch(Exception e){
+			    Logger.error("FAILURE: Twitter status could not be updated: " + e.getMessage());
+			}
+		    Logger.info("status posted");
 		return ok(winner.render(game));
 	}
 
