@@ -14,6 +14,7 @@ import play.Logger;
 import play.Play;
 import play.db.jpa.JPA;
 import play.libs.F.Function0;
+import scala.util.Random;
 import at.ac.tuwien.big.we.dbpedia.api.DBPediaService;
 import at.ac.tuwien.big.we.dbpedia.api.SelectQueryBuilder;
 import at.ac.tuwien.big.we.dbpedia.vocabulary.DBPProp;
@@ -84,16 +85,25 @@ public class Global extends GlobalSettings {
     private static void retrieveQuestion()
     {
     	
-    	Category category=new Category();
-    	List<Question> questions= new ArrayList<Question>();
+    
     	if(DBPediaService.isAvailable())
     	{
+    		Category category=new Category();
+        	List<Question> questions= new ArrayList<Question>();
+        	
     		Logger.info("DBPediaService Available: " + DBPediaService.isAvailable());
+    		
+    		//load necessary Resources from DBPedia
+    		
     		Resource vienna = DBPediaService.loadStatements(DBPedia.createResource("Vienna"));
     		Resource austrians= DBPediaService.loadStatements(DBPedia.createResource("Austrians"));
-    		Logger.info("frameworks englisch "+ DBPediaService.getResourceName(vienna, Locale.ENGLISH));
-    		Logger.info("frameworks deutsch "+ DBPediaService.getResourceName(vienna, Locale.GERMAN));
+    		Resource republic= DBPediaService.loadStatements(DBPedia.createResource("Republic"));
+
+    		Logger.debug("city englisch "+ DBPediaService.getResourceName(vienna, Locale.ENGLISH));
+    		Logger.debug("city deutsch "+ DBPediaService.getResourceName(vienna, Locale.GERMAN));
     		
+    		
+    		//select all Person who are Writers, were born in Vienna and are Austrians
     		SelectQueryBuilder queryBuilder = DBPediaService.createQueryBuilder()
     				.setLimit(2000)
     				.addWhereClause(RDF.type, DBPediaOWL.Writer)
@@ -103,14 +113,11 @@ public class Global extends GlobalSettings {
     				.addWhereClause(DBPediaOWL.nationality, austrians)
     				.addFilterClause(RDFS.label, Locale.ENGLISH)
     				.addFilterClause(RDFS.label, Locale.GERMAN);
-    	
-    		
-    		System.out.println(queryBuilder);
-
+    		//load Model for query
     		Model writersVienna = DBPediaService.loadStatements(queryBuilder.toQueryString());
-    		List<String> namesOfViennaWriter=DBPediaService.getResourceNames(writersVienna, Locale.GERMAN);
-    		Logger.info(""+namesOfViennaWriter);
+        	Logger.debug("writer Vienna "+DBPediaService.getResourceNames(writersVienna,Locale.GERMAN));
 
+    		//select all Person who are Writers, were not born in Vienna and are Austrians
     		queryBuilder = DBPediaService.createQueryBuilder()
     				.setLimit(2000)
     				.addWhereClause(RDF.type, DBPediaOWL.Writer)
@@ -120,15 +127,10 @@ public class Global extends GlobalSettings {
     				.addWhereClause(DBPediaOWL.nationality, austrians)
     				.addFilterClause(RDFS.label, Locale.ENGLISH)
     				.addFilterClause(RDFS.label, Locale.GERMAN);
-    		
     		Model writersNotVienna = DBPediaService.loadStatements(queryBuilder.toQueryString());
-    		List<String> namesOfNotViennaWriter=DBPediaService.getResourceNames(writersNotVienna, Locale.GERMAN);
-    		Logger.info(""+namesOfNotViennaWriter);
-    		
-    	
-	
-    		Resource republic= DBPediaService.loadStatements(DBPedia.createResource("Republic"));
+        	Logger.debug("writers Not Vienna "+DBPediaService.getResourceNames(writersNotVienna,Locale.GERMAN));
 
+        	//select all countries where Vienna is/was the capital and the govermentType is "Republic" 
 			queryBuilder = DBPediaService.createQueryBuilder()
     				.setLimit(2000)
     				.addWhereClause(RDF.type, DBPediaOWL.Country)
@@ -139,9 +141,9 @@ public class Global extends GlobalSettings {
     				.addFilterClause(RDFS.label, Locale.ENGLISH)
     				.addFilterClause(RDFS.label, Locale.GERMAN);
     		Model aRepublic = DBPediaService.loadStatements(queryBuilder.toQueryString());
-    		List<String> politicanViennaList=DBPediaService.getResourceNames(aRepublic, Locale.GERMAN);
-    		Logger.info(" "+politicanViennaList);
+    		Logger.debug("republic "+DBPediaService.getResourceNames(aRepublic, Locale.GERMAN));
 
+        	//select all countries where Vienna is/was the capital and the govermentType is not "Republic" 
     		queryBuilder = DBPediaService.createQueryBuilder()
     				.setLimit(2000)
     				.addWhereClause(RDF.type, DBPediaOWL.Country)
@@ -151,13 +153,10 @@ public class Global extends GlobalSettings {
     				.addMinusClause(DBPProp.createProperty("governmentType"), republic)
     				.addFilterClause(RDFS.label, Locale.ENGLISH)
     				.addFilterClause(RDFS.label, Locale.GERMAN);
-    		
     		Model noRepublic = DBPediaService.loadStatements(queryBuilder.toQueryString());
-    		 politicanViennaList=DBPediaService.getResourceNames(noRepublic, Locale.GERMAN);
-     		Logger.info(" "+politicanViennaList);
+     		Logger.debug("not republic "+DBPediaService.getResourceNames(noRepublic, Locale.GERMAN));
      		
-  
-    		
+     		//select all persons who were born in Vienna, died in Vienna, have been Austrians and were no Writers
     		queryBuilder = DBPediaService.createQueryBuilder()
     				.setLimit(2000)
     				.addWhereClause(RDF.type, DBPediaOWL.Person)
@@ -169,13 +168,10 @@ public class Global extends GlobalSettings {
     				.addMinusClause(RDF.type, DBPediaOWL.Writer)
     				.addFilterClause(RDFS.label, Locale.ENGLISH)
     				.addFilterClause(RDFS.label, Locale.GERMAN);
-    		
     		Model personVienna = DBPediaService.loadStatements(queryBuilder.toQueryString());
-    		List<String> actorsViennaList=DBPediaService.getResourceNames(personVienna, Locale.GERMAN);
-      		Logger.info(" "+actorsViennaList);
+      		Logger.debug("not a Writer "+DBPediaService.getResourceNames(personVienna, Locale.GERMAN));
     		
-     	
-    		
+      		//select all universities in Vienna
     		queryBuilder = DBPediaService.createQueryBuilder()
     				.setLimit(2000)
     				.addWhereClause(RDF.type, DBPediaOWL.University)
@@ -185,9 +181,9 @@ public class Global extends GlobalSettings {
     				.addFilterClause(RDFS.label, Locale.ENGLISH)
     				.addFilterClause(RDFS.label, Locale.GERMAN);
        		Model universityVienna = DBPediaService.loadStatements(queryBuilder.toQueryString());
-    		List<String> list=DBPediaService.getResourceNames(universityVienna, Locale.GERMAN);
-      		Logger.info(" "+list);
+      		Logger.debug("university vienna "+DBPediaService.getResourceNames(universityVienna, Locale.GERMAN));
       		
+      		//select buildings belong to vienna, which are not universities
       		queryBuilder = DBPediaService.createQueryBuilder()
     				.setLimit(2000)
     				.addMinusClause(RDF.type, DBPediaOWL.University)
@@ -197,10 +193,9 @@ public class Global extends GlobalSettings {
     				.addFilterClause(RDFS.label, Locale.ENGLISH)
     				.addFilterClause(RDFS.label, Locale.GERMAN);
        		Model buildingVienna = DBPediaService.loadStatements(queryBuilder.toQueryString());
-    		list=DBPediaService.getResourceNames(buildingVienna, Locale.GERMAN);
-      		Logger.info(" "+list);
+      		Logger.debug("not a university "+DBPediaService.getResourceNames(buildingVienna, Locale.GERMAN));
       		
-    		
+    		//select all kinds of food which has its origin in Vienna
     		queryBuilder = DBPediaService.createQueryBuilder()
     				.setLimit(2000)
     				.addWhereClause(RDF.type, DBPediaOWL.Food)
@@ -210,9 +205,9 @@ public class Global extends GlobalSettings {
     				.addFilterClause(RDFS.label, Locale.ENGLISH)
     				.addFilterClause(RDFS.label, Locale.GERMAN);
        		Model foodVienna = DBPediaService.loadStatements(queryBuilder.toQueryString());
-    		list=DBPediaService.getResourceNames(foodVienna, Locale.GERMAN);
-      		Logger.info(" "+list);
+      		Logger.debug("food vienna "+DBPediaService.getResourceNames(foodVienna, Locale.GERMAN));
       		
+      		//select food which has not its origin in VIenna
       		queryBuilder = DBPediaService.createQueryBuilder()
     				.setLimit(2000)
     				.addWhereClause(RDF.type, DBPediaOWL.Food)
@@ -222,17 +217,17 @@ public class Global extends GlobalSettings {
     				.addFilterClause(RDFS.label, Locale.ENGLISH)
     				.addFilterClause(RDFS.label, Locale.GERMAN);
        		Model foodNotVienna = DBPediaService.loadStatements(queryBuilder.toQueryString());
-    		list=DBPediaService.getResourceNames(foodNotVienna, Locale.GERMAN);
-      		Logger.info(" "+list);
+      		Logger.debug("food not vienna "+DBPediaService.getResourceNames(foodNotVienna, Locale.GERMAN));
   
 
+      		//build Questions
     		questions.add(buildQuestion(category,capitalOfRepublicDE,capitalOfRepublicEN,aRepublic, noRepublic,10));
     		questions.add(buildQuestion(category,universityViennaDE,universityViennaEN,universityVienna, buildingVienna,20));
     		questions.add(buildQuestion(category,foodViennaDE,foodViennaEN,foodVienna, foodNotVienna,30));
     		questions.add(buildQuestion(category,writerOfViennaDE,writerOfViennaEN,writersVienna, personVienna,40));
     		questions.add(buildQuestion(category,writersBornInViennaDE,writersBornInViennaEN,writersVienna, writersNotVienna,50));
 
-    		
+    		//add Questions to category and persist
     		category.setQuestions(questions);
     		category.setName("Vienna", Locale.ENGLISH.toString());
     		category.setName("Wien", Locale.GERMAN.toString());
@@ -240,26 +235,33 @@ public class Global extends GlobalSettings {
     	}
     }
     
+    
     private static Question buildQuestion(Category category, String questionTextDE, String questionTextEN, Model rightChoices, Model wrongChoices, int value) {
     	
-    	int answerLimit=4;
     	List<String> rightDE=DBPediaService.getResourceNames(rightChoices, Locale.GERMAN.toString());
     	List<String> rightEN=DBPediaService.getResourceNames(rightChoices, Locale.ENGLISH.toString());
-
+        	
     	List<String> wrongDE=DBPediaService.getResourceNames(wrongChoices, Locale.GERMAN.toString());
     	List<String> wrongEN=DBPediaService.getResourceNames(wrongChoices, Locale.ENGLISH.toString());
 
+    	//create Question
 		Question question= new Question();
     	question.setCategory(category);
     	question.setValue(value);
     	question.setTextDE(questionTextDE);	
     	question.setTextEN(questionTextEN);
-
     	
-    	for(int i=0;i<Math.min(rightDE.size(),answerLimit);i++)
+    	//calculate number of right Answers and wrong Answers
+    	int answerLimit=4;
+    	Random random= new Random();
+    	int nrRightAnswer=Math.max(random.nextInt(Math.min(rightDE.size(), answerLimit)), 1);
+    	int nrWrongAnswer=answerLimit-nrRightAnswer;
+    	
+    	
+    	//create Answers
+    	for(int i=0;i<nrRightAnswer;i++)
 		{
         	Answer answer= new Answer();
-
     		answer.setTextDE(rightDE.get(i));
     		answer.setTextEN(rightEN.get(i));
     		answer.setCorrectAnswer(true);
@@ -267,10 +269,9 @@ public class Global extends GlobalSettings {
     		question.addRightAnswer(answer);
 		}
     	
-    	for(int i=0;i<(answerLimit-rightDE.size());i++)
+    	for(int i=0;i<nrWrongAnswer;i++)
 		{
         	Answer answer= new Answer();
-
     		answer.setTextDE(wrongDE.get(i));
     		answer.setTextEN(wrongEN.get(i));
     		answer.setCorrectAnswer(false);

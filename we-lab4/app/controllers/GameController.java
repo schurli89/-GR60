@@ -35,7 +35,7 @@ import java.util.*;
 @Security.Authenticated(Secured.class)
 public class GameController extends Controller {
 	
-	protected static final int CATEGORY_LIMIT = 5;
+	protected static final int CATEGORY_LIMIT = 6;
 	private static final String USER_KEY = "3ke93-gue34-dkeu9";
 	private static final String ERROR_PUBLISH ="Service unavailable.";
 	
